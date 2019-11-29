@@ -14,7 +14,7 @@
                 
         <form action="" method="POST">
             
-            <a href="sisarq.php?option=cadempresa" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
+            <a href="sisarq.php?option=cadempresa&id=0&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
                     aria-hidden="true"></i> Novo</a>
 
             <button class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Filtro </button>
@@ -37,8 +37,21 @@
                             echo "<tr>";
                             echo "<td>{$codigo}</td>";
                             echo "<td>{$nome}</td>";
-                            echo '<td><button name="edit" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>';
-                            echo '<button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button></td>';
+                            
+                            echo "<td>";
+
+                               $link="href=sisarq.php?option=cadempresa&id={$codigo}&status=a";
+                               echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
+                                    echo '<i class="fa fa-edit"></i>';
+                                echo '</a> ';
+                                
+                                $link="href=sisarq.php?option=cadempresa&id={$codigo}&status=e";
+                                echo '<a name="edit" class="btn btn-danger btn-sm"'.$link.'>';
+                                    echo '<i class="fa fa-trash"></i>';
+                                echo '</a> ';
+
+                            echo '</td>';
+    
                             echo "</tr>";
                         } 
 

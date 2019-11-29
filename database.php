@@ -13,7 +13,7 @@
     $user=array($celio,$bruno);
 
     #cadastro de empresa
-    $empresas["001"]="Empresa 001";
+    $empresas["001"]="Empresa001";
     $empresas["002"]="Empresa 002";
     $empresas["003"]="Empresa 003";
     $empresas["004"]="Empresa 004";

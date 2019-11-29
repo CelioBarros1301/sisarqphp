@@ -28,6 +28,7 @@ function SomenteNumero(e){
  * Alteracao:
  */
 function LetraNumero(e){
+    return true;
     var tecla=(window.event)?event.keyCode:e.which;   
     if( (tecla>47 && tecla<58) || (tecla>64 && tecla<91) || (tecla>96 && tecla<123 ) || (tecla==32) || (tecla==45)) return true;
     else{

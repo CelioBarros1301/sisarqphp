@@ -18,7 +18,8 @@
 			/** 
 			* Essa opção faz a inclusão do arquivo html que nada mais é o fomulário de cadastro de usuários
 			**/
-			case 'empresa':			
+			case 'empresa':	
+					
 				include_once 'empresa.html';			
 			break;
 

@@ -6,7 +6,8 @@
     }
 
     # Informacoes do banco
-    include_once  "database.php";
+    include_once  "empresa.php";
+    
     
 ?>
 <div class="row">
@@ -32,29 +33,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                        foreach ($empresas as $codigo=> $nome) {
+                    <?php foreach ($empresas as $registro ) {
                             echo "<tr>";
-                            echo "<td>{$codigo}</td>";
-                            echo "<td>{$nome}</td>";
                             
-                            echo "<td>";
-
-                               $link="href=sisarq.php?option=cadempresa&id={$codigo}&status=a";
-                               echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
-                                    echo '<i class="fa fa-edit"></i>';
-                                echo '</a> ';
+                                echo "<td>";
+                                    echo $registro["cod_empresa"];
+                                echo "</td>";
                                 
-                                $link="href=sisarq.php?option=cadempresa&id={$codigo}&status=e";
-                                echo '<a name="edit" class="btn btn-danger btn-sm"'.$link.'>';
-                                    echo '<i class="fa fa-trash"></i>';
-                                echo '</a> ';
+                                echo "<td>";
+                                    echo $registro["des_empresa"];
+                                echo "</td>";
+                                
+                                echo "<td>";
 
-                            echo '</td>';
+                                    $link='href=sisarq.php?option=cadempresa&id='. $registro["cod_empresa"]. '&status=a';
+                                    echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
+                                            echo '<i class="fa fa-edit"></i>';
+                                        echo '</a> ';
+                                        
+                                        $link='href=sisarq.php?option=cadempresa&id='.$registro["cod_empresa"] .'&status=e';
+                                        echo '<a name="edit" class="btn btn-danger btn-sm"'.$link.'>';
+                                            echo '<i class="fa fa-trash"></i>';
+                                        echo '</a> ';
     
+                               echo '</td>';
+                                              
                             echo "</tr>";
                         } 
-
 
                     ?>
 

@@ -1,11 +1,19 @@
 <?php
     
-    require("constantes.php");
-    require("Conexao_Class.php");
-
-    $conexao=Conexao::getConnection();
-    $sqlEmpresas=$conexao->query("select cod_empresa,des_empresa from tb_empresas");
-    $empresas=$sqlEmpresas->fetchAll();
-   
+    require("empresaPDO.php");
+    $empresaPDO = new EmpresaPDO();
+        
+    # Preencher Formulario com os dados 
+    if (isset($_GET['status']))
+    {
+        $acao=$_GET['status'];
+        $codigo=$_GET['id'];
+        $registro=$empresaPDO->busca($codigo);
+    }
+    else
+    {
+        # Preencher o DataTable
+        $empresas=$empresaPDO->lista("");
+    }
 
 ?>

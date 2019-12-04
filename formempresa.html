@@ -1,7 +1,19 @@
 <?php
-# Informacoes do banco
-    include_once  "database.php";
-?>   
+
+    
+    if ( !isset($_SESSION['user'])){
+        #header("location: index.php");
+    }
+
+    # Informacoes do banco
+    include_once  "empresa.php";
+    
+    
+?>
+
+
+
+
  <div class="row">
         <div class="col-md-8 offset-4 col-sm-12">
             <div class="empresa-form">
@@ -13,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label>Empresa</label>
-                        <input type="text" name="desEmp" value="<?=$_GET['status']!="i"?$empresas[$_GET['id']]:"";?>"  <?=$_GET['status']=="e"?"disabled":"";?> class="form-control" placeholder="Nome da Empresa" required  >
+                        <input type="text" name="desEmp" value="<?=$_GET['status']!="i"?$registro["Empresa"]:"";?>"  <?=$_GET['status']=="e"?"disabled":"";?> class="form-control" placeholder="Nome da Empresa" required  >
                     </div>
                     
                     <button type="submit" class="btn btn-primary  "  aria-pressed="true">

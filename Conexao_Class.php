@@ -1,5 +1,7 @@
 <?php
 
+require("constantes.php");
+
 class Conexao 
 {
     private static $connection;

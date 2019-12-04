@@ -33,30 +33,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($empresas as $registro ) {
+                    <?php for ($i=0;$i < count($empresas);$i++ ) {
                             echo "<tr>";
                             
-                                echo "<td>";
-                                    echo $registro["cod_empresa"];
-                                echo "</td>";
+                                foreach ($empresas[$i] as $campo){
+                                    echo "<td>";
+                                        echo $campo;
+                                    echo "</td>";
+                                }    
                                 
                                 echo "<td>";
-                                    echo $registro["des_empresa"];
-                                echo "</td>";
-                                
-                                echo "<td>";
-
-                                    $link='href=sisarq.php?option=cadempresa&id='. $registro["cod_empresa"]. '&status=a';
+                                    $link='href=sisarq.php?option=cadempresa&id='. $empresas[$i]['Codigo']. '&status=a';
                                     echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
                                             echo '<i class="fa fa-edit"></i>';
                                         echo '</a> ';
                                         
-                                        $link='href=sisarq.php?option=cadempresa&id='.$registro["cod_empresa"] .'&status=e';
+                                        $link='href=sisarq.php?option=cadempresa&id='.$empresas[$i]['Codigo'] .'&status=e';
                                         echo '<a name="edit" class="btn btn-danger btn-sm"'.$link.'>';
                                             echo '<i class="fa fa-trash"></i>';
                                         echo '</a> ';
     
-                               echo '</td>';
+                                echo '</td>';
                                               
                             echo "</tr>";
                         } 

@@ -26,10 +26,12 @@
 
                 <thead>
                     <tr>
-                        <th>Codigo</th>
-                        <th>Empresa</th>
+                        <?php foreach ($nomeColunas as $coluna)
+                            {
+                            echo "<th>". $coluna. "</th>";
+                            }
+                        ?>        
                         <th>Ações</th>
-
                     </tr>
                 </thead>
                 <tbody>

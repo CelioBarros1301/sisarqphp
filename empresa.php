@@ -2,6 +2,8 @@
     
     require("empresaPDO.php");
     $empresaPDO = new EmpresaPDO();
+
+    $nomeColunas = array();
         
     # Preencher Formulario com os dados 
         
@@ -16,6 +18,8 @@
     {
         # Preencher o DataTable
         $empresas=$empresaPDO->lista("");
+        $nomeColunas = array_keys($empresas[0]);
+        
     }
     
     # Verificar operacoes de Banco

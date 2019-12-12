@@ -1,27 +1,25 @@
-|<?php
+<?php
 require("Conexao_Class.php");
 
 class AutorizadoPDO
 {
 
-     private $conexao; 
-     
-     public  function __construct()
+    public function __construct(){}
   
-     {
-         $this->conexao=Conexao::getConnection(); 
-     }
     public function busca($codigo)
     {
+            
+            $conexao=Conexao::getConnection();
             $result=array();
             $sql="SELECT * ";
             $sql.=" FROM tb_autorizados ";
             $sql.=" WHERE cod_autorizado=?";
             
-            $smtm=$this->conexao->prepare($sql);
+            $smtm=$conexao->prepare($sql);
             $smtm->bindValue(1,$codigo);
             $smtm->execute();
             $resultSet=$smtm->fetch(PDO::FETCH_ASSOC);
+            $conexao=null;
             return $resultSet ;      
             
 
@@ -34,6 +32,7 @@ class AutorizadoPDO
         * Nota: Se o codigo do Autorizado  for igual a 0000, sistema deve gerar automaticamente o proximo codigo
         */
 
+        $conexao=Conexao::getConnection();
         $codigo=$autorizado->getCodigo();
                 
         $sql='INSERT INTO tb_autorizados (`cod_autorizado`,';
@@ -58,7 +57,7 @@ class AutorizadoPDO
             $sql.='?,?,?,?,?,?,?,?,?)';
         }
 
-        $smtm=$this->conexao->prepare($sql);
+        $smtm=$conexao->prepare($sql);
         if ($codigo=="0000")
         {
                 $smtm->bindValue(1,$autorizado->getNome());
@@ -84,12 +83,16 @@ class AutorizadoPDO
             $smtm->bindValue(9,$autorizado->getLogin());
           
         }
-        return $smtm->execute();
+        $result=$smtm->execute();
+        $conexao->commit();
+        $conexao=null;
+        return $result;
     }
 
 
     public function update($autorizado)
     {
+        $conexao=Conexao::getConnection();
         $sql="UPDATE  tb_autorizados SET ";
         $sql.='`nom_autorizado`=?,';
         $sql.='`emp_autorizado`=?,';
@@ -102,7 +105,7 @@ class AutorizadoPDO
        
         $sql.= " WHERE cod_autorizado=?";
         
-        $smtm=$this->conexao->prepare($sql);
+        $smtm=$conexao->prepare($sql);
         
         $smtm->bindValue(1,$autorizado->getNome());
         $smtm->bindValue(2,$autorizado->getEmpresa());
@@ -113,27 +116,34 @@ class AutorizadoPDO
         $smtm->bindValue(7,$autorizado->getTelefone());
         $smtm->bindValue(8,$autorizado->getLogin());
         $smtm->bindValue(9,$autorizado->getCodigo());
-        return $smtm->execute();
+        $result=$smtm->execute();
+        $conexao->commit();
+        $conexao=null;
+        return $result;
     }
 
     public function delete($codigo)
     {
+        $conexao=Conexao::getConnection();
         $sql="DELETE  FROM  tb_autorizados ";
         $sql.= " WHERE cod_autorizado=? ";
         
-        $smtm=$this->conexao->prepare($sql);
+        $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$codigo);
-               
-        return $smtm->execute();
+        $result=$smtm->execute();
+        $conexao->commit();
+        $conexao=null;
+        return $result;
     }
 
 
     public function lista($filtro)
     {
+        $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT cod_autorizado Codigo,nom_autorizado Nome, emp_autorizado Empresa,cel_autorizado Celular ";
         $sql.=" FROM tb_autorizados ";
-        $smtm=$this->conexao -> prepare($sql);
+        $smtm=$conexao -> prepare($sql);
         
         if (isset($filtro))
         {
@@ -142,10 +152,10 @@ class AutorizadoPDO
         }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
         return  $result;
     }
 
 }
-
 
 ?>

@@ -61,7 +61,7 @@
                         <div class="col-md-4"> 
                             <div class="form-group">
                                 <label>Celular</label>
-                                <input type="text" name="celAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["cel_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="e-Mail" required  >
+                                <input type="text" name="celAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["cel_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Celular" required  >
                             </div>
                         </div>
                         <div class="col-md-4"> 
@@ -70,12 +70,29 @@
                                 <input type="text" name="telAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["tel_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Telefone" required  >
                             </div>
                         </div>
+                        
+                    </div>    
+                    <div class="row">
                         <div class="col-md-4"> 
                             <div class="form-group">
                                 <label>Login</label>
-                                <input type="text" name="logAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["log_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Telefone" required  >
+                                <input type="text" name="logAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["log_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Login" required  >
                             </div>
                         </div>
+                        <div class="col-md-4"> 
+                            <div class="form-group">
+                                <label>Senha</label>
+                                <input type="text" name="senAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["cel_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Senha" required  >
+                            </div>
+                        </div>
+                        <div class="col-md-4"> 
+                                <div class="form-group">
+                                <label>Senha Confirmação</label>
+                                <input type="text" name="SenConlAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["tel_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Senha Confirmação" required  >
+                            </div>
+                        </div>
+                        
+                    </div>
 
                     <div class="form-group">
                         <label hidden >Operacao</label>

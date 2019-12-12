@@ -1,5 +1,9 @@
 <?php
+/*
+ * Classe de Conexao com o banco de Dados
+*/
 
+#Constantes com  os parametros de acesso ao banco de dados
 require("constantes.php");
 
 class Conexao 
@@ -11,18 +15,21 @@ class Conexao
     public static function getConnection()
     {
         $pdoConfig=DB_DRIVER. ":host=". DB_HOST .";";
-        $pdoConfig .="dbname=".DB_NAME;
+        $pdoConfig .="dbname=".DB_NAME .";";
+        $pdoConfig .="Charset=".DB_CHARSET;
 
-        ##mysql:host=localhost;dbname=meuBancoDeDados'
         try
         {
             
             if (!isset($connection))
             {
-                $connection=new PDO($pdoConfig,DB_USER,DB_PASSWORD);
-                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$connection=new PDO($pdoConfig,DB_USER,DB_PASSWORD);
+                self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$connection->setAttribute(PDO::ATTR_PERSISTENT, TRUE);
+                self::$connection->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES UTF8');
+                self::$connection->beginTransaction();
             }
-            return $connection;
+            return self::$connection;
 
         }
         catch (PDOExecption $e  )

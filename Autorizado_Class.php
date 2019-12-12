@@ -12,6 +12,8 @@ Class Autorizado
     private $celular;
     private $telefone;
     private $login;
+    
+    private function __construct() {};
 
     private $descricao;
 

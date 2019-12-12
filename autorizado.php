@@ -2,6 +2,11 @@
     
     require("autorizadoPDO.php");
     require("Autorizado_Class.php");
+
+
+    require("usuarioPDO.php");
+    require("Usuario_Class.php");
+
     
     $tabelaPDO = new AutorizadoPDO();
     $autorizado=new Autorizado();
@@ -44,6 +49,10 @@
         $autorizado->setTelefone($_POST['telAut']);
         $autorizado->setLogin($_POST['logAut']);
         
+        $usuario->setLogin($_POS['logAut']);
+        $usuario->setSenha($_POS['senhAut']);
+        $usuario->setStatus("");
+        $usuario->setPerfil("0")
         
         switch ($operacao)
         {
@@ -52,6 +61,8 @@
             break;
             case 'i':
                 $registro=$tabelaPDO->insert($autorizado);
+                $registro=$tabelaPDO->insert($autorizado);
+                
             break;
             case 'e':
                 $registro=$tabelaPDO->delete($codigo);
@@ -60,5 +71,4 @@
         header("location:sisarq.php?option=autorizado");
     }
      
-    
 ?>

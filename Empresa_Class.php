@@ -8,21 +8,21 @@ Class Empresa
 
     public function setCodigo($codigo)
     {
-        this.$codigo=$codigo;
+        $this->codigo=$codigo;
     }
 
     public function getCodigo()
     {
-        return this.$codigo;
+        return $this->codigo;
     }
     public function setDescricao($descricao)
     {
-        this.$descricao=$descricao;
+        $this->descricao=$descricao;
     }
 
     public function getDescricao()
     {
-        return this.$descricao;
+        return $this->descricao;
     }
     
 }

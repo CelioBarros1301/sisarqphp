@@ -32,9 +32,9 @@ class AutorizadoPDO
         * Nota: Se o codigo do Autorizado  for igual a 0000, sistema deve gerar automaticamente o proximo codigo
         */
 
-        $conexao=Conexao::getConnection();
+        $conexao=Conexao::getConnection();;
         $codigo=$autorizado->getCodigo();
-                
+              
         $sql='INSERT INTO tb_autorizados (`cod_autorizado`,';
         $sql.='`nom_autorizado`,';
         $sql.='`emp_autorizado`,';
@@ -84,8 +84,6 @@ class AutorizadoPDO
           
         }
         $result=$smtm->execute();
-        $conexao->commit();
-        $conexao=null;
         return $result;
     }
 
@@ -117,7 +115,7 @@ class AutorizadoPDO
         $smtm->bindValue(8,$autorizado->getLogin());
         $smtm->bindValue(9,$autorizado->getCodigo());
         $result=$smtm->execute();
-        $conexao->commit();
+        #$conexao->commit();
         $conexao=null;
         return $result;
     }

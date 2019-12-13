@@ -1,0 +1,24 @@
+﻿Correções e Melhorias no Sistema
+
+1) Verificar se tabela tem informação antes do preenchimendo da GRID
+  
+2) Incluir a formataçcao de campos no form de autorizados
+
+3) Validar de a Senha e confirmacao de senha no form de autorizados são iguais
+antes de submeter o form
+
+4) Analiase a troca do login de acesso do sistema pelo email
+
+5) Configura o botao cancelar 0 redirecionar para a tela de GRID
+
+6) Criar botao de atualizacao da tela de grid, para executar uma nova consulta para preenchimento 
+da grid
+
+7) Incluir campo na tabela de autorizados para HABILITAR/DESABILITAR autorizacao de acesso
+
+8) Incluir campo na tabela de empresaautorizadoas para HABILITAR/DESABILIAR autoizazao de acesso 
+aos dados da empresaautorizadoas
+
+9) URGENTE: Ver processo de TRANSACAO - NAO ESTA FUNCIONANDO 
+
+10)addslashes incluir do $_GET E $_POST

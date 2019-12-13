@@ -13,8 +13,7 @@ Class Autorizado
     private $telefone;
     private $login;
     
-    private function __construct() {};
-
+    
     private $descricao;
 
     public function setCodigo($codigo)

@@ -1,15 +1,27 @@
+/*
+* Regras de Negocio para a Processo de Autorizados para acesso as Documentos cadastrados no sistema
+*  Objetos envolvidos: Autorizados,Usuario
+*  Regra: Quando do cadastro de um Autorizado e for informar o Login, sistema deverá 
+*         incluir as informacoes na tabela de Usuario que e responsavel pela liberaçao de
+*         acesso ao sistema
+*/
+
 <?php
     
     require("autorizadoPDO.php");
     require("Autorizado_Class.php");
-
+ 
 
     require("usuarioPDO.php");
     require("Usuario_Class.php");
 
     
-    $tabelaPDO = new AutorizadoPDO();
+    $autorizadoPDO= new AutorizadoPDO();
     $autorizado=new Autorizado();
+
+    $usuarioPDO= new UsuarioPDO();
+    $usuario=new Usuario();
+
 
     # Array para guarda os nome das Colunas doa DataTable
     $dataTableColunas = array(); 
@@ -21,13 +33,13 @@
     {
         $acao=$_GET['status'];
         $codigo=$_GET['id'];
-        $registro=$tabelaPDO->busca($codigo);
+        $registro=$autorizadoPDO->busca($codigo);
         
     }
     else if( !isset($_GET['status']))
     {
         # Preencher o DataTable
-        $dataTable=$tabelaPDO->lista("");
+        $dataTable=$autorizadoPDO->lista("");
         $dataTableColunas = array_keys($dataTable[0]);
     }
     
@@ -49,23 +61,43 @@
         $autorizado->setTelefone($_POST['telAut']);
         $autorizado->setLogin($_POST['logAut']);
         
-        $usuario->setLogin($_POS['logAut']);
-        $usuario->setSenha($_POS['senhAut']);
+        $usuario->setLogin($_POST['logAut']);
+        $usuario->setSenha($_POST['senAut']);
         $usuario->setStatus("");
-        $usuario->setPerfil("0")
+        $usuario->setPerfil("0");
         
         switch ($operacao)
         {
             case 'a':
-                $registro=$tabelaPDO->update($autorizado);
+                $registro=$autorizadoPDO->update($autorizado);
             break;
             case 'i':
-                $registro=$tabelaPDO->insert($autorizado);
-                $registro=$tabelaPDO->insert($autorizado);
-                
+                try 
+                {
+                    $conexao=Conexao::getConnection();
+                    self::$connection->beginTransaction();
+                    $conexao->beginTransaction();
+                    $registro=$autorizadoPDO->insert($autorizado);
+                    $registro=$usuarioPDO->insert($usuario);
+                    $conexao->commit();
+                    $conexao=null;
+                }
+                catch (PDOExecption $e  )
+                {
+                    $mensagem = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
+                    $mensagem .= "\nErro: " . $e->getMessage();
+                    $conexao->rollback();
+                    $conexao=null;
+                    throw new Exception($mensagem);
+                    
+                }
+                /*finally
+                {
+                    $conexao=null; 
+                }*/
             break;
             case 'e':
-                $registro=$tabelaPDO->delete($codigo);
+                $registro=$autorizadoPDO->delete($codigo);
             break;
         }
         header("location:sisarq.php?option=autorizado");

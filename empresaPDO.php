@@ -34,6 +34,7 @@ class EmpresaPDO
         * Nota: Se o codigo da empresa for igual a 000, sistema deve gerar automaticamente o proximo codigo
         */
         $conexao=Conexao::getConnection();
+        $conexao->beginTransaction();
         $sql='INSERT INTO tb_empresas(`cod_empresa`,`des_empresa`) ';
         $sql.= 'VALUES ( ';
         if ($codigo=="000")
@@ -73,7 +74,7 @@ class EmpresaPDO
         $smtm->bindValue(1,$descricao);
         $smtm->bindValue(2,$codigo);
         $result=$smtm->execute();
-        $conexao->commit();
+        ##$conexao->commit();
         $conexao=null;
         return $result;
     }
@@ -88,7 +89,7 @@ class EmpresaPDO
             $smtm=$conexao->prepare($sql);
             $smtm->bindValue(1,$codigo);
             $result= $smtm->execute();
-            $conexao->commit();
+            ##$conexao->commit();
             $conexao=null;
         }
         catch (PDOExecption $e  )

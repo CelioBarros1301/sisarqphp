@@ -1,5 +1,6 @@
 <?php
-require("Conexao_Class.php");
+
+require_once("Conexao_Class.php");
 
 class UsuarioPDO
 {
@@ -27,36 +28,43 @@ class UsuarioPDO
     public function insert($usuario)
     {
         /*
-        * Objeto: Incluir Autorizadoa
+        * Objeto: Incluir Usuario
         * Parametros: $usuario-> Objeto Usuario               
         * Nota: Se o codigo do Usuario e autoincremento
                 */
 
-        $conexao=Conexao::getConnection();
-        $codigo=$autorizado->getCodigo();
-                
-        $sql='INSERT INTO tb_usuarios ( ';
-        $sql.='`log_usuario`,';
-        $sql.='`sen_usuario`,';
-        $sql.='`sta_usuario`,';
-        $sql.='`per_usuario`) ';
-        
-        $sql.=' VALUES ( ';
-        
-        $sql.='?,?,?,?)';
+        try
+        {
+            $conexao=Conexao::getConnection();
+            $sql='INSERT INTO tb_usuarios ( ';
+            $sql.='`log_usuario`,';
+            $sql.='`sen_usuario`,';
+            $sql.='`sta_usuario`,';
+            $sql.='`per_usuario`) ';
+            
+            $sql.=' VALUES ( ';
+            
+            $sql.='?,?,?,?)';
+            
+            
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$usuario->getLogin());
+            $smtm->bindValue(2,$usuario->getSenha());
+            $smtm->bindValue(3,$usuario->getStatus());
+            $smtm->bindValue(4,$usuario->getPerfil());
+            
+            
+            $result=$smtm->execute();
+            
+            return $result;
         }
-
-        $smtm=$conexao->prepare($sql);
-        $smtm->bindValue(1,$usuario->getLogin());
-        $smtm->bindValue(2,$usuario->getSenha());
-        $smtm->bindValue(3,$usuario->getStatus());
-        $smtm->bindValue(4,$usuario->getPerfil());
-        
+        catch (PDOExecption $e  )
+        {
+            $mensagem = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
+            $mensagem .= "\nErro: " . $e->getMessage();
+            throw new Exception($mensagem);
         }
-        $result=$smtm->execute();
-        $conexao->commit();
-        $conexao=null;
-        return $result;
     }
 
 
@@ -64,7 +72,6 @@ class UsuarioPDO
     {
         $conexao=Conexao::getConnection();
         $sql="UPDATE  tb_autorizados SET ";
-        $sql.='`log_usuario`=?,';
         $sql.='`sen_usuario`=?,';
         $sql.='`sta_usuario`=?,';
         $sql.='`per_usuario`=?) ';
@@ -73,13 +80,13 @@ class UsuarioPDO
         
         $smtm=$conexao->prepare($sql);
         
-        $smtm->bindValue(1,$usuario->getLogin());
-        $smtm->bindValue(2,$usuario->getSenha());
-        $smtm->bindValue(3,$usuario->getStatus());
-        $smtm->bindValue(4,$usuario->getPerfil());
-       
+        $smtm->bindValue(1,$usuario->getSenha());
+        $smtm->bindValue(2,$usuario->getStatus());
+        $smtm->bindValue(3,$usuario->getPerfil());
+        $smtm->bindValue(4,$usuario->getLogin());
+        
         $result=$smtm->execute();
-        $conexao->commit();
+        ##$conexao->commit();
         $conexao=null;
         return $result;
     }
@@ -93,7 +100,7 @@ class UsuarioPDO
         $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$login);
         $result=$smtm->execute();
-        $conexao->commit();
+        ##$conexao->commit();
         $conexao=null;
         return $result;
     }

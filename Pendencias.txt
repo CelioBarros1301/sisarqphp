@@ -1,5 +1,14 @@
 ﻿Correções e Melhorias no Sistema
 
+PRIORIDADES:
+
+12)Salvar a senha criptografada e quando for alterar descritografar a senha 
+13)Alterar o acesso do sistema via banco retira o arquyivo txt
+10)addslashes incluir do $_GET E $_POST
+
+
+RELAÇAO DO BACKLOG
+
 1) Verificar se tabela tem informação antes do preenchimendo da GRID
   
 2) Incluir a formataçcao de campos no form de autorizados
@@ -26,3 +35,8 @@ aos dados da empresaautorizadoas
 11)Bloqueio de acesso a cadastro de Usuario e Sql so liberara para Administrador
 
 12)Salvar a senha criptografada e quando for alterar descritografar a senha 
+
+13)Alterar o acesso do sistema via banco retira o arquyivo txt
+
+14) Validar de a Senha e confirmacao de senha no form de USUARIO são iguais
+antes de submeter o form

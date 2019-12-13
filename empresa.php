@@ -37,7 +37,6 @@
                 $registro=$empresaPDO->insert($codigo,$descricao);
             break;
             case 'e':
-                echo "<p>Deletando..</p>";
                 $registro=$empresaPDO->delete($codigo);
             break;
         }

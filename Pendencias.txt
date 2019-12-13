@@ -19,6 +19,10 @@ da grid
 8) Incluir campo na tabela de empresaautorizadoas para HABILITAR/DESABILIAR autoizazao de acesso 
 aos dados da empresaautorizadoas
 
-9) URGENTE: Ver processo de TRANSACAO - NAO ESTA FUNCIONANDO 
+9) URGENTE: Ver processo de TRANSACAO - NAO ESTA FUNCIONANDO - R E S O L V I D O 
 
 10)addslashes incluir do $_GET E $_POST
+
+11)Bloqueio de acesso a cadastro de Usuario e Sql so liberara para Administrador
+
+12)Salvar a senha criptografada e quando for alterar descritografar a senha 

@@ -41,6 +41,18 @@
 				include_once 'formautorizado.html';
 			break;
 			
+			# usuario
+			case 'usuario':	
+					
+				include_once 'usuario.html';			
+			break;
+
+			case 'cadusuario':
+				
+				include_once 'formusuario.html';
+			break;
+					
+			
 			case 'manager_users':
 				
 				include_once 'manager_users.html';

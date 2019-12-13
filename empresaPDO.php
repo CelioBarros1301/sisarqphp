@@ -34,7 +34,6 @@ class EmpresaPDO
         * Nota: Se o codigo da empresa for igual a 000, sistema deve gerar automaticamente o proximo codigo
         */
         $conexao=Conexao::getConnection();
-        $conexao->beginTransaction();
         $sql='INSERT INTO tb_empresas(`cod_empresa`,`des_empresa`) ';
         $sql.= 'VALUES ( ';
         if ($codigo=="000")
@@ -58,7 +57,6 @@ class EmpresaPDO
             $smtm->bindValue(2,$descricao);
         }
         $result=$smtm->execute();
-        $conexao->commit();
         $conexao=null;
         return $result;
     }
@@ -67,20 +65,19 @@ class EmpresaPDO
     public function update($codigo,$descricao)
     {
         $conexao=Conexao::getConnection();
-        $sql="UPDATE  tb_empresas SET des_empresa=? ";
+        $sql="UPDATE  tb_empresas SET des_empresa=?";
         $sql.= " WHERE cod_empresa=?";
-        
         $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$descricao);
         $smtm->bindValue(2,$codigo);
         $result=$smtm->execute();
-        ##$conexao->commit();
         $conexao=null;
         return $result;
     }
 
     public function delete($codigo)
     {
+        $conexao=null;
         try{
             $conexao=Conexao::getConnection();
             $sql="DELETE  FROM  tb_empresas ";
@@ -89,14 +86,14 @@ class EmpresaPDO
             $smtm=$conexao->prepare($sql);
             $smtm->bindValue(1,$codigo);
             $result= $smtm->execute();
-            ##$conexao->commit();
             $conexao=null;
         }
         catch (PDOExecption $e  )
         {
             $mensagem = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
             $mensagem .= "\nErro: " . $e->getMessage();
-            var_dump($mesagem);
+            $conexao=null;
+            var_dump($mensagem);
             throw new Exception($mensagem);
         }
         

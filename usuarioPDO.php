@@ -7,14 +7,14 @@ class UsuarioPDO
 
     public function __construct(){}
   
-    public function busca($login)
+    public function busca($codigo)
     {
             
             $conexao=Conexao::getConnection();
             $result=array();
             $sql="SELECT * ";
             $sql.=" FROM tb_usuarios ";
-            $sql.=" WHERE log_usuario=?";
+            $sql.=" WHERE id_usu=?";
             
             $smtm=$conexao->prepare($sql);
             $smtm->bindValue(1,$codigo);
@@ -71,19 +71,19 @@ class UsuarioPDO
     public function update($usuario)
     {
         $conexao=Conexao::getConnection();
-        $sql="UPDATE  tb_autorizados SET ";
+        $sql="UPDATE  tb_usuarios SET ";
         $sql.='`sen_usuario`=?,';
         $sql.='`sta_usuario`=?,';
-        $sql.='`per_usuario`=?) ';
+        $sql.='`per_usuario`=? ';
        
-        $sql.= " WHERE log_usuario=?";
+        $sql.= " WHERE id_usu=?";
         
         $smtm=$conexao->prepare($sql);
         
         $smtm->bindValue(1,$usuario->getSenha());
         $smtm->bindValue(2,$usuario->getStatus());
         $smtm->bindValue(3,$usuario->getPerfil());
-        $smtm->bindValue(4,$usuario->getLogin());
+        $smtm->bindValue(4,$usuario->getCodigo());
         
         $result=$smtm->execute();
         ##$conexao->commit();
@@ -110,7 +110,8 @@ class UsuarioPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT id_usuarioo Codigo,log_usuario Login ";
+        $sql="SELECT id_usu Codigo,log_usuario Login ,";
+        $sql.="CASE WHEN per_usuario ='1' THEN 'Administrador' ELSE 'Usuario Padrao' END as Perfil";
         $sql.=" FROM tb_usuarios ";
         $smtm=$conexao -> prepare($sql);
         

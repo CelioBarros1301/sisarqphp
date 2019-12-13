@@ -3,5 +3,5 @@
    
 
     $empresaPDO = new EmpresaPDO();
-    $empresaPDO->delete('024');
+    $empresaPDO->update('024','1212');
 ?>

@@ -8,41 +8,48 @@
     # Informacoes do banco
     
     include_once  "usuario.php";
-     
+         
 ?>
 
  <div class="row">
         <div class="col-md-8 offset-1 col-sm-12">
             <div class="empresa-form">
  
-                <form action="autorizado.php" method="POST">
+                <form action="usuario.php" method="POST">
+                    
+                    <div class="form-group">
+                        <label hidden >Codigo</label>
+                        <input  type="hidden" name="id" class="form-control" value="<?=$_GET['status']!="i"?$registro["id_usu"]:"";?>" placeholder="Codigo" required  >
+                    </div>
                     
                     <div class="row">
                             <div class="col-md-2"> 
-                                    <div class="form-group">
-                                        <label>Login</label>
-                                        <input type="text" name="logUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["log_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Login do Usuario" required  >
-                                    </div>
-                                </div>
-                            <div class="col-md-5"> 
                                 <div class="form-group">
-                                    <label>Senha</label>
-                                    <input type="text" name="senUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["senh_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Senha do usuario" required  >
+                                    <label>Login</label>
+                                    <input type="text" name="logUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["log_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Login do Usuario" required  >
                                 </div>
                             </div>
-                            <div class="col-md-10"> 
+                            <div class="col-md-4"> 
+                                <div class="form-group">
+                                    <label>Senha</label>
+                                    <input type="text" name="senUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sen_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Senha do usuario" required  >
+                                </div>
+                            </div>
+                            <div class="col-md-4"> 
                                     <div class="form-group">
                                         <label>Confirmacao Senha</label>
-                                        <input type="text" name="consenUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["senh_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Confirmacao Senha do usuario" required  >
+                                        <input type="text" name="consenUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sen_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Confirmacao Senha do usuario" required  >
                                     </div>
                                 </div>    
                     </div>  
                     
-                    
-                    <div class="form-group">
-                        <label>Perfil do Usario</label>
-                        <input type="text" name="empAut" maxlength="80" value="<?=$_GET['status']!="i"?$registro["emp_autorizado"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Nome da Empresa" required  >
+                    <div class="form-check">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" <?=$registro["per_usuario"]=='1'?'checked':"";?> <?=$_GET['status']=="e"?"disabled":"";?> class="custom-control-input" value="1"  id="perfil" name="perfUsu">
+                            <label class="custom-control-label" for="perfil">Perfil Administrador</label>
+                        </div>
                     </div>
+                    
                         
                    
                     <div class="form-group">

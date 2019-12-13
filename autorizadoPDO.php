@@ -115,7 +115,6 @@ class AutorizadoPDO
         $smtm->bindValue(8,$autorizado->getLogin());
         $smtm->bindValue(9,$autorizado->getCodigo());
         $result=$smtm->execute();
-        #$conexao->commit();
         $conexao=null;
         return $result;
     }
@@ -129,7 +128,6 @@ class AutorizadoPDO
         $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$codigo);
         $result=$smtm->execute();
-        $conexao->commit();
         $conexao=null;
         return $result;
     }

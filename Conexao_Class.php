@@ -27,7 +27,7 @@ class Conexao
                 self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$connection->setAttribute(PDO::ATTR_PERSISTENT, TRUE);
                 self::$connection->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES UTF8');
-                self::$connection->beginTransaction();
+                ##self::$connection->beginTransaction();
             }
             return self::$connection;
 

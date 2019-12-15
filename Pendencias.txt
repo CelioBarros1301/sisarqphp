@@ -40,3 +40,5 @@ aos dados da empresaautorizadoas
 
 14) Validar de a Senha e confirmacao de senha no form de USUARIO são iguais
 antes de submeter o form
+
+15)ver o tratamento de erro e enviar o erro para atela com tratamento

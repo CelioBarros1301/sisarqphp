@@ -25,6 +25,39 @@ class UsuarioPDO
             
 
     }
+    public function buscaLogin($login)
+    /*
+    * Objetivo: Localizar o usuario pelo login
+    * Parametro: $login -> login do usuario
+    * Retorno: Objeto da classe usuario
+    */
+    {
+           
+            $usuario=null;
+            $conexao=Conexao::getConnection();
+            $result=array();
+            $sql="SELECT * ";
+            $sql.=" FROM tb_usuarios ";
+            $sql.=" WHERE log_usuario=?";
+            
+            $smtm=$conexao->prepare($sql);
+            $smtm->bindValue(1,$login);
+            $smtm->execute();
+            $resultset=$smtm->fetch(PDO::FETCH_ASSOC);
+            $conexao=null;
+            /*
+            $usuario= new Usuario();
+            $usuario->setCodigo($resultset['id_usu']);
+            $usuario->setLogin($resultset['log_usuario']);
+            $usuario->setSenha($resultset['sen_usuario']);
+            $usuario->setStatus($resultset['sta_usuario']);
+            $usuario->setPerfil($resultset['per_usuario']);
+            */
+            
+            return $resultset ;      
+            
+
+    }
     public function insert($usuario)
     {
         /*

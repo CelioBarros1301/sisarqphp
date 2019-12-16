@@ -3,10 +3,7 @@
     if( isset($_SESSION['user'])){
         header("location: sisarq.php");
    }
-
 ?>
-
-
 <!DOCTYPE html>
 <html>
 

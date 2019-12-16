@@ -12,8 +12,8 @@
 	
 	# Recuperando os dados da sessão
 	$user = $_SESSION['user'];
-
-	$page_title = "Usuario: ".$user[0];
+    
+	$page_title = "Usuario: ".$user['log_usuario'];
 
 	# Criando a função de gerenciamento
 	function page_content(){

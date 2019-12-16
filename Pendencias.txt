@@ -3,7 +3,7 @@
 PRIORIDADES:
 
 12)Salvar a senha criptografada e quando for alterar descritografar a senha 
-13)Alterar o acesso do sistema via banco retira o arquyivo txt
+13)Alterar o acesso do sistema via banco retira o arquyivo txt R E S O L V I D O 
 10)addslashes incluir do $_GET E $_POST
 
 

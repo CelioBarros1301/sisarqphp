@@ -11,6 +11,6 @@ include_once "Conexao_Class.php";
 	$conexao=Conexao::getConnection();
 	$conecao=null;
 	header("location: index.php?error=session_ending");
-      
+   
 
 ?>

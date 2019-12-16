@@ -45,14 +45,6 @@ class UsuarioPDO
             $smtm->execute();
             $resultset=$smtm->fetch(PDO::FETCH_ASSOC);
             $conexao=null;
-            /*
-            $usuario= new Usuario();
-            $usuario->setCodigo($resultset['id_usu']);
-            $usuario->setLogin($resultset['log_usuario']);
-            $usuario->setSenha($resultset['sen_usuario']);
-            $usuario->setStatus($resultset['sta_usuario']);
-            $usuario->setPerfil($resultset['per_usuario']);
-            */
             
             return $resultset ;      
             
@@ -83,7 +75,7 @@ class UsuarioPDO
             $smtm=$conexao->prepare($sql);
             
             $smtm->bindValue(1,$usuario->getLogin());
-            $smtm->bindValue(2,$usuario->getSenha());
+            $smtm->bindValue(2,base64_encode($usuario->getSenha()));
             $smtm->bindValue(3,$usuario->getStatus());
             $smtm->bindValue(4,$usuario->getPerfil());
             
@@ -113,7 +105,7 @@ class UsuarioPDO
         
         $smtm=$conexao->prepare($sql);
         
-        $smtm->bindValue(1,$usuario->getSenha());
+        $smtm->bindValue(1,base64_encode($usuario->getSenha()));
         $smtm->bindValue(2,$usuario->getStatus());
         $smtm->bindValue(3,$usuario->getPerfil());
         $smtm->bindValue(4,$usuario->getCodigo());

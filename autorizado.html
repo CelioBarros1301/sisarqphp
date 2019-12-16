@@ -30,8 +30,15 @@
                                             {
                                             echo "<th>". $coluna. "</th>";
                                             }
-                                        ?>        
-                                        <th>Ações</th>
+                                            if ( count($dataTable)>0  )
+                                            {        
+                                                echo "<th>Ações</th>";
+                                            }
+                                            else
+                                            {
+                                                echo "<th> </th>";
+                                            }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>

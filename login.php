@@ -5,8 +5,8 @@
    
     #Dados dos Formularios
     $email=$_POST['email'];
-    $senha=$_POST['senha'];
-
+    $senha=base64_encode($_POST['senha']);
+    
     #Localizar o usuario
     $usuarioPDO= new UsuarioPDO();
     $usuario=$usuarioPDO->buscaLogin($email);

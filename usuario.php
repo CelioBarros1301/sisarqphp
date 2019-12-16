@@ -1,4 +1,3 @@
-
 <?php
   
 /*
@@ -32,7 +31,10 @@
     {
         # Preencher o DataTable
         $dataTable=$usuarioPDO->lista("");
-        $dataTableColunas = array_keys($dataTable[0]);
+        if ( $dataTable ) 
+        {
+            $dataTableColunas = array_keys($dataTable[0]);
+        }
     }
     
     # Verificar operacoes de Banco
@@ -41,7 +43,8 @@
         $operacao=$_POST['operacao'];
         
         $codigo=$_POST['id'];
-        print_r($_POST);
+        
+        
         # Gerando as informacoes do Objeto
         $usuario->setCodigo($_POST['id']);
         $usuario->setLogin($_POST['logUsu']);

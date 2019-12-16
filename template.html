@@ -1,8 +1,10 @@
 <?php
     
-
+    # Recuperando os dados da sessão
+    $user = $_SESSION['user'];
+    $perfil=($user['per_usuario']=="1"?"Admin":"Padrao");
+ 
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -129,16 +131,25 @@
                     <a href="#SubMenuFerramenta" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Ferramenta</a>
                     
                     <ul class="collapse list-unstyled" id="SubMenuFerramenta">
-                                                <li>
-                            <a href="?option=usuario">Cadastro Usuario</a>
-                        </li>
+                        <?php 
+                            if ($perfil=="Admin")
+                            {
+                                echo "<li>";
+                                    echo '<a href="?option=usuario">Cadastro Usuario</a>';
+                                echo "</li>";
+                            }
+                        ?>    
                         <li>
                             <a href="#">Liberar Login</a>
                         </li>
-                        <li>
-                            <a href="#">SQL</a>
-                        </li>
-                       
+                        <?php 
+                            if ($perfil=="Admin")
+                            {
+                                echo "<li>";
+                                    echo '<a href="#">SQL</a>';
+                                echo "</li>";
+                            }
+                       ?>
                     </ul>
                 </li>
 

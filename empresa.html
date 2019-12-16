@@ -29,12 +29,21 @@
                             {
                             echo "<th>". $coluna. "</th>";
                             }
-                        ?>        
-                        <th>Ações</th>
+                            if ( count($empresas)>0  )
+                            {        
+                             echo "<th>Ações</th>";
+                            }
+                            else
+                            {
+                               echo "<th> </th>";
+                            }
+                        ?>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for ($i=0;$i < count($empresas);$i++ ) {
+                    <?php
+                         
+                        for ($i=0;$i < count($empresas);$i++ ) {
                             echo "<tr>";
                             
                                 foreach ($empresas[$i] as $campo){

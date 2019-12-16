@@ -17,9 +17,12 @@
     else if( !isset($_GET['status']))
     {
         # Preencher o DataTable
+        $nomeColunas=array();
         $empresas=$empresaPDO->lista("");
-        $nomeColunas = array_keys($empresas[0]);
-        
+        if ( $empresas ) 
+        {
+            $nomeColunas = array_keys($empresas[0]);
+        }
     }
     
     # Verificar operacoes de Banco
@@ -42,6 +45,5 @@
         }
         header("location:sisarq.php?option=empresa");
     }
-     
-    
+
 ?>

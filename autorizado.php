@@ -1,4 +1,3 @@
-
 <?php
   
 /*
@@ -40,7 +39,11 @@
     {
         # Preencher o DataTable
         $dataTable=$autorizadoPDO->lista("");
-        $dataTableColunas = array_keys($dataTable[0]);
+        if ( $dataTable ) 
+        {
+            $dataTableColunas = array_keys($dataTable[0]);
+        }
+        
     }
     
     # Verificar operacoes de Banco

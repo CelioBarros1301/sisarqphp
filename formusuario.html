@@ -32,13 +32,13 @@
                             <div class="col-md-4"> 
                                 <div class="form-group">
                                     <label>Senha</label>
-                                    <input type="text" name="senUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sen_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Senha do usuario" required  >
+                                    <input type="text" name="senUsu" maxlength="80" value="<?=$_GET['status']!="i"?base64_decode($registro["sen_usuario"]):"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Senha do usuario" required  >
                                 </div>
                             </div>
                             <div class="col-md-4"> 
                                     <div class="form-group">
                                         <label>Confirmacao Senha</label>
-                                        <input type="text" name="consenUsu" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sen_usuario"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Confirmacao Senha do usuario" required  >
+                                        <input type="text" name="consenUsu" maxlength="80" value="<?=$_GET['status']!="i"?base64_decode($registro["sen_usuario"]):"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Confirmacao Senha do usuario" required  >
                                     </div>
                                 </div>    
                     </div>  

@@ -143,7 +143,7 @@ class AutorizadoPDO
         
         if (isset($filtro))
         {
-            $sql.= " WHERE nome_autorizado like '%?%'";
+            $sql.= " WHERE nom_autorizado like '%?%'";
             $smtm->bindValue(1,$filtro);
         }
         $smtm->execute();
@@ -153,5 +153,4 @@ class AutorizadoPDO
     }
 
 }
-
 ?>

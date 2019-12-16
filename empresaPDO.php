@@ -1,4 +1,4 @@
-|<?php
+<?php
 require_once("Conexao_Class.php");
 
 class EmpresaPDO

@@ -30,8 +30,15 @@
                                             {
                                             echo "<th>". $coluna. "</th>";
                                             }
-                                        ?>        
-                                        <th>Ações</th>
+                                            if ( count($dataTable)>0  )
+                                            {        
+                                                echo "<th>Ações</th>";
+                                            }
+                                            else
+                                            {
+                                                echo "<th> </th>";
+                                            }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,13 +55,14 @@
                                                     $link='href=sisarq.php?option=cadusuario&id='. $dataTable[$i]['Codigo']. '&status=a';
                                                     echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
                                                             echo '<i class="fa fa-edit"></i>';
-                                                        echo '</a> ';
-                                                        
-                                                        $link='href=sisarq.php?option=cadusuario&id='.$dataTable[$i]['Codigo'] .'&status=e';
-                                                        echo '<a name="edit" class="btn btn-danger btn-sm"'.$link.'>';
-                                                            echo '<i class="fa fa-trash"></i>';
-                                                        echo '</a> ';
-                    
+                                                    echo '</a> ';
+                                                    if ( $user['log_usuario']!=$dataTable[$i]['Login'] )
+                                                        {
+                                                         $link='href=sisarq.php?option=cadusuario&id='.$dataTable[$i]['Codigo'] .'&status=e';
+                                                            echo '<a name="edit" class="btn btn-danger btn-sm"'.$link.'>';
+                                                                echo '<i class="fa fa-trash"></i>';
+                                                            echo '</a> ';
+                                                        }        
                                                 echo '</td>';
                                                               
                                             echo "</tr>";

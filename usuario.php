@@ -12,8 +12,7 @@
     
     $usuarioPDO= new UsuarioPDO();
     $usuario=new Usuario();
-
-
+   
     # Array para guarda os nome das Colunas doa DataTable
     $dataTableColunas = array(); 
 

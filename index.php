@@ -138,11 +138,14 @@
                     </div>
                     <div class="form-group">
                         <label>Login</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Informar e-mail">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Informar e-mail" required>
                         <?php
                             if (isset($_GET['error'])) {
                                 if ( $_GET['error']=="user_not_found" ){
                                     echo '<span class="text-danger" >Usuário Não Encontrado</span>';
+                                }
+                                if ( $_GET['error']=="user_log" ){
+                                    echo '<span class="text-danger" >Usuário logado em outra estação</span>';
                                 }
                             }
                         ?>
@@ -150,7 +153,7 @@
                     </div>
                     <div class="form-group">
                         <label>Senha</label>
-                        <input type="password" name="senha" class="form-control" placeholder="Informar Senha">
+                        <input type="password" name="senha" class="form-control" placeholder="Informar Senha" required>
                         <?php
                             if (isset($_GET['error'])) {
                                 if ( $_GET['error']=="password_incorrect" ){
@@ -159,6 +162,7 @@
                             }
                         ?>
                     </div>
+
                     <button type="submit" class="btn btn-primary">
                             Login
                     </button>

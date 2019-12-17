@@ -9,27 +9,34 @@
     
     #Localizar o usuario
     $usuarioPDO= new UsuarioPDO();
-    $usuario=$usuarioPDO->buscaLogin($email);
+    $registro=$usuarioPDO->buscaLogin($email);
     
-    $error=""; 
-    $login=false;
-        
-    if($email== $usuario['log_usuario'] and $senha==$usuario['sen_usuario'])
+    if (!$registro)
+    {
+        header("location: index.php?error=user_not_found");
+    } 
+    elseif(! ( $senha==$registro['sen_usuario'])) {
+        header("location: index.php?error=password_incorrect");  
+    }
+    elseif ($registro['sta_usuario']!=""){
+        header("location: index.php?error=user_log");
+    }
+    else
     {
         #Granando dados da Sessão
         session_start();
-        $_SESSION['user']=$usuario;
+        $_SESSION['user']=$registro;
         $login=true;
-        header("location: index.php");
+        $usuario=new Usuario();
         
-    }elseif ($email==$usuario['log_usuario'] and $senha!=$usuario['sen_usuario']){
-        $error="password_incorrect";
-     
-    }
-    if ($error=="password_incorrect"){
-        header("location: index.php?error=password_incorrect");
-    }elseif (!$login) {
-        header("location: index.php?error=user_not_found");
+        $usuario->setCodigo($registro['id_usu']);
+        $usuario->setLogin($registro['log_usuario']);
+        $usuario->setSenha(base64_decode($registro['sen_usuario']));
+        $usuario->setPerfil($registro['per_usuario']);
+        $usuario->setStatus($registro['sen_usuario']);
+        $registro=$usuarioPDO->update($usuario);
+
+        header("location: index.php");
     }
     
 ?>

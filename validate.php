@@ -1,8 +1,10 @@
 <?php  
-
+    
 	
 	function validate_options(){
-			
+		
+		
+		$_SESSION['transacao']="";
 		if(!isset($_GET['option'])){
 			return false;
 		}
@@ -11,7 +13,6 @@
 		switch($_GET['option']){
 			
 			case "painel":				
-				$users = count(file("users.txt"));
 				include_once 'painel.html';
 			break;
 
@@ -21,34 +22,28 @@
 
 			# Empresa
 			case 'empresa':	
-					
 				include_once 'empresa.html';			
 			break;
 
 			case 'cadempresa':
-				
 				include_once 'formempresa.html';
 			break;
 
 			# Autorizado
 			case 'autorizado':	
-					
 				include_once 'autorizado.html';			
 			break;
 
 			case 'cadautorizado':
-				
 				include_once 'formautorizado.html';
 			break;
 			
 			# usuario
 			case 'usuario':	
-					
 				include_once 'usuario.html';			
 			break;
 
 			case 'cadusuario':
-				
 				include_once 'formusuario.html';
 			break;
 					
@@ -65,6 +60,58 @@
 		}# End Switch
 	}#End Funtion validate_options
 
+
+	function transacao(){
+		
+		
+		$_SESSION['transacao']="";
+		if(!isset($_GET['option'])){
+			return false;
+		}
+		global $user;
+		
+		switch($_GET['option']){
+			
+			
+			# Empresa
+			case 'empresa':	
+				$_SESSION['transacao']="Empresas";
+			break;
+
+			case 'cadempresa':
+				$_SESSION['transacao']="Empresas";
+			break;
+
+			# Autorizado
+			case 'autorizado':	
+				$_SESSION['transacao']="Autorizados";	
+			break;
+
+			case 'cadautorizado':
+				$_SESSION['transacao']="Autorizados";
+			break;
+			
+			# usuario
+			case 'usuario':	
+				$_SESSION['transacao']="Usuarios";	
+			break;
+
+			case 'cadusuario':
+				$_SESSION['transacao']="Usuarios";
+			break;
+					
+			
+			case 'manager_users':
+				
+				include_once 'manager_users.html';
+			break;
+
+			
+			
+
+
+		}# End Switch
+	}#End Funtion validate_options
 
 
 ?>

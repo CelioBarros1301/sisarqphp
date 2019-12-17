@@ -1,0 +1,13 @@
+Bloqueio de registro:
+
+https://pt.stackoverflow.com/questions/6114/update-e-select-ao-mesmo-tempo-locked?rq=1
+
+http://underpop.online.fr/m/mysql/manual/mysql-mysql-optimization-internal-locking.html
+
+
+https://pt.stackoverflow.com/questions/73667/lock-de-registro - LEIA IMPORTANTE
+
+https://www.xpertdeveloper.com/row-locking-with-mysql/ - LEIA IMPORTANTE
+
+http://ptcomputador.com/P/php-mysql-programming/92919.html
+

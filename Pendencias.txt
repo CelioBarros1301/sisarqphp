@@ -48,4 +48,7 @@ antes de submeter o form
 17) Nao permitir o usuario se logar em mais de uma maquina simultaneamente. Usar o processo de 
 gravar o masaddress na tabela de Usuario- sta_usuario. Utilizar o IP . Quando usario for
 se logar verificar login e senha(ok) e depois verificar se o ip da tabela e igual ao da maquina
-e libera o acesso ou ip da tabela for branco. Mostra a mensagem usario logando em outra estação
+e libera o acesso ou ip da tabela for branco. Mostra a mensagem usario logando em outra estação R E S O L V I D O
+
+18)Incluir o Icone de Consulta nas grid so apresentar quando o usuario não tiver acesso a alteracao/delecao
+

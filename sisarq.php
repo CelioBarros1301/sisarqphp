@@ -16,6 +16,7 @@
 	$page_title = "Usuario: ".$user['log_usuario'];
 
 	# Criando a função de gerenciamento
+	transacao();
 	function page_content(){
 		validate_options();
 	}

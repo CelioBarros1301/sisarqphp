@@ -47,12 +47,23 @@
 				include_once 'formusuario.html';
 			break;
 					
+			# arquivo
+			case 'arquivo':	
+				include_once 'arquivo.html';			
+			break;
+
+			case 'cadarquivo':
+				include_once 'formarquivo.html';
+			break;
 			
+
 			case 'manager_users':
 				
 				include_once 'manager_users.html';
 			break;
-
+			default:
+				echo "Erro: 404 - Pagina Não encontrada";
+		break;
 			
 			
 
@@ -90,6 +101,17 @@
 			case 'cadautorizado':
 				$_SESSION['transacao']="Autorizados";
 			break;
+			
+			
+			# arquivo
+			case 'arquivo':	
+				$_SESSION['transacao']="Arquivos";				
+			break;
+
+			case 'cadarquivo':
+				$_SESSION['transacao']="Arquivos";	
+			break;
+			
 			
 			# usuario
 			case 'usuario':	

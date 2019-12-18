@@ -5,6 +5,9 @@ PRIORIDADES:
 12)Salvar a senha criptografada e quando for alterar descritografar a senha  R E S O L V I D O 
 13)Alterar o acesso do sistema via banco retira o arquyivo txt R E S O L V I D O 
 10)addslashes incluir do $_GET E $_POST
+19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
+    alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
+20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo )
 
 
 RELAÇAO DO BACKLOG
@@ -52,3 +55,6 @@ e libera o acesso ou ip da tabela for branco. Mostra a mensagem usario logando e
 
 18)Incluir o Icone de Consulta nas grid so apresentar quando o usuario não tiver acesso a alteracao/delecao
 
+19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
+    alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
+20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo )

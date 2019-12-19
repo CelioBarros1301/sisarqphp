@@ -8,6 +8,9 @@
     # Informacoes do banco
     
     include_once  "arquivo.php";
+    $selecao=$_GET["status"]!="i"?"selected":"";
+    $readonly=$_GET['status']!="i"?"readonly":"";
+                                                            
      
 ?>
 
@@ -20,12 +23,13 @@
                     <div class="row">
                         <div class="form-group">    
                             <label> Empresa </label><br>	
-                            <select name="codEmp" class="form-control">
+                            <select name="codEmp" <?=$readonly;?> class="form-control">
                                 <?php
-                                foreach ($tabelaEmpresa as $coluna)
-                                    echo '<option value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
-
+                                foreach ($tabelaEmpresa as $coluna){
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
+                                }
                                 ?>
+                                 
                             </select>
                         </div>
                     </div>        

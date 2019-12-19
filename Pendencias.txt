@@ -7,7 +7,8 @@ PRIORIDADES:
 10)addslashes incluir do $_GET E $_POST
 19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
     alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
-20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo )
+    R E S O L V I D O
+20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo ) R E S O L V I D O 
 
 
 RELAÇAO DO BACKLOG
@@ -57,4 +58,5 @@ e libera o acesso ou ip da tabela for branco. Mostra a mensagem usario logando e
 
 19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
     alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
-20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo )
+R E S O L V I D O
+20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo ) R E S O L V I D O

@@ -14,8 +14,8 @@
     $arquivo=new Arquivo();
     $empresaPDO=new EmpresaPDO();
 
-    $tabelaEmpresa=$empresaPDO->lista("");
-   
+        
+    
     # Array para guarda os nome das Colunas doa DataTable
     $dataTableColunas = array(); 
 
@@ -28,6 +28,14 @@
         $codEmpresa=$_GET['codEmp'];
         $codArquivo=$_GET['codArq'];
         
+        if ($acao=="i" ) 
+        { 
+            $tabelaEmpresa=$empresaPDO->lista("");
+        }
+        else
+        {
+            $tabelaEmpresa=$empresaPDO->lista($codEmpresa);
+        }
         $registro=$arquivoPDO->busca($codEmpresa,$codArquivo);
         
     }
@@ -78,7 +86,7 @@
                
             break;
             case 'e':
-                $registro=$arquivoPDO->delete($codEmp,$codArq);
+                $registro=$arquivoPDO->delete($codEmpresa,$codArquivo);
             break;
         }
         header("location:sisarq.php?option=arquivo");

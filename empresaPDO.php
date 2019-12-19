@@ -103,14 +103,16 @@ class EmpresaPDO
 
     public function lista($filtro)
     {
-        $conexao=Conexao::getConnection();
         $result=array();
+        $conexao=Conexao::getConnection();
         $sql="SELECT cod_empresa Codigo,des_empresa Empresa FROM tb_empresas ";
-        $smtm=$conexao -> prepare($sql);
-        
-        if (isset($filtro))
+        if (isset($filtro) && $filtro!="")
         {
-            $sql.= " WHERE des_empresa like '%?%'";
+            $sql .= " WHERE cod_empresa= ? ";
+        }
+        $smtm=$conexao->prepare($sql);
+        if (isset($filtro) && $filtro!="" )
+        {
             $smtm->bindValue(1,$filtro);
         }
         $smtm->execute();
@@ -119,5 +121,7 @@ class EmpresaPDO
         return  $result;
     }
 
+    
 }
+
 ?>

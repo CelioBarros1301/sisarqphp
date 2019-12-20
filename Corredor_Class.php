@@ -12,7 +12,7 @@ Class Corredor
     private $codArquivo;
     private $codCorredor;
     private $desCorredor;
-    private $sigCorredor
+    private $sigCorredor;
     
     public function setCodigoEmpresa($codigo)
     {
@@ -52,7 +52,7 @@ Class Corredor
 
     public function setSigla($sigla)
     {
-        $this-sigCorredor=$sigla;
+        $this->sigCorredor=$sigla;
     }
     public function getSigla()
     {

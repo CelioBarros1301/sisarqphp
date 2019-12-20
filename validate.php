@@ -56,6 +56,16 @@
 				include_once 'formarquivo.html';
 			break;
 			
+			# corredor
+			case 'corredor':	
+				include_once 'corredor.html';			
+			break;
+
+			case 'cadcorredor':
+				include_once 'formcorredor.html';
+			break;
+
+
 
 			case 'manager_users':
 				
@@ -112,6 +122,15 @@
 				$_SESSION['transacao']="Arquivos";	
 			break;
 			
+			# corredor
+			case 'corredor':	
+				$_SESSION['transacao']="Corredores";				
+			break;
+
+			case 'cadcorredor':
+				$_SESSION['transacao']="Corredores";	
+			break;
+	
 			
 			# usuario
 			case 'usuario':	

@@ -74,15 +74,15 @@ class CorredorPDO
             if ($corredor->getCodigoCorredor()=="000")
             { 
                 $smtm->bindValue(1,$corredor->getCodigoEmpresa());
-                $smtm->bindValue(2,$corredor->getCodigoArquivo()));
+                $smtm->bindValue(2,$corredor->getCodigoArquivo());
                 $smtm->bindValue(3,$corredor>getDescricao());
                 $smtm->bindValue(4,$arquivo->getSigla());
             }
             else
             {
                 $smtm->bindValue(1,$corredor->getCodigoEmpresa());
-                $smtm->bindValue(2,$corredor->getCodigoArquivo()));
-                $smtm->bindValue(3,$corredor->getCodigoCorredor()));
+                $smtm->bindValue(2,$corredor->getCodigoArquivo());
+                $smtm->bindValue(3,$corredor->getCodigoCorredor());
                 $smtm->bindValue(4,$corredor>getDescricao());
                 $smtm->bindValue(5,$arquivo->getSigla());
                
@@ -155,17 +155,31 @@ class CorredorPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT empresa.cod_empresa CodEmpresa,des_empresa Empresa,cod_arquivo CodArquivo,des_arquivo Descricao ";
-        $sql.=" FROM tb_arquivos arquivo left join tb_empresas empresa on";
-        $sql.="     arquivo.cod_empresa=empresa.cod_empresa ";
+
+        $sql="SELECT    empresa.cod_empresa CodEmpresa,des_empresa Empresa,";
+        $sql.="         arquivo.cod_arquivo CodArquivo,des_arquivo Descricao,";
+        $sql.="         cod_corredor CodCorredor,des_corredor Corredor, ";
+        $sql.="         sig_corredor Sigla ";
         
+        $sql.="FROM tb_corredores corredor "; 
+             
+        $sql.="     left join tb_arquivos arquivo on ";
+        $sql.="          corredor.cod_empresa=arquivo.cod_empresa and ";
+        $sql.="          corredor.cod_arquivo=arquivo.cod_arquivo ";
+        $sql.="     left join tb_empresas empresa on ";
+        $sql.="       corredor.cod_empresa=empresa.cod_empresa ";
+        
+        if ($filtro!="")
+        { 
+            $sql.= " WHERE empresa.cod_empresa=?";
+        }
         $smtm=$conexao -> prepare($sql);
         
-        if (isset($filtro))
+        if ($filtro!="")
         {
-            $sql.= " WHERE ?";
             $smtm->bindValue(1,$filtro);
         }
+        
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;

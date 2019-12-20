@@ -82,7 +82,7 @@
                             <a href="?option=arquivo">Arquivo</a>
                         </li>
                         <li>
-                            <a href="#">Corredor</a>
+                            <a href="?option=corredor&filtroEmp=">Corredor</a>
                         </li>
                         <li>
                             <a href="#">Estante</a>
@@ -293,6 +293,13 @@
         })
         </script>
     
+
+        <script>
+            function consultagride(filtroEmpresa) {
+                
+                window.location.href = "sisarq.php?option=corredor&filtroEmp="+filtroEmpresa;
+            }                 
+        </script>
 </body>
 
 </html>

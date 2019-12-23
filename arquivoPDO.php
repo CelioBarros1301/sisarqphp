@@ -127,7 +127,8 @@ class ArquivoPDO
         $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT empresa.cod_empresa CodEmpresa,des_empresa Empresa,cod_arquivo CodArquivo,des_arquivo Descricao ";
-        $sql.=" FROM tb_arquivos arquivo left join tb_empresas empresa on";
+        $sql.=" FROM tb_arquivos arquivo ";
+        $sql.="     inner join tb_empresas empresa on";
         $sql.="     arquivo.cod_empresa=empresa.cod_empresa ";
         $smtm=$conexao -> prepare($sql);
         
@@ -135,6 +136,38 @@ class ArquivoPDO
         {
             $sql.= " WHERE ?";
             $smtm->bindValue(1,$filtro);
+        }
+        $smtm->execute();
+        $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
+        return  $result;
+    }
+
+    public function listaArquivo($codEmpresa,$codArquivo)
+    {
+        $conexao=Conexao::getConnection();
+        $result=array();
+        $sql="SELECT * ";
+        $sql.=" FROM tb_arquivos ";
+        
+        $smtm=$conexao -> prepare($sql);
+        
+        if ($codArquivo != "" )
+        {
+            $sql.= " WHERE cod_empresa=? AND ";
+            $sql.= "       cod_arquivo=?  ";
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+        }
+        else
+        {
+        
+            $sql.= " WHERE cod_empresa=?  ";
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
         }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);

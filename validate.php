@@ -65,6 +65,17 @@
 				include_once 'formcorredor.html';
 			break;
 
+			# estante
+			case 'estante':	
+				include_once 'estante.html';			
+			break;
+
+			case 'cadestante':
+				include_once 'formestante.html';
+			break;
+
+
+
 
 
 			case 'manager_users':

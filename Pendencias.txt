@@ -59,4 +59,10 @@ e libera o acesso ou ip da tabela for branco. Mostra a mensagem usario logando e
 19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
     alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
 R E S O L V I D O
+
 20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo ) R E S O L V I D O
+
+21)TESTE DE O REGISTRO NA EXISTIR APRESENTAR A MENSAGEM DE REGITRO NAO ENCONTRADO
+
+22)Para as opcoes Arquivo,corredor,estantee prateleira implemnetar a
+cargo do combox conforme a seleçao do nivel superior

@@ -106,7 +106,7 @@ class CorredorPDO
         $conexao=Conexao::getConnection();
         $sql="UPDATE  tb_corredores SET ";
         $sql.='`des_corredor`=? ,';
-        $sql.='`sig_arquivo`=? ';
+        $sql.='`sig_corredor`=? ';
         
        
         $sql.= " WHERE cod_empresa=? and ";
@@ -120,9 +120,10 @@ class CorredorPDO
         $smtm->bindValue(1,$corredor->getDescricao());
         $smtm->bindValue(2,$corredor->getSigla());
        
-        $smtm->bindValue(3,$arquivo->getcodigoEmpresa());
-        $smtm->bindValue(4,$arquivo->getcodigoArquivo());
-        $smtm->bindValue(5,$arquivo->getcodigoCorredor());
+        $smtm->bindValue(3,$corredor->getCodigoEmpresa());
+        $smtm->bindValue(4,$corredor->getCodigoArquivo());
+        $smtm->bindValue(5,$corredor->getCodigoCorredor());
+        
 
         
         $result=$smtm->execute();
@@ -142,7 +143,7 @@ class CorredorPDO
         $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$codEmpresa);
         $smtm->bindValue(2,$codArquivo);
-        $smtm->bindValue(2,$codCorredor);
+        $smtm->bindValue(3,$codCorredor);
         
         $result=$smtm->execute();
         ##$conexao->commit();
@@ -163,10 +164,10 @@ class CorredorPDO
         
         $sql.="FROM tb_corredores corredor "; 
              
-        $sql.="     left join tb_arquivos arquivo on ";
+        $sql.="     inner join tb_arquivos arquivo on ";
         $sql.="          corredor.cod_empresa=arquivo.cod_empresa and ";
         $sql.="          corredor.cod_arquivo=arquivo.cod_arquivo ";
-        $sql.="     left join tb_empresas empresa on ";
+        $sql.="     inner join tb_empresas empresa on ";
         $sql.="       corredor.cod_empresa=empresa.cod_empresa ";
         
         if ($filtro!="")
@@ -185,6 +186,48 @@ class CorredorPDO
         $conexao=null;
         return  $result;
     }
+
+
+    public function listaCorredor($codEmpresa,$codArquivo,$codCorredor)
+    {
+        $conexao=Conexao::getConnection();
+        $result=array();
+        $sql="SELECT * ";
+        $sql.=" FROM tb_arquivos ";
+        
+        $smtm=$conexao -> prepare($sql);
+        
+        if ($codCorredor != "" )
+        {
+            $sql.= " WHERE cod_empresa=? AND ";
+            $sql.= "       cod_arquivo=?  AND ";
+            $sql.= "       cod_corredoro=?  ";
+            
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+            $smtm->bindValue(3,$codCorredor);
+            
+        }
+        else
+        {
+        
+            $sql.= " WHERE cod_empresa=?  ";
+            $sql.= "       cod_arquivo=?  ";
+            
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+            
+        }
+        $smtm->execute();
+        $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
+        return  $result;
+    }
+
 
 }
 

@@ -6,17 +6,18 @@
 *  Regra: 
 */
     
-    require("corredorPDO.php");
-    require("corredor_Class.php");
+    require("estantePDO.php");
+    require("estante_Class.php");
 
+    require("corredorPDO.php");
     require("arquivoPDO.php");
     require("empresaPDO.php");
     
    
-    $corredorPDO= new CorredorPDO();
-    $corredor=new Corredor();
+    $estantePDO= new CorredorPDO();
+    $estante=new Corredor();
     
-    
+    $corredorPDO= new ArquivoPDO();
     $arquivoPDO= new ArquivoPDO();
     $empresaPDO=new EmpresaPDO();
                
@@ -33,19 +34,24 @@
         $codEmpresa=$_GET['codEmp'];
         $codArquivo=$_GET['codArq'];
         $codCorredor=$_GET['codCor'];
+        $codEstante=$_GET['codEst'];
+  
         if ($acao=="i" ) 
         { 
             $tabelaEmpresa=$empresaPDO->lista("");
             $tabelaArquivo=$arquivoPDO->lista("");
+            $tabelaCorredor=$corredorPDO->lista("");
             
         }
         else
         {
             $tabelaEmpresa=$empresaPDO->lista($codEmpresa);
             $tabelaArquivo=$arquivoPDO->listaArquivo($codEmpresa,$codArquivo);
+            $tabelaCorredor=$corredorPDO->listaArquivo($codEmpresa,$codArquivo,$codCorredor);
+            
             
         }
-        $registro=$corredorPDO->busca($codEmpresa,$codArquivo,$codCorredor);
+        $registro=$estantePDO->busca($codEmpresa,$codArquivo,$codCorredor,$codEstante);
         
     }
     else if( !isset($_GET['status']))
@@ -59,7 +65,7 @@
        
         $tabelaEmpresa=$empresaPDO->lista("");
             
-        $dataTable=$corredorPDO->lista($filtroEmpresa);
+        $dataTable=$estantePDO->lista($filtroEmpresa);
         if ( $dataTable ) 
         {
             $dataTableColunas = array_keys($dataTable[0]);
@@ -74,26 +80,28 @@
         $codEmpresa=$_POST['codEmp'];
         $codArquivo=$_POST['codArq'];
         $codCorredor=$_POST['CodCor'];
+        $codEstante=$_POST['CodEst'];
         
         
         # Gerando as informacoes do Objeto
-        $corredor->setCodigoEmpresa($_POST['codEmp']);
-        $corredor->setCodigoArquivo($_POST['codArq']);
-        $corredor->setCodigoCorredor($_POST['codCor']);
-        $corredor->setDescricao($_POST['desCor']);
-        $corredor->setSigla($_POST['sigCor']);
+        $estante->setCodigoEmpresa($_POST['codEmp']);
+        $estante->setCodigoArquivo($_POST['codArq']);
+        $estante->setCodigoCorredor($_POST['codCor']);
+        $estante->setCodigoEstante($_POST['codEst']);
+        $estante->setDescricao($_POST['desEst']);
+        $estante->setSigla($_POST['sigEst']);
         
         
         switch ($operacao)
         {
             case 'a':
-                $registro=$corredorPDO->update($corredor);
+                $registro=$estantePDO->update($estante);
             break;
             case 'i':
                 try 
                 {
                     $conexao=Conexao::getConnection();
-                    $registro=$corredorPDO->insert($corredor);
+                    $registro=$estantePDO->insert($estante);
                     $conexao=null;
                 }
                 catch (PDOExecption $e  )
@@ -107,10 +115,10 @@
                
             break;
             case 'e':
-                $registro=$corredorPDO->delete($codEmpresa,$codArquivo,$codCorredor);
+                $registro=$estantePDO->delete($codEmpresa,$codArquivo,$codCorredor,$codEstante);
             break;
         }
-        header("location:sisarq.php?option=corredor&filtroEmp=$filtroEmpresa");
+        header("location:sisarq.php?option=estante&filtroEmp=$filtroEmpresa");
     }
      
 ?>

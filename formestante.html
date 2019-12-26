@@ -38,8 +38,8 @@
                             <label> Arquivo </label><br>	
                             <select name="codArq" <?=$readonly;?> class="form-control">
                                 <?php
-                                foreach ($tabelaArquivo as $coluna){
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["codArquivo"] .'">' .$coluna["Aquivo"] ."</option>";                     
+                                 foreach ($tabelaArquivo as $coluna){
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
                                 }
                                 ?>
                                  
@@ -53,7 +53,7 @@
                             <select name="codCor" <?=$readonly;?> class="form-control">
                                 <?php
                                 foreach ($tabelaCorredor as $coluna){
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["codCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
                                 }
                                 ?>
                                  
@@ -66,7 +66,7 @@
                     <div class="row"> 
                         <div class="form-group">
                             <label>Codigo</label>
-                            <input type="text" name="codEst"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codEst"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                            <input type="text" name="codEst"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codEst"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,3)'>
                         </div>
                     </div>
                     

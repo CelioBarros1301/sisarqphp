@@ -43,11 +43,11 @@ Class Corredor
 
     public function setDescricao($descricao)
     {
-        $this->desArquivo=$descricao;
+        $this->desCorredor=$descricao;
     }
     public function getDescricao()
     {
-        return $this->desArquivo;
+        return $this->desCorredor;
     }
 
     public function setSigla($sigla)

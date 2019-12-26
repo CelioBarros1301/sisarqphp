@@ -127,7 +127,7 @@ class SetorPDO
         $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT empresa.cod_empresa CodEmpresa,des_empresa Empresa,";
-        $sql.="cod_setor CodSetor,des_setor Descricao ";
+        $sql.="cod_setor CodSetor,des_setor Setor ";
         $sql.=" FROM tb_setores setor ";
         $sql.="     inner join tb_empresas empresa on";
         $sql.="           setor.cod_empresa=empresa.cod_empresa ";
@@ -148,7 +148,7 @@ class SetorPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT * ";
+        $sql="SELECT cod_setor CodSetor,des_setor Setor ";
         $sql.=" FROM tb_setores ";
         
         $smtm=$conexao -> prepare($sql);

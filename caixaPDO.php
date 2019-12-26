@@ -52,14 +52,14 @@ class CaixaPDO
             $sql.='`des_caixa`)';
             
             $sql.=' VALUES ( ';
-            if ($caixa->getCodigoCorredor()=="00000")
+            if ($caixa->getCodigoCaixa()=="00000")
             {
                 $sql.='?,';
                 $sql.='?,';
                 
-                $sql.='(SELECT right(concat("00000",max(caixa.cod_caixa)+1),5) from tb_caixas caixas';
+                $sql.='(SELECT right(concat("00000",max(caixa.cod_caixa)+1),5) from tb_caixas caixa';
                 $sql.=' where caixa.cod_empresa=' . "'". $caixa->getCodigoEmpresa() ."' AND ";
-                $sql.='       caixa.cod_setor='   . "'". $caixa->getCodigoSetor()   ."' AND ";
+                $sql.='       caixa.cod_setor  =' . "'". $caixa->getCodigoSetor()   ."'   ),";
                 
                 $sql.='?)';
               
@@ -83,7 +83,7 @@ class CaixaPDO
                 $smtm->bindValue(3,$caixa->getCodigoCaixa());
                 $smtm->bindValue(4,$caixa->getDescricao());
                
-             
+            
             }
             $result=$smtm->execute();
             
@@ -153,7 +153,7 @@ class CaixaPDO
         $result=array();
 
         $sql="SELECT    empresa.cod_empresa CodEmpresa ,des_empresa  Empresa  ,";
-        $sql.="         setor.cod_setor     CodSetor   ,des_setor    Descricao,";
+        $sql.="         setor.cod_setor     CodSetor   ,des_setor    Setor    ,";
         $sql.="         cod_caixa           CodCaixa   ,des_caixa    Caixa    ";
         
         $sql.="FROM tb_caixas caixa "; 
@@ -187,7 +187,6 @@ class CaixaPDO
         $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT  cod_caixa  CodCaixa   ,des_caixa  Caixa  ";
-        ";
         $sql.=" FROM tb_caixas ";
         
         $smtm=$conexao -> prepare($sql);

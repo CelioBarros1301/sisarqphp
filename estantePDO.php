@@ -63,9 +63,9 @@ class EstantePDO
                 $sql.='?,';
                 
                 $sql.='(SELECT right(concat("000",max(estante.cod_estante)+1),3) from tb_estantes estante';
-                $sql.=' where estante.cod_empresa=' . "'". $estante->getCodigoEmpresa() ."' AND ";
-                $sql.='  estante.cod_arquivo=' . "'". $estante->getCodigoArquivo() ."' AND ";
-                $sql.='  estante.cod_corredor=' . "'". $estante->getCodigoCorredor() ."' ";
+                $sql.=' where estante.cod_empresa =' . "'". $estante->getCodigoEmpresa()  . "' AND ";
+                $sql.='       estante.cod_arquivo =' . "'". $estante->getCodigoArquivo()  . "' AND ";
+                $sql.='       estante.cod_corredor=' . "'". $estante->getCodigoCorredor() . "'   ),";
                 
                 $sql.='?,?)';
               
@@ -81,8 +81,8 @@ class EstantePDO
                 $smtm->bindValue(1,$estante->getCodigoEmpresa());
                 $smtm->bindValue(2,$estante->getCodigoArquivo());
                 $smtm->bindValue(3,$estante->getCodigoCorredor());
-                $smtm->bindValue(4,$estante>getDescricao());
-                $smtm->bindValue(5,$arquivo->getSigla());
+                $smtm->bindValue(4,$estante->getDescricao());
+                $smtm->bindValue(5,$estante->getSigla());
             }
             else
             {
@@ -90,8 +90,8 @@ class EstantePDO
                 $smtm->bindValue(2,$estante->getCodigoArquivo());
                 $smtm->bindValue(3,$estante->getCodigoCorredor());
                 $smtm->bindValue(4,$estante->getCodigoEstante());
-                $smtm->bindValue(5,$estante>getDescricao());
-                $smtm->bindValue(6,$arquivo->getSigla());
+                $smtm->bindValue(5,$estante->getDescricao());
+                $smtm->bindValue(6,$estante->getSigla());
             }  
              
             $result=$smtm->execute();
@@ -168,10 +168,10 @@ class EstantePDO
         $conexao=Conexao::getConnection();
         $result=array();
 
-        $sql="SELECT    empresa.cod_empresa    CodEmpresa ,des_empresa  Empresa,";
-        $sql.="         arquivo.cod_arquivo    CodArquivo ,des_arquivo  Descricao,";
+        $sql="SELECT    empresa.cod_empresa    CodEmpresa ,des_empresa  Empresa , ";
+        $sql.="         arquivo.cod_arquivo    CodArquivo ,des_arquivo  Arquivo , ";
         $sql.="         corredor.cod_corredor  CodCorredor,des_corredor Corredor, ";
-        $sql.="         cod_estante            CodEstante ,des_estante  Estante, ";
+        $sql.="         cod_estante            CodEstante ,des_estante  Estante , ";
         $sql.="         sig_estante Sigla ";
         
         $sql.="FROM tb_estantes estante "; 
@@ -186,7 +186,7 @@ class EstantePDO
         $sql.="          estante.cod_arquivo=arquivo.cod_arquivo ";
       
         $sql.="     inner join tb_empresas empresa on ";
-        $sql.="       estante.cod_empresa=empresa.cod_empresa ";
+        $sql.="          estante.cod_empresa=empresa.cod_empresa ";
         
         if ($filtro!="")
         { 
@@ -209,8 +209,7 @@ class EstantePDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT  cod_estante   CodEstante ,des_estante  Estante, ";
-        ";
+        $sql="SELECT  cod_estante   CodEstante ,des_estante  Estante ";
         $sql.=" FROM tb_estantes ";
         
         $smtm=$conexao -> prepare($sql);

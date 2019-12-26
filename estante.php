@@ -49,7 +49,6 @@
             $tabelaArquivo =$arquivoPDO->listaArquivo($codEmpresa,$codArquivo);
             $tabelaCorredor=$corredorPDO->listaCorredor($codEmpresa,$codArquivo,$codCorredor);
             
-            
         }
         $registro=$estantePDO->busca($codEmpresa,$codArquivo,$codCorredor,$codEstante);
         
@@ -116,12 +115,7 @@
                
             break;
             case 'e':
-                echo $codEmpresa ."</br>";
-                echo $codArquivo ."</br>";
-                echo $codCorredor ."</br>";
-                echo $codEstante ."</br>";
-                
-
+             
                 $registro=$estantePDO->delete($codEmpresa,$codArquivo,$codCorredor,$codEstante);
             break;
         }

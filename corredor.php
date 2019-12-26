@@ -18,7 +18,7 @@
     
     
     $arquivoPDO= new ArquivoPDO();
-    $empresaPDO=new EmpresaPDO();
+    $empresaPDO= new EmpresaPDO();
                
     
     # Array para guarda os nome das Colunas doa DataTable
@@ -30,9 +30,9 @@
     if (isset($_GET['status'] ))
     {
         $acao=$_GET['status'];
-        $codEmpresa=$_GET['codEmp'];
-        $codArquivo=$_GET['codArq'];
-        $codCorredor=$_GET['codCor'];
+        $codEmpresa  =$_GET['codEmp'];
+        $codArquivo  =$_GET['codArq'];
+        $codCorredor =$_GET['codCor'];
         if ($acao=="i" ) 
         { 
             $tabelaEmpresa=$empresaPDO->lista("");
@@ -71,10 +71,9 @@
     {
         $operacao=$_POST['operacao'];
         
-        $codEmpresa=$_POST['codEmp'];
-        $codArquivo=$_POST['codArq'];
+        $codEmpresa =$_POST['codEmp'];
+        $codArquivo =$_POST['codArq'];
         $codCorredor=$_POST['codCor'];
-        
         
         # Gerando as informacoes do Objeto
         $corredor->setCodigoEmpresa($_POST['codEmp']);
@@ -82,7 +81,6 @@
         $corredor->setCodigoCorredor($_POST['codCor']);
         $corredor->setDescricao($_POST['desCor']);
         $corredor->setSigla($_POST['sigCor']);
-        
         
         switch ($operacao)
         {
@@ -92,13 +90,13 @@
             case 'i':
                 try 
                 {
-                    $conexao=Conexao::getConnection();
+                    $conexao =Conexao::getConnection();
                     $registro=$corredorPDO->insert($corredor);
-                    $conexao=null;
+                    $conexao =null;
                 }
                 catch (PDOExecption $e  )
                 {
-                    $mensagem = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
+                    $mensagem  = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
                     $mensagem .= "\nErro: " . $e->getMessage();
                     $conexao=null;
                     throw new Exception($mensagem);
@@ -110,7 +108,7 @@
                 $registro=$corredorPDO->delete($codEmpresa,$codArquivo,$codCorredor);
             break;
         }
-        header("location:sisarq.php?option=corredor&filtroEmp=$filtroEmpresa");
+        #header("location:sisarq.php?option=corredor&filtroEmp=$filtroEmpresa");
     }
      
 ?>

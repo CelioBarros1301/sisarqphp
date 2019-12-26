@@ -72,3 +72,5 @@ cargo do combox conforme a seleçao do nivel superior
 24) Nao esta excluido corredor R E S O L V I D O
 
 25) Nao esta excluido Estante R E S O L V I D O
+
+26) Quando não tem registro na tabela o max esta retornando null

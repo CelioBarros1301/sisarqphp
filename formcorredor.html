@@ -40,7 +40,7 @@
                             <select name="codArq" <?=$readonly;?> class="form-control">
                                 <?php
                                 foreach ($tabelaArquivo as $coluna){
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["codArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
                                 }
                                 ?>
                                  
@@ -52,7 +52,7 @@
                     <div class="row"> 
                         <div class="form-group">
                             <label>Codigo</label>
-                            <input type="text" name="codCor"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codCor"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                            <input type="text" name="codCor"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codCor"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,3)'>
                         </div>
                     </div>
                     

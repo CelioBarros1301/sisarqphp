@@ -55,24 +55,24 @@ class PrateleiraPDO
             $sql.='`cod_arquivo`,';
             $sql.='`cod_corredor`,';
             $sql.='`cod_estante`,';
-            $sql.='`cod_prateira`,';
+            $sql.='`cod_prateleira`,';
             
             $sql.='`des_prateleira`,';
             $sql.='`sig_prateleira`)';
             
             $sql.=' VALUES ( ';
-            if ($estante->getCodigoPrateira()=="00")
+            if ($prateleira->getCodigoPrateleira()=="00")
             {
                 $sql.='?,';
                 $sql.='?,';
                 $sql.='?,';
                 $sql.='?,';
                 
-                $sql.='(SELECT right(concat("00",max(prateleira.cod_prateleira)+1),2) from tb_prateleiras prateleira';
+                $sql.='(SELECT right(concat("00",max(prateleira.cod_prateleira)+1),2) from tb_prateleiras prateleira ';
                 $sql.=' where prateleira.cod_empresa=' . "'". $prateleira->getCodigoEmpresa() ."' AND ";
-                $sql.='  prateleira.cod_arquivo=' . "'". $prateleira->getCodigoArquivo()         ."' AND ";
-                $sql.='  prateleira.cod_corredor=' . "'". $prateleira->getCodigoCorredor()       ."' AND ";
-                $sql.='  prateleira.cod_corredor=' . "'". $estante->getCodigoEstanter()          ."' ";
+                $sql.='     prateleira.cod_arquivo  =' . "'". $prateleira->getCodigoArquivo()         ."' AND ";
+                $sql.='     prateleira.cod_corredor =' . "'". $prateleira->getCodigoCorredor()       ."' AND ";
+                $sql.='     prateleira.cod_estante  =' . "'". $prateleira->getCodigoEstante()          ."' ),";
                 
                 $sql.='?,?)';
               
@@ -81,7 +81,7 @@ class PrateleiraPDO
             {
                 $sql.='?,?,?,?,?,?,?)';
             }
-            
+            echo $sql ;
             $smtm=$conexao->prepare($sql);
             if ($prateleira->getCodigoPrateleira()=="00")
             { 
@@ -89,7 +89,7 @@ class PrateleiraPDO
                 $smtm->bindValue(2,$prateleira->getCodigoArquivo());
                 $smtm->bindValue(3,$prateleira->getCodigoCorredor());
                 $smtm->bindValue(4,$prateleira->getCodigoEstante());
-                $smtm->bindValue(5,$prateleira>getDescricao());
+                $smtm->bindValue(5,$prateleira->getDescricao());
                 $smtm->bindValue(6,$prateleira->getSigla());
             }
             else
@@ -99,7 +99,7 @@ class PrateleiraPDO
                 $smtm->bindValue(3,$estante->getCodigoCorredor());
                 $smtm->bindValue(4,$estante->getCodigoEstante());
                 $smtm->bindValue(5,$estante->getCodigoPrateleira());
-                $smtm->bindValue(6,$estante>getDescricao());
+                $smtm->bindValue(6,$estante->getDescricao());
                 $smtm->bindValue(7,$arquivo->getSigla());
             }  
              
@@ -183,7 +183,7 @@ class PrateleiraPDO
         $result=array();
 
         $sql="SELECT    empresa.cod_empresa    CodEmpresa    ,des_empresa    Empresa   ,";
-        $sql.="         arquivo.cod_arquivo    CodArquivo    ,des_arquivo    Descricao ,";
+        $sql.="         arquivo.cod_arquivo    CodArquivo    ,des_arquivo    Arquivo   ,";
         $sql.="         corredor.cod_corredor  CodCorredor   ,des_corredor   Corredor  ,";
         $sql.="         estante.cod_estante    CodEstante    ,des_estante    Estante   ,";
         $sql.="         cod_prateleira         CodPrateleira ,des_prateleira Prateleira,";

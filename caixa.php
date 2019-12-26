@@ -82,7 +82,7 @@
         $caixa->setCodigoCaixa($_POST['codCai']);
         $caixa->setDescricao($_POST['desCai']);
         
-        
+        echo var_dump ($caixa);
         switch ($operacao)
         {
             case 'a':
@@ -92,7 +92,7 @@
                 try 
                 {
                     $conexao=Conexao::getConnection();
-                    $registro=$caixarPDO->insert($caixa);
+                    $registro=$caixaPDO->insert($caixa);
                     $conexao=null;
                 }
                 catch (PDOExecption $e  )
@@ -109,7 +109,7 @@
                 $registro=$caixaPDO->delete($codEmpresa,$codSetor,$codCaixa);
             break;
         }
-        header("location:sisarq.php?option=caixa&filtroEmp=$filtroEmpresa");
+       header("location:sisarq.php?option=caixa&filtroEmp=$filtroEmpresa");
     }
      
 ?>

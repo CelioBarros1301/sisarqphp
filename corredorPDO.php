@@ -192,7 +192,7 @@ class CorredorPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT * ";
+        $sql="SELECT cod_corredor  CodCorredor,des_corredor Corredor ";
         $sql.=" FROM tb_corredores ";
         
         $smtm=$conexao -> prepare($sql);

@@ -209,7 +209,8 @@ class EstantePDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT * ";
+        $sql="SELECT  cod_estante   CodEstante ,des_estante  Estante, ";
+        ";
         $sql.=" FROM tb_estantes ";
         
         $smtm=$conexao -> prepare($sql);

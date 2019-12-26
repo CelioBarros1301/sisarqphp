@@ -84,7 +84,26 @@
 				include_once 'formprateleira.html';
 			break;
 
+			# caixa
+			case 'caixa':	
+				include_once 'caixa.html';			
+			break;
 
+			case 'cadcaixa':
+				include_once 'formcaixa.html';
+			break;
+
+
+
+			# setor
+			case 'setor':	
+				include_once 'setor.html';			
+			break;
+
+			case 'cadsetor':
+				include_once 'formsetor.html';
+			break;
+			
 
 			case 'manager_users':
 				
@@ -168,8 +187,28 @@
 			case 'cadprateleira':
 				$_SESSION['transacao']="Prateleiras";	
 			break;
+
+			# caixa
+			case 'caixa':	
+				$_SESSION['transacao']="Caixas";				
+			break;
+
+			case 'cadcaixa':
+				$_SESSION['transacao']="Caixas";	
+			break;
+
 	
-	
+			# setor
+			case 'setor':	
+				$_SESSION['transacao']="Setor";				
+			break;
+
+			case 'cadsetor':
+				$_SESSION['transacao']="Setor";	
+			break;
+
+
+
 			# usuario
 			case 'usuario':	
 				$_SESSION['transacao']="Usuarios";	

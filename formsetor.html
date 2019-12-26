@@ -7,17 +7,18 @@
 
     # Informacoes do banco
     
-    include_once  "estante.php";
+    include_once  "setor.php";
     $selecao=$_GET["status"]!="i"?"selected":"";
     $readonly=$_GET['status']!="i"?"readonly":"";
                                                             
+     
 ?>
 
  <div class="row">
         <div class="col-md-8 offset-3 col-sm-12">
             <div class="arquivo-form">
  
-                <form action="estante.php" method="POST">
+                <form action="setor.php" method="POST">
                     
                     <div class="row">
                         <div class="form-group">    
@@ -34,57 +35,19 @@
                     </div>        
             
                     <div class="row"> 
-                        <div class="form-group">    
-                            <label> Arquivo </label><br>	
-                            <select name="codArq" <?=$readonly;?> class="form-control">
-                                <?php
-                                foreach ($tabelaArquivo as $coluna){
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["codArquivo"] .'">' .$coluna["Aquivo"] ."</option>";                     
-                                }
-                                ?>
-                                 
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row"> 
-                        <div class="form-group">    
-                            <label> Corredor </label><br>	
-                            <select name="codCor" <?=$readonly;?> class="form-control">
-                                <?php
-                                foreach ($tabelaCorredor as $coluna){
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["codCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
-                                }
-                                ?>
-                                 
-                            </select>
-                        </div>
-                    </div>
-
-
-
-                    <div class="row"> 
                         <div class="form-group">
                             <label>Codigo</label>
-                            <input type="text" name="codEst"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codEst"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                            <input type="text" name="codSet"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codSet"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
                         </div>
                     </div>
                     
-
                     <div class="row"> 
                         <div class="form-group">
                             <label>Descricao</label>
-                            <input type="text" name="desEst" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_estante"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao do Corredor" required  >
+                            <input type="text" name="desSet" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_setor"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Nome da Empresa" required  >
                         </div>
-                    </div>
-
-                    <div class="row"> 
-                        <div class="form-group">
-                            <label>Sigla Estante</label>
-                            <input type="text" name="sigEst" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_estante"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Sigla da Estante" required  >
-                        </div>
-                    </div>
-                    
+                    </div>        
+            
                     <div class="form-group">
                         <label hidden >Operacao</label>
                         <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control" placeholder="Nome da Empresa" required  >

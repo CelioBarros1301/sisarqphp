@@ -6,17 +6,19 @@
 *  Regra: 
 */
     
-    require("estantePDO.php");
-    require("estante_Class.php");
+    require("prateleiraPDO.php");
+    require("Prateleira_Class.php");
 
+    require("estantePDO.php");
     require("corredorPDO.php");
     require("arquivoPDO.php");
     require("empresaPDO.php");
     
    
-    $estantePDO  = new EstantePDO();
-    $estante     = new Estante();
+    $prateleiraPDO  = new PrateleiraPDO();
+    $prateleira     = new Prateleira();
     
+    $estantePDO  = new EstantePDO();
     $corredorPDO = new CorredorPDO();
     $arquivoPDO  = new ArquivoPDO();
     $empresaPDO  = new EmpresaPDO();
@@ -31,16 +33,20 @@
     if (isset($_GET['status'] ))
     {
         $acao=$_GET['status'];
-        $codEmpresa  =$_GET['codEmp'];
-        $codArquivo  =$_GET['codArq'];
-        $codCorredor =$_GET['codCor'];
-        $codEstante  =$_GET['codEst'];
+        $codEmpresa    =$_GET['codEmp'];
+        $codArquivo    =$_GET['codArq'];
+        $codCorredor   =$_GET['codCor'];
+        $codEstante    =$_GET['codEst'];
+        $codPrateleira =$_GET['codPra'];
+        
   
         if ($acao=="i" ) 
         { 
             $tabelaEmpresa =$empresaPDO->lista("");
             $tabelaArquivo =$arquivoPDO->lista("");
             $tabelaCorredor=$corredorPDO->lista("");
+            $tabelaEstante =$estantePDO->lista("");
+            
             
         }
         else
@@ -48,10 +54,11 @@
             $tabelaEmpresa =$empresaPDO->lista($codEmpresa);
             $tabelaArquivo =$arquivoPDO->listaArquivo($codEmpresa,$codArquivo);
             $tabelaCorredor=$corredorPDO->listaCorredor($codEmpresa,$codArquivo,$codCorredor);
+            $tabelaEstante =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,$codEstante);
             
             
         }
-        $registro=$estantePDO->busca($codEmpresa,$codArquivo,$codCorredor,$codEstante);
+        $registro=$prateleiraPDO->busca($codEmpresa,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
         
         
     }
@@ -66,7 +73,7 @@
        
         $tabelaEmpresa=$empresaPDO->lista("");
             
-        $dataTable=$estantePDO->lista($filtroEmpresa);
+        $dataTable=$prateleiraPDO->lista($filtroEmpresa);
         if ( $dataTable ) 
         {
             $dataTableColunas = array_keys($dataTable[0]);
@@ -78,31 +85,34 @@
     {
         $operacao=$_POST['operacao'];
         
-        $codEmpresa =$_POST['codEmp'];
-        $codArquivo =$_POST['codArq'];
-        $codCorredor=$_POST['codCor'];
-        $codEstante =$_POST['codEst'];
+        $codEmpresa    =$_POST['codEmp'];
+        $codArquivo    =$_POST['codArq'];
+        $codCorredor   =$_POST['codCor'];
+        $codEstante    =$_POST['codEst'];
+        $codPrateleira =$_POST['codPra'];
+        
         
         
         # Gerando as informacoes do Objeto
-        $estante->setCodigoEmpresa($_POST['codEmp']);
-        $estante->setCodigoArquivo($_POST['codArq']);
-        $estante->setCodigoCorredor($_POST['codCor']);
-        $estante->setCodigoEstante($_POST['codEst']);
-        $estante->setDescricao($_POST['desEst']);
-        $estante->setSigla($_POST['sigEst']);
+        $prateleira->setCodigoEmpresa($_POST['codEmp']);
+        $prateleira->setCodigoArquivo($_POST['codArq']);
+        $prateleira->setCodigoCorredor($_POST['codCor']);
+        $prateleira->setCodigoEstante($_POST['codEst']);
+        $prateleira->setCodigoPrateleira($_POST['codPra']);
+        $prateleira->setDescricao($_POST['desPra']);
+        $prateleira->setSigla($_POST['sigPra']);
         
         
         switch ($operacao)
         {
             case 'a':
-                $registro=$estantePDO->update($estante);
+                $registro=$prateleiraPDO->update($prateleira);
             break;
             case 'i':
                 try 
                 {
                     $conexao =Conexao::getConnection();
-                    $registro=$estantePDO->insert($estante);
+                    $registro=$prateleiraPDO->insert($prateleira);
                     $conexao =null;
                 }
                 catch (PDOExecption $e  )
@@ -116,16 +126,11 @@
                
             break;
             case 'e':
-                echo $codEmpresa ."</br>";
-                echo $codArquivo ."</br>";
-                echo $codCorredor ."</br>";
-                echo $codEstante ."</br>";
                 
-
-                $registro=$estantePDO->delete($codEmpresa,$codArquivo,$codCorredor,$codEstante);
+                $registro=$prateleiraPDO->delete($codEmpresa,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
             break;
         }
-        header("location:sisarq.php?option=estante&filtroEmp=$filtroEmpresa");
+        header("location:sisarq.php?option=prateleira&filtroEmp=$filtroEmpresa");
     }
      
 ?>

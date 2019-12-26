@@ -75,6 +75,14 @@
 			break;
 
 
+			# prateleira
+			case 'prateleira':	
+				include_once 'prateleira.html';			
+			break;
+
+			case 'cadprateleira':
+				include_once 'formprateleira.html';
+			break;
 
 
 
@@ -142,7 +150,26 @@
 				$_SESSION['transacao']="Corredores";	
 			break;
 	
-			
+	
+			# estante
+			case 'estante':	
+				$_SESSION['transacao']="Estantes";				
+			break;
+
+			case 'cadestante':
+				$_SESSION['transacao']="Estantes";	
+			break;
+
+			# prateleira
+			case 'prateleira':	
+				$_SESSION['transacao']="Prateleiras";				
+			break;
+
+			case 'cadprateleira':
+				$_SESSION['transacao']="Prateleiras";	
+			break;
+	
+	
 			# usuario
 			case 'usuario':	
 				$_SESSION['transacao']="Usuarios";	

@@ -2,13 +2,13 @@
 
 PRIORIDADES:
 
-12)Salvar a senha criptografada e quando for alterar descritografar a senha  R E S O L V I D O 
-13)Alterar o acesso do sistema via banco retira o arquyivo txt R E S O L V I D O 
 10)addslashes incluir do $_GET E $_POST
-19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
-    alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
-    R E S O L V I D O
-20) Realizar bloqueio do campo codigo da Empresa (Cadastro de arquivo ) R E S O L V I D O 
+
+24) Nao esta excluido corredor R E S O L V I D O 
+
+25) Nao esta excluido Estante R E S O L V I D O
+
+
 
 
 RELAÇAO DO BACKLOG
@@ -68,3 +68,7 @@ R E S O L V I D O
 cargo do combox conforme a seleçao do nivel superior
 
 23) Criar as chaves estrangeiras da tabelas
+
+24) Nao esta excluido corredor R E S O L V I D O
+
+25) Nao esta excluido Estante R E S O L V I D O

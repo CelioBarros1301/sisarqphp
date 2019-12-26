@@ -7,9 +7,10 @@
 
     # Informacoes do banco
     
-    include_once  "estante.php";
+    include_once  "prateleira.php";
     $selecao=$_GET["status"]!="i"?"selected":"";
     $readonly=$_GET['status']!="i"?"readonly":"";
+    
                                                             
 ?>
 
@@ -17,7 +18,7 @@
         <div class="col-md-8 offset-3 col-sm-12">
             <div class="arquivo-form">
  
-                <form action="estante.php" method="POST">
+                <form action="prateleira.php" method="POST">
                     
                     <div class="row">
                         <div class="form-group">    
@@ -62,11 +63,25 @@
                     </div>
 
 
+                    <div class="row"> 
+                        <div class="form-group">    
+                            <label> Estante </label><br>	
+                            <select name="codEst" <?=$readonly;?> class="form-control">
+                                <?php
+                                foreach ($tabelaEstante as $coluna){
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["cod_estante"] .'">' .$coluna["des_estante"] ."</option>";                     
+                                }
+                                ?>
+                                 
+                            </select>
+                        </div>
+                    </div>
+
 
                     <div class="row"> 
                         <div class="form-group">
                             <label>Codigo</label>
-                            <input type="text" name="codEst"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codEst"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                            <input type="text" name="codPra"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codPra"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
                         </div>
                     </div>
                     
@@ -74,14 +89,14 @@
                     <div class="row"> 
                         <div class="form-group">
                             <label>Descricao</label>
-                            <input type="text" name="desEst" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_estante"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao do Corredor" required  >
+                            <input type="text" name="desPra" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_prateleira"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao do Corredor" required  >
                         </div>
                     </div>
 
                     <div class="row"> 
                         <div class="form-group">
-                            <label>Sigla Estante</label>
-                            <input type="text" name="sigEst" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_estante"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Sigla da Estante" required  >
+                            <label>Sigla Prateleira</label>
+                            <input type="text" name="sigPra" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_prateleira"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Sigla da Estante" required  >
                         </div>
                     </div>
                     

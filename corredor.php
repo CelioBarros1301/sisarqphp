@@ -73,7 +73,7 @@
         
         $codEmpresa=$_POST['codEmp'];
         $codArquivo=$_POST['codArq'];
-        $codCorredor=$_POST['CodCor'];
+        $codCorredor=$_POST['codCor'];
         
         
         # Gerando as informacoes do Objeto

@@ -14,8 +14,8 @@ class CorredorPDO
             $result=array();
             $sql="SELECT * ";
             $sql.=" FROM tb_corredores ";
-            $sql.=" WHERE cod_empresa=? and ";
-            $sql.="       cod_arquivo=? and ";
+            $sql.=" WHERE cod_empresa =? and ";
+            $sql.="       cod_arquivo =? and ";
             $sql.="       cod_corredor=?  ";
             
             
@@ -60,7 +60,7 @@ class CorredorPDO
                 
                 $sql.='(SELECT right(concat("000",max(corredor.cod_corredor)+1),3) from tb_corredores corredor';
                 $sql.=' where corredor.cod_empresa=' . "'". $corredor->getCodigoEmpresa() ."' AND ";
-                $sql.='  corredor.cod_arquivo=' . "'". $corredor->getCodigoArquivo() ."' AND ";
+                $sql.='       corredor.cod_arquivo=' . "'". $corredor->getCodigoArquivo() ."' AND ";
                 
                 $sql.='?,?)';
               
@@ -109,8 +109,8 @@ class CorredorPDO
         $sql.='`sig_corredor`=? ';
         
        
-        $sql.= " WHERE cod_empresa=? and ";
-        $sql.= "       cod_arquivo=? and ";
+        $sql.= " WHERE cod_empresa =? and ";
+        $sql.= "       cod_arquivo =? and ";
         $sql.= "       cod_corredor=? ";
         
         
@@ -135,8 +135,8 @@ class CorredorPDO
     {
         $conexao=Conexao::getConnection();
         $sql="DELETE  FROM  tb_corredores ";
-        $sql.= " WHERE cod_empresa=? and ";
-        $sql.= "       cod_arquivo=? and  ";
+        $sql.= " WHERE cod_empresa =? and ";
+        $sql.= "       cod_arquivo =? and  ";
         $sql.= "       cod_corredor=?  ";
         
         
@@ -157,9 +157,9 @@ class CorredorPDO
         $conexao=Conexao::getConnection();
         $result=array();
 
-        $sql="SELECT    empresa.cod_empresa CodEmpresa,des_empresa Empresa,";
-        $sql.="         arquivo.cod_arquivo CodArquivo,des_arquivo Descricao,";
-        $sql.="         cod_corredor CodCorredor,des_corredor Corredor, ";
+        $sql="SELECT    empresa.cod_empresa CodEmpresa ,des_empresa  Empresa,";
+        $sql.="         arquivo.cod_arquivo CodArquivo ,des_arquivo  Descricao,";
+        $sql.="         cod_corredor        CodCorredor,des_corredor Corredor, ";
         $sql.="         sig_corredor Sigla ";
         
         $sql.="FROM tb_corredores corredor "; 
@@ -168,7 +168,7 @@ class CorredorPDO
         $sql.="          corredor.cod_empresa=arquivo.cod_empresa and ";
         $sql.="          corredor.cod_arquivo=arquivo.cod_arquivo ";
         $sql.="     inner join tb_empresas empresa on ";
-        $sql.="       corredor.cod_empresa=empresa.cod_empresa ";
+        $sql.="          corredor.cod_empresa=empresa.cod_empresa ";
         
         if ($filtro!="")
         { 
@@ -193,15 +193,15 @@ class CorredorPDO
         $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT * ";
-        $sql.=" FROM tb_arquivos ";
+        $sql.=" FROM tb_corredores ";
         
         $smtm=$conexao -> prepare($sql);
         
         if ($codCorredor != "" )
         {
-            $sql.= " WHERE cod_empresa=? AND ";
-            $sql.= "       cod_arquivo=?  AND ";
-            $sql.= "       cod_corredoro=?  ";
+            $sql.= " WHERE cod_empresa =?  AND ";
+            $sql.= "       cod_arquivo =?  AND ";
+            $sql.= "       cod_corredor=?  ";
             
             $smtm=$conexao->prepare($sql);
             

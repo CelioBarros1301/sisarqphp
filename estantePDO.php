@@ -94,7 +94,6 @@ class EstantePDO
                 $smtm->bindValue(6,$arquivo->getSigla());
             }  
              
-            }
             $result=$smtm->execute();
             
             return $result;
@@ -124,8 +123,8 @@ class EstantePDO
         
         $smtm=$conexao->prepare($sql);
         
-        $smtm->bindValue(1,$estante>getDescricao());
-        $smtm->bindValue(2,$arquivo->getSigla());
+        $smtm->bindValue(1,$estante->getDescricao());
+        $smtm->bindValue(2,$estante->getSigla());
         
 
         $smtm->bindValue(3,$estante->getCodigoEmpresa());
@@ -145,16 +144,17 @@ class EstantePDO
     {
         $conexao=Conexao::getConnection();
         $sql="DELETE  FROM  tb_estantes ";
-        $sql.= " WHERE cod_empresa=? and ";
-        $sql.= "       cod_arquivo=? and ";
+        $sql.= " WHERE cod_empresa =? and ";
+        $sql.= "       cod_arquivo =? and ";
         $sql.= "       cod_corredor=? and ";
-        $sql.= "       cod_estante=?  ";
+        $sql.= "       cod_estante =?     ";
         
+        $smtm=$conexao->prepare($sql);
         
-        $smtm->bindValue(1,$estante->getCodigoEmpresa());
-        $smtm->bindValue(2,$estante->getCodigoArquivo());
-        $smtm->bindValue(3,$estante->getCodigoCorredor());
-        $smtm->bindValue(4,$estante->getCodigoEstante());
+        $smtm->bindValue(1,$codEmpresa);
+        $smtm->bindValue(2,$codArquivo);
+        $smtm->bindValue(3,$codCorredor);
+        $smtm->bindValue(4,$codEstante);
        
         $result=$smtm->execute();
         ##$conexao->commit();
@@ -168,17 +168,17 @@ class EstantePDO
         $conexao=Conexao::getConnection();
         $result=array();
 
-        $sql="SELECT    empresa.cod_empresa CodEmpresa,des_empresa Empresa,";
-        $sql.="         arquivo.cod_arquivo CodArquivo,des_arquivo Descricao,";
-        $sql.="         cod_corredor CodCorredor,des_corredor Corredor, ";
-        $sql.="         cod_estante CodEstante,des_corredor Corredor, ";
+        $sql="SELECT    empresa.cod_empresa    CodEmpresa ,des_empresa  Empresa,";
+        $sql.="         arquivo.cod_arquivo    CodArquivo ,des_arquivo  Descricao,";
+        $sql.="         corredor.cod_corredor  CodCorredor,des_corredor Corredor, ";
+        $sql.="         cod_estante            CodEstante ,des_estante  Estante, ";
         $sql.="         sig_estante Sigla ";
         
         $sql.="FROM tb_estantes estante "; 
              
         $sql.="     inner join tb_corredores corredor on ";
-        $sql.="          estante.cod_empresa=corredor.cod_empresa and ";
-        $sql.="          estante.cod_arquivo=corredor.cod_arquivo and ";
+        $sql.="          estante.cod_empresa =corredor.cod_empresa and ";
+        $sql.="          estante.cod_arquivo =corredor.cod_arquivo and ";
         $sql.="          estante.cod_corredor=corredor.cod_corredor  ";
         
         $sql.="     inner join tb_arquivos arquivo on ";
@@ -204,6 +204,53 @@ class EstantePDO
         $conexao=null;
         return  $result;
     }
+
+    public function listaEstante($codEmpresa,$codArquivo,$codCorredor,$codEstante)
+    {
+        $conexao=Conexao::getConnection();
+        $result=array();
+        $sql="SELECT * ";
+        $sql.=" FROM tb_estantes ";
+        
+        $smtm=$conexao -> prepare($sql);
+        
+        if ($codCorredor != "" )
+        {
+            $sql.= " WHERE cod_empresa =?  AND ";
+            $sql.= "       cod_arquivo =?  AND ";
+            $sql.= "       cod_corredor=?  AND ";
+            $sql.= "       cod_estante =?      ";
+            
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+            $smtm->bindValue(3,$codCorredor);
+            $smtm->bindValue(4,$codEstante);
+            
+            
+        }
+        else
+        {
+        
+            $sql.= " WHERE cod_empresa =?  ";
+            $sql.= "       cod_arquivo =?  ";
+            $sql.= "       cod_corredor=?  ";
+            
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+            $smtm->bindValue(3,$codCorredor);
+            
+            
+        }
+        $smtm->execute();
+        $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
+        return  $result;
+    }
+
 
 }
 

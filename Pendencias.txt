@@ -66,3 +66,5 @@ R E S O L V I D O
 
 22)Para as opcoes Arquivo,corredor,estantee prateleira implemnetar a
 cargo do combox conforme a seleçao do nivel superior
+
+23) Criar as chaves estrangeiras da tabelas

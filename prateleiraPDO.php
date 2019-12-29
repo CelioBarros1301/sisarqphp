@@ -68,7 +68,7 @@ class PrateleiraPDO
                 $sql.='?,';
                 $sql.='?,';
                 
-                $sql.='(SELECT right(concat("00",max(prateleira.cod_prateleira)+1),2) from tb_prateleiras prateleira ';
+                $sql.='(SELECT ifnull(right(concat("00",max(prateleira.cod_prateleira)+1),2),"01") from tb_prateleiras prateleira ';
                 $sql.=' where prateleira.cod_empresa=' . "'". $prateleira->getCodigoEmpresa() ."' AND ";
                 $sql.='     prateleira.cod_arquivo  =' . "'". $prateleira->getCodigoArquivo()         ."' AND ";
                 $sql.='     prateleira.cod_corredor =' . "'". $prateleira->getCodigoCorredor()       ."' AND ";

@@ -105,6 +105,16 @@
 			break;
 			
 
+			# tipodocumento
+			case 'tipodocumento':	
+				include_once 'tipodocumento.html';			
+			break;
+
+			case 'cadtipodoc':
+				include_once 'formtipodocumento.html';
+			break;
+
+
 			case 'manager_users':
 				
 				include_once 'manager_users.html';
@@ -205,6 +215,16 @@
 
 			case 'cadsetor':
 				$_SESSION['transacao']="Setor";	
+			break;
+
+
+			# tipodocumento
+			case 'tipodocumento':	
+				$_SESSION['transacao']="Tipo de Documentos";	
+			break;
+
+			case 'cadtipodoc':
+				$_SESSION['transacao']="Tipo de Documentos";	
 			break;
 
 

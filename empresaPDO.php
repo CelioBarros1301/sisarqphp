@@ -38,7 +38,7 @@ class EmpresaPDO
         $sql.= 'VALUES ( ';
         if ($codigo=="000")
         {
-            $sql.='(SELECT right(concat("00",max(empresa.cod_empresa)+1),3) from tb_empresas empresa),';
+            $sql.='(SELECT ifnull(right(concat("00",max(empresa.cod_empresa)+1),3),"001") from tb_empresas empresa),';
             $sql.='?)';
         }
         else

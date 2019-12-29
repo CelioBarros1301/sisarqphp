@@ -4,9 +4,6 @@ PRIORIDADES:
 
 10)addslashes incluir do $_GET E $_POST
 
-24) Nao esta excluido corredor R E S O L V I D O 
-
-25) Nao esta excluido Estante R E S O L V I D O
 
 
 
@@ -73,4 +70,8 @@ cargo do combox conforme a seleçao do nivel superior
 
 25) Nao esta excluido Estante R E S O L V I D O
 
-26) Quando não tem registro na tabela o max esta retornando null
+26) Quando não tem registro na tabela o max esta retornando null R E S O L V I D O 
+
+27) Criar usuario Administrador e Supervisor com senha padrao e nao permitir excluir 
+
+28) Quando da rotina de liberacao de login usario não pode liberar ele mesmo

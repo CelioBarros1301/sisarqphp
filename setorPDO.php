@@ -50,7 +50,7 @@ class SetorPDO
             if ($setor->getCodigoSetor()=="000")
             {
                 $sql.='?,';
-                $sql.='(SELECT right(concat("000",max(setor.cod_setor)+1),3) from tb_setores setor where setor.cod_empresa=' . "'". $setor->getCodigoEmpresa() ."'),";
+                $sql.='(SELECT ifnull(right(concat("000",max(setor.cod_setor)+1),3),"001") from tb_setores setor where setor.cod_empresa=' . "'". $setor->getCodigoEmpresa() ."'),";
                 $sql.='?)';
               
             }

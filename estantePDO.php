@@ -62,7 +62,7 @@ class EstantePDO
                 $sql.='?,';
                 $sql.='?,';
                 
-                $sql.='(SELECT right(concat("000",max(estante.cod_estante)+1),3) from tb_estantes estante';
+                $sql.='(SELECT ifnull(right(concat("000",max(estante.cod_estante)+1),3),"001") from tb_estantes estante';
                 $sql.=' where estante.cod_empresa =' . "'". $estante->getCodigoEmpresa()  . "' AND ";
                 $sql.='       estante.cod_arquivo =' . "'". $estante->getCodigoArquivo()  . "' AND ";
                 $sql.='       estante.cod_corredor=' . "'". $estante->getCodigoCorredor() . "'   ),";

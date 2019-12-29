@@ -2,25 +2,25 @@
 
 require_once("Conexao_Class.php");
 
-class ArquivoPDO
+class TipoDocumentoPDO
 {
 
     public function __construct(){}
   
-    public function busca($codEmpresa,$codArquivo)
+    public function busca($codEmpresa,$codDocumento)
     {
             
             $conexao=Conexao::getConnection();
             $result=array();
             $sql="SELECT * ";
-            $sql.=" FROM tb_arquivos ";
-            $sql.=" WHERE cod_empresa=? and ";
-            $sql.="       cod_arquivo=?  ";
+            $sql.=" FROM tb_tipo_documentos   ";
+            $sql.=" WHERE cod_empresa  =? and ";
+            $sql.="       cod_documento=?     ";
             
             
             $smtm=$conexao->prepare($sql);
             $smtm->bindValue(1,$codEmpresa);
-            $smtm->bindValue(2,$codArquivo);
+            $smtm->bindValue(2,$codDocumento);
             
             $smtm->execute();
             $resultSet=$smtm->fetch(PDO::FETCH_ASSOC);
@@ -30,7 +30,7 @@ class ArquivoPDO
 
     }
     
-    public function insert($arquivo)
+    public function insert($tipodocumento)
     {
         /*
         * Objeto: Incluir Usuario
@@ -41,35 +41,40 @@ class ArquivoPDO
         try
         {
             $conexao=Conexao::getConnection();
-            $sql='INSERT INTO tb_arquivos ( ';
-            $sql.='`cod_empresa`,';
-            $sql.='`cod_arquivo`,';
-            $sql.='`des_arquivo`)';
+            $sql='INSERT INTO tb_tipo_documentos ( ';
+            $sql.='`cod_empresa`,  ';
+            $sql.='`cod_documento`,';
+            $sql.='`des_documento`,';
+            $sql.='`sig_documento`)';
             
             $sql.=' VALUES ( ';
-            if ($arquivo->getCodigoArquivo()=="00")
+            if ($tipodocumento->getCodigoDocumento()=="0000")
             {
                 $sql.='?,';
-                $sql.='(SELECT ifnull(right(concat("00",max(arquivo.cod_arquivo)+1),2),"01") from tb_arquivos arquivo where arquivo.cod_empresa=' . "'". $arquivo->getCodigoEmpresa() ."'),";
-                $sql.='?)';
+                $sql.='(SELECT ifnull(right(concat("00",max(documento.cod_documento)+1),4),"0001") from tb_tipo_documentos documento ';
+                $sql.='where documento.cod_empresa=' . "'". $tipodocumento->getCodigoEmpresa() ."'),";
+                $sql.='?,?)';
               
             }
             else
             {
-                $sql.='?,?,?)';
+                $sql.='?,?,?,?)';
             }
             
             $smtm=$conexao->prepare($sql);
-            if ($arquivo->getCodigoArquivo()=="00")
+            if ($tipodocumento->getCodigoDocumento()=="0000")
             { 
-                $smtm->bindValue(1,$arquivo->getCodigoEmpresa());
-                $smtm->bindValue(2,$arquivo->getDescricao());
+                $smtm->bindValue(1,$tipodocumento->getCodigoEmpresa());
+                $smtm->bindValue(2,$tipodocumento->getDescricao());
+                $smtm->bindValue(3,$tipodocumento->getSigla());
+                
             }
             else
             {
-                $smtm->bindValue(1,$arquivo->getCodigoEmpresa());
-                $smtm->bindValue(2,$arquivo->getCodigoArquivo());
-                $smtm->bindValue(3,$arquivo->getDescricao());
+                $smtm->bindValue(1,$tipodocumento->getCodigoEmpresa());
+                $smtm->bindValue(2,$tipodocumento->getCodigoDocumento());
+                $smtm->bindValue(3,$tipodocumento->getDescricao());
+                $smtm->bindValue(4,$tipodocumento->getSigla());
             }
             $result=$smtm->execute();
             
@@ -84,37 +89,41 @@ class ArquivoPDO
     }
 
 
-    public function update($arquivo)
+    public function update($tipodocumento)
     {
         $conexao=Conexao::getConnection();
-        $sql="UPDATE  tb_arquivos SET ";
-        $sql.='`des_arquivo`=? ';
+        $sql="UPDATE  tb_tipo_documentos SET ";
+        $sql.='`des_documento`=? ,';
+        $sql.='`sig_documento`=? ';
+
        
-        $sql.= " WHERE cod_empresa=? and ";
-        $sql.= "       cod_arquivo=? ";
+        $sql.= " WHERE cod_empresa  =? and ";
+        $sql.= "       cod_documento=? ";
         
         
         $smtm=$conexao->prepare($sql);
         
-        $smtm->bindValue(1,$arquivo->getDescricao());
-        $smtm->bindValue(2,$arquivo->getcodigoEmpresa());
-        $smtm->bindValue(3,$arquivo->getcodigoArquivo());
-        
-        $result=$smtm->execute();
+        $smtm->bindValue(1,$tipodocumento->getDescricao());
+        $smtm->bindValue(2,$tipodocumento->getSigla());
+     
+        $smtm->bindValue(3,$tipodocumento->getCodigoEmpresa());
+        $smtm->bindValue(4,$tipodocumento->getCodigoDocumento());
+     
+$result=$smtm->execute();
         $conexao=null;
         return $result;
     }
 
-    public function delete($codEmpresa,$codArquivo)
+    public function delete($codEmpresa,$codDocumento)
     {
         $conexao=Conexao::getConnection();
-        $sql="DELETE  FROM  tb_arquivos ";
-        $sql.= " WHERE cod_empresa=? and ";
-        $sql.= "       cod_arquivo=?  ";
+        $sql="DELETE  FROM  tb_tipo_documentos ";
+        $sql.= " WHERE cod_empresa  =? and ";
+        $sql.= "       cod_documento=?  ";
         
         $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$codEmpresa);
-        $smtm->bindValue(2,$codArquivo);
+        $smtm->bindValue(2,$codDocumento);
         $result=$smtm->execute();
         ##$conexao->commit();
         $conexao=null;
@@ -127,10 +136,12 @@ class ArquivoPDO
         $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT empresa.cod_empresa CodEmpresa,des_empresa Empresa," ;  
-        $sql.="     cod_arquivo CodArquivo,des_arquivo Arquivo ";
-        $sql.=" FROM tb_arquivos arquivo ";
+        $sql.="     cod_documento CodDocumento,des_documento    Documento, ";
+        $sql.="     sig_documento Sigla ";
+        
+        $sql.=" FROM tb_tipo_documentos documento ";
         $sql.="     inner join tb_empresas empresa on ";
-        $sql.="          arquivo.cod_empresa=empresa.cod_empresa ";
+        $sql.="          documento.cod_empresa=empresa.cod_empresa ";
         
         
         if ($filtro!="")
@@ -150,23 +161,23 @@ class ArquivoPDO
         return  $result;
     }
 
-    public function listaArquivo($codEmpresa,$codArquivo)
+    public function listaTipoDocumento($codEmpresa,$codDocumento)
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT    cod_arquivo CodArquivo,des_arquivo Arquivo ";
-        $sql.=" FROM tb_arquivos arquivo ";
+        $sql="SELECT    cod_documento CodDocumento,des_documento Documento ";
+        $sql.=" FROM tb_tipo_documentos documento ";
         
         
         if ($codArquivo!="")
         { 
-            $sql.= " WHERE arquivo.cod_empresa=? and ";
-            $sql.= "       arquivo.cod_arquivo=?     ";
+            $sql.= " WHERE documento.cod_empresa  =? and ";
+            $sql.= "       documento.cod_documento=?     ";
             
         }
         else
         {
-            $sql.= " WHERE arquivo.cod_empresa=?  ";
+            $sql.= " WHERE documento.cod_empresa=?  ";
             
         }
         $smtm=$conexao -> prepare($sql);
@@ -174,7 +185,7 @@ class ArquivoPDO
         if ($codArquivo!="")
         {
             $smtm->bindValue(1,$codEmpresa);
-            $smtm->bindValue(2,$codArquivo);
+            $smtm->bindValue(2,$codDocumento);
             
         }
         else

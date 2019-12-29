@@ -57,7 +57,7 @@ class CaixaPDO
                 $sql.='?,';
                 $sql.='?,';
                 
-                $sql.='(SELECT right(concat("00000",max(caixa.cod_caixa)+1),5) from tb_caixas caixa';
+                $sql.='(SELECT ifnull(right(concat("00000",max(caixa.cod_caixa)+1),5),"00001") from tb_caixas caixa';
                 $sql.=' where caixa.cod_empresa=' . "'". $caixa->getCodigoEmpresa() ."' AND ";
                 $sql.='       caixa.cod_setor  =' . "'". $caixa->getCodigoSetor()   ."'   ),";
                 

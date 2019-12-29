@@ -209,17 +209,24 @@ class CorredorPDO
             $smtm->bindValue(3,$codCorredor);
             
         }
-        else
+        else if($codArquivo!="")
         {
         
-            $sql.= " WHERE cod_empresa=?  ";
-            $sql.= "       cod_arquivo=?  ";
+            $sql.= " WHERE cod_empresa=?  AND ";
+            $sql.= "       cod_arquivo=?      ";
             
             $smtm=$conexao->prepare($sql);
             
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codArquivo);
             
+        }
+        else
+        {
+            $result[0]["CodCorredor"]="0";
+            $result[0]["Corredor"]="=>Selecionar Corredor<=";
+            $conexao=null;
+            return $result;
         }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);

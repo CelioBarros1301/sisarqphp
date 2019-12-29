@@ -40,7 +40,7 @@
         { 
             $tabelaEmpresa =$empresaPDO->lista("");
             $tabelaArquivo =$arquivoPDO->listaArquivo($codEmpresa,"");
-            $tabelaCorredor=$corredorPDO->lista("");
+            $tabelaCorredor=$corredorPDO->listaCorredor($codEmpresa,$codArquivo,"");
             
         }
         else

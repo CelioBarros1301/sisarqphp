@@ -192,6 +192,7 @@ class ArquivoPDO
         }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+       
         $conexao=null;
         if ( count($result)==0 ) 
         {

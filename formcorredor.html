@@ -44,7 +44,12 @@
                             <label> Arquivo </label><br>	
                             <select name="codArq" <?=$readonly;?> class="form-control">
                                 <?php
+                                if ( $_GET["status"]=="i" && $_GET["codArq"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
+                                }
                                 foreach ($tabelaArquivo as $coluna){
+                                    $selecao = $_GET["codArq"]==$coluna["CodigoArquivo"]?"selected":"";
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
                                 }
                                 ?>

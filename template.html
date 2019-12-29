@@ -303,12 +303,21 @@
                 if ( opcao=="cadcorredor" )
                 {
                    
-                    window.location.href = "sisarq.php?option=cadcorredor&codEmp="+filtroEmpresa+"&codArq=&codCor=&status=i";
+                    window.location.href = "sisarq.php?option=cadcorredor&codEmp="+filtroEmpresa+"&codArq=0&codCor=&status=i";
                 }
                 if ( opcao=="cadestante" )
                 {
-                   
                     window.location.href = "sisarq.php?option=cadestante&codEmp="+filtroEmpresa+"&codArq=&codCor=&codEst=&status=i";
+                }
+
+            }                 
+        </script>
+
+        <script>
+            function changecomboarquivo(filtroEmpresa,filtroarquivo,opcao) {
+                if ( opcao=="cadestante" )
+                {
+                    window.location.href = "sisarq.php?option=cadestante&codEmp="+filtroEmpresa+"&codArq=01&codCor=0&codEst=&status=i";
                 }
 
             }                 

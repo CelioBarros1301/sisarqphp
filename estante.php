@@ -39,7 +39,7 @@
         if ($acao=="i" ) 
         { 
             $tabelaEmpresa =$empresaPDO->lista("");
-            $tabelaArquivo =$arquivoPDO->lista("");
+            $tabelaArquivo =$arquivoPDO->listaArquivo($codEmpresa,"");
             $tabelaCorredor=$corredorPDO->lista("");
             
         }

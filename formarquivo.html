@@ -22,9 +22,13 @@
                     
                     <div class="row">
                         <div class="form-group">    
-                            <label> Empresa </label><br>	
-                            <select name="codEmp" <?=$readonly;?> class="form-control">
+                            <label> Empresa </label><br>
+                            <select name="codEmp" <?=$readonly;?> required class="form-control">
                                 <?php
+                                if ( $_GET["status"]=="i")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
                                 foreach ($tabelaEmpresa as $coluna){
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
                                 }

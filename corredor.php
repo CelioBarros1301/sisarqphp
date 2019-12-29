@@ -36,7 +36,7 @@
         if ($acao=="i" ) 
         { 
             $tabelaEmpresa=$empresaPDO->lista("");
-            $tabelaArquivo=$arquivoPDO->lista("");
+            $tabelaArquivo=$arquivoPDO->listaArquivo($codEmpresa,"");
             
         }
         else
@@ -108,7 +108,7 @@
                 $registro=$corredorPDO->delete($codEmpresa,$codArquivo,$codCorredor);
             break;
         }
-        #header("location:sisarq.php?option=corredor&filtroEmp=$filtroEmpresa");
+        header("location:sisarq.php?option=corredor&filtroEmp=$filtroEmpresa");
     }
      
 ?>

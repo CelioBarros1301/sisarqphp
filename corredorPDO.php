@@ -61,7 +61,6 @@ class CorredorPDO
                 $sql.='(SELECT ifnull(right(concat("000",max(corredor.cod_corredor)+1),3),"001") from tb_corredores corredor';
                 $sql.=' where corredor.cod_empresa=' . "'". $corredor->getCodigoEmpresa() ."' AND ";
                 $sql.='       corredor.cod_arquivo=' . "'". $corredor->getCodigoArquivo() ."'    ),";
-                echo $sql ;
                 $sql.='?,?)';
               
             }

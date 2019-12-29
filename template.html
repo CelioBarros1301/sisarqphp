@@ -295,9 +295,22 @@
     
 
         <script>
-            function consultagride(filtroEmpresa) {
-                
-                window.location.href = "sisarq.php?option=corredor&filtroEmp="+filtroEmpresa;
+            function changecomboempresa(filtroEmpresa,opcao) {
+                if ( opcao=="corredor" )
+                {
+                    window.location.href = "sisarq.php?option=corredor&filtroEmp="+filtroEmpresa;
+                }   
+                if ( opcao=="cadcorredor" )
+                {
+                   
+                    window.location.href = "sisarq.php?option=cadcorredor&codEmp="+filtroEmpresa+"&codArq=&codCor=&status=i";
+                }
+                if ( opcao=="cadestante" )
+                {
+                   
+                    window.location.href = "sisarq.php?option=cadestante&codEmp="+filtroEmpresa+"&codArq=&codCor=&codEst=&status=i";
+                }
+
             }                 
         </script>
 </body>

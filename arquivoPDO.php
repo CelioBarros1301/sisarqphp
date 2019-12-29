@@ -164,11 +164,19 @@ class ArquivoPDO
             $sql.= "       arquivo.cod_arquivo=?     ";
             
         }
-        else
+        else if($codEmpresa!="")
         {
             $sql.= " WHERE arquivo.cod_empresa=?  ";
             
         }
+        else
+        {
+            $result[0]["CodArquivo"]="0";
+            $result[0]["Arquivo"]="=>Selecionar Arquivo<=";
+            $conexao=null;
+            return $result;
+        }
+        
         $smtm=$conexao -> prepare($sql);
         
         if ($codArquivo!="")
@@ -185,6 +193,11 @@ class ArquivoPDO
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;
+        if ( count($result)==0 ) 
+        {
+            $result[0]["CodArquivo"]="0";
+            $result[0]["Arquivo"]="=>Selecionar Arquivo<=";
+        }
         return  $result;
     }
 }

@@ -24,7 +24,7 @@
                         $filtro= $_GET['filtroEmp'];   
                     }
                 ?>
-                <select id="codigo" name="codEmp"  class="form-control" onchange="consultagride(document.getElementById('codigo').value)">
+                <select id="codigo" name="codEmp"  class="form-control" onchange="changecomboempresa(document.getElementById('codigo').value,'corredor')">
                     <?php
                     echo '<option value=""> Todas Empresas</option>';
                     foreach ($tabelaEmpresa as $coluna){
@@ -45,7 +45,7 @@
                 </select>
             </div>
             
-            <a href="sisarq.php?option=cadcorredor&codEmp=000&codArq=00&codCor=000&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
+            <a href="sisarq.php?option=cadcorredor&codEmp=0&codArq=&codCor=&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
                     aria-hidden="true"></i> Novo</a>
 
             <button class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Filtro </button>

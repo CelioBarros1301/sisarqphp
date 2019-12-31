@@ -1,5 +1,5 @@
 <?php
-require("Conexao_Class.php");
+require_once("Conexao_Class.php");
 
 class AutorizadoPDO
 {

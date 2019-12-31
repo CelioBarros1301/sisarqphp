@@ -138,7 +138,7 @@
                     </div>
                     <div class="form-group">
                         <label>Login</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Informar e-mail" required>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Informar e-mail" required >
                         <?php
                             if (isset($_GET['error'])) {
                                 if ( $_GET['error']=="user_not_found" ){

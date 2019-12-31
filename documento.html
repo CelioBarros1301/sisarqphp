@@ -1,0 +1,309 @@
+<?php
+
+    
+    if ( !isset($_SESSION['user'])){
+        #header("location: index.php");
+    }
+
+    # Informacoes da regra de negocios e acesso aos dados
+    include_once  "documento.php";
+    
+?>
+
+<div class="container">
+       
+        <div class="row">
+            <div class="col-md-12">  
+                <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home">Criterio Seleção</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu1">Documentos</a>
+                </li>
+                </ul>
+            </div>
+        </div>
+      
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div id="home" class="container tab-pane active"><br>
+            <form class="form" action="##" method="post" id="registrationForm">
+                      
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Autorizado </label><br>
+                            <select id="idAutorizado" name="filCodAut" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" )
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Autorizado<=</option>';	
+                                }
+                                foreach ($tabelaAutorizado as $coluna){
+                                    $selecao = $_GET["filCodAut"]==$coluna["Codigo"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Nome"] ."</option>";                     
+                                }
+                                ?>
+                            </select>                   
+                         
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Empresa</label><br>
+                            <select id="idEmpresa" name="filCodEmp" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
+                                foreach ($tabelaEmpresa as $coluna){
+                                    $selecao = $_GET["filCodEmp"]==$coluna["Codigo"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Setor </label><br>
+                            <select id="idSetor" name="filCodSet" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
+                                foreach ($tabelaSetor as $coluna){
+                                    $selecao = $_GET["codSet"]==$coluna["CodSetor"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodSetor"] .'">' .$coluna["Setor"] ."</option>";                     
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <hr>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-center">Localização</p>
+                    </div>
+                    <div class="col-md-4">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Arquivo</label><br>
+                            <select id="idArquivo" name="filCodArq" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
+                                foreach ($tabelaArquivo as $coluna){
+                                    $selecao = $_GET["filCodArq"]==$coluna["CodArquivo"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Setor"] ."</option>";                     
+                                }
+                                ?>
+                            </select>
+                            
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Corredor </label><br>
+                             <select id="idCorredor" name="filCodCor" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
+                                foreach ($tabelaCorredor as $coluna){
+                                    $selecao = $_GET["filCodCor"]==$coluna["CodCorredor"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
+                                }
+                                ?>
+                            </select>
+                            
+                        </div>
+                    </div>
+                
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Estante</label><br>
+                            <select id="idEstante" name="filCodEst" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
+                                foreach ($tabelaEstante as $coluna){
+                                    $selecao = $_GET["filCodEst"]==$coluna["CodEstante"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodEstante"] .'">' .$coluna["Estante"] ."</option>";                     
+                                }
+                                ?>
+                            </select>
+      
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Prateleira </label><br>
+                            <select id="idPrateleira" name="filCodPra" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
+                                foreach ($tabelaPrateleira as $coluna){
+                                    $selecao = $_GET["filCodPra"]==$coluna["CodPrateleira"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodPrateleira"] .'">' .$coluna["Prateleira"] ."</option>";                     
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Caixa</label><br>
+                            <select id="idCaixa" name="filCodCai" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                                <?php
+                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
+                                foreach ($tabelaCaixa as $coluna){
+                                    $selecao = $_GET["filCodCai"]==$coluna["CodCaixa"]?"selected":"";
+                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodCaixa"] .'">' .$coluna["Caixa"] ."</option>";                     
+                                }
+                                ?>
+                            </select>
+                          
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        
+       
+            <div class="row">
+                <div class="col-md-4">
+                    <hr>
+                </div>
+                <div class="col-md-4">
+                    <p class="text-center">Documento</p>
+                </div>
+                <div class="col-md-4">
+                    <hr>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Tipo</label><br>
+                        <select id="idTipo" name="filCodTip" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <?php
+                            if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                            { 
+                                echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                            }
+                            foreach ($tabelaTipoDocumento as $coluna){
+                                $selecao = $_GET["filTipDoc"]==$coluna["CodTipo"]?"selected":"";
+                                echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodTipo"] .'">' .$coluna["TipoDocumento"] ."</option>";                     
+                            }
+                            ?>
+                        </select>
+    
+                    </div>
+                </div>
+
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Status</label><br>
+                        <select name="filCodSta"  class="form-control" id="filCodSta" placeholder="first name" title="enter your first name if any.">
+                        <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                        <option value=1>Contabilidade</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Numero </label><br>
+                        <input  name="filNumDoc"  class="form-control" id="filNunDoc" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+            
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Emissão </label><br>
+                        <input  name="filEmiDoc"  class="form-control" id="filEmiDoc" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-1">
+                    <hr>
+                </div>
+                <div class="col-md-2">
+                    <p class="text-center">Ano</p>
+                </div>
+                <div class="col-md-1">
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Exercicio </label><br>
+                        <input  name="filAnoExe"  class="form-control" id="filAnoExe" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+
+                
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Calendario </label><br>
+                        <input  name="filAnoCal"  class="form-control" id="filAnoCal" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+            
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Texto </label><br>
+                        <input  name="filTexDoc"  class="form-control" id="filTextDoc" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+            </div>
+
+
+          </div>
+          <div id="menu1" class="container tab-pane fade"><br>
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          <div id="menu2" class="container tab-pane fade"><br>
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+          </div>
+        </div>
+      </div>
+
+

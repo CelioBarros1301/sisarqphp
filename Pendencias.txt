@@ -4,6 +4,8 @@ PRIORIDADES:
 
 10)addslashes incluir do $_GET E $_POST
 
+37) CRUD Autorizado empresa
+
 
 
 
@@ -81,3 +83,40 @@ cargo do combox conforme a seleçao do nivel superior  R E S O L V I D O
     ( Placeholder ) - R E S O L V I D O 
 
 30)Tipo de documento ver padrao do combo da empresa R E S O L V I D O 
+
+31)incluir spinner quando processando em background ( regras de negocios
+
+32)https://getbootstrap.com/docs/4.4/components/forms/ ( Size dos controle 
+propriedade form-control-lg form-control-sm)
+
+33) propriedade Tooltips/title ( incluir nos controle de Codigo para informar que informando zero ira gerar o proximo da sequencia)
+
+34) Alterar o processo quando for informado o codigo(Arquivo,corredor,estante,prateleira,caixa,empresa) mostrar
+os dadosdo registro igual ao botao EDITAR
+
+35) Incluir label flotoante -https://getbootstrap.com/docs/4.4/examples/floating-labels/
+
+36) Trocara as mensagem informando campo obrigatorio
+
+37) CRUD Autorizado empresa
+
+==========================
+infomacoes sobre tabs
+
+https://bootsnipp.com/snippets/5Moza
+
+
+https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-navs.php
+
+
+https://bootstrap-vue.js.org/docs/components/tabs/ ( muito bom)
+
+
+https://mdbootstrap.com/docs/jquery/components/tabs/
+
+
+https://getbootstrap.com.br/docs/4.1/utilities/borders/
+
+
+
+https://www.w3schools.com/bootstrap4/bootstrap_ref_js_tab.asp

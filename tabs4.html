@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title><?={$rotina};?></title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">>
+   
+   <!-- Our Custom CSS
+    <link rel="stylesheet" href="bootstrap3/css/bootstrap_3.3.7.min.css" >
+    Our Custom CSS 
+    <link rel="stylesheet" href="sidebar/css/style2.css">
+    
+    <link rel="stylesheet" href="sidebar/css/jquery.mCustomScrollbar.min.css">
+    -->
+    <link rel="stylesheet" type="text/css" href="fontawesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="datatable/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="datatable/css/buttons.dataTables.min.css">
+    <!--
+    <link rel="stylesheet" type="text/css" href="datatable/css/dataTables.bootstrap4.min.css">
+    -->
+</head>
+
+
+
+
+<body>
+
+    <div class="container">
+       
+        <div class="row">
+         <div class="col-md-8">  
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#home">Criterio Seleção</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu1">Documentos</a>
+          </li>
+         
+        </ul>
+        </div>
+        </div>
+      
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div id="home" class="container tab-pane active"><br>
+            <form class="form" action="##" method="post" id="registrationForm">
+                      
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Colaborador </label><br>
+                            <select name="filCodCol"  class="form-control" id="filCodCol" placeholder="first name" title="enter your first name if any.">
+                            <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                            <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>    
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Empresa</label><br>
+                            <select name="filCodCol"  class="form-control" id="filCodCol" placeholder="first name" title="enter your first name if any.">
+                            <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                            <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Setor </label><br>
+                            <select name="filCodSet"  class="form-control" id="filCodSet" placeholder="first name" title="enter your first name if any.">
+                                <option value=0>Informatica ad hjdh hd khdka jd</option>
+                                <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <hr>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="text-center">Localização</p>
+                    </div>
+                    <div class="col-md-2">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Arquivo</label><br>
+                            <select name="filCodArq"  class="form-control" id="filCodArq" placeholder="first name" title="enter your first name if any.">
+                            <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                            <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Corredor </label><br>
+                            <select name="filCodCor"  class="form-control" id="filCodCor" placeholder="first name" title="enter your first name if any.">
+                                <option value=0>Informatica ad hjdh hd khdka jd</option>
+                                <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Estante</label><br>
+                            <select name="filCodEst"  class="form-control" id="filCodEst" placeholder="first name" title="enter your first name if any.">
+                            <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                            <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Prateleira </label><br>
+                            <select name="filCodPra"  class="form-control" id="filCodPra" placeholder="first name" title="enter your first name if any.">
+                                <option value=0>Informatica ad hjdh hd khdka jd</option>
+                                <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Caixa</label><br>
+                            <select name="filCodCai"  class="form-control" id="filCodCai" placeholder="first name" title="enter your first name if any.">
+                            <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                            <option value=1>Contabilidade</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        
+         
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <hr>
+                </div>
+                <div class="col-md-2">
+                    <p class="text-center">Documento</p>
+                </div>
+                <div class="col-md-2">
+                    <hr>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Tipo</label><br>
+                        <select name="filCodTip"  class="form-control" id="filCodTip" placeholder="first name" title="enter your first name if any.">
+                        <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                        <option value=1>Contabilidade</option>
+                        </select> 
+                    </div>
+                </div>
+
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Status</label><br>
+                        <select name="filCodSta"  class="form-control" id="filCodSta" placeholder="first name" title="enter your first name if any.">
+                        <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
+                        <option value=1>Contabilidade</option>
+                        </select> 
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Numero </label><br>
+                        <input  name="filNumDoc"  class="form-control" id="filNunDoc" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Emissão </label><br>
+                        <input  name="filEmiDoc"  class="form-control" id="filEmiDoc" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-2">
+                    <hr>
+                </div>
+                <div class="col-md-2">
+                    <p class="text-center">Ano</p>
+                </div>
+                <div class="col-md-2">
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Exercicio </label><br>
+                        <input  name="filAnoExe"  class="form-control" id="filAnoExe" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+
+                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Calendario </label><br>
+                        <input  name="filAnoCal"  class="form-control" id="filAnoCal" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Texto </label><br>
+                        <input  name="filTexDoc"  class="form-control" id="filTextDoc" placeholder="first name" title="enter your first name if any.">
+                    </div>
+                </div>
+            </div>
+
+
+          </div>
+          <div id="menu1" class="container tab-pane fade"><br>
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          <div id="menu2" class="container tab-pane fade"><br>
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    
+</body>
+
+<script type="text/javascript" src="jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="jquery/popper.min.js"></script>
+<script type="text/javascript" src="bootstrap4/js/bootstrap.min.js"></script>
+<script>
+
+</script>
+</html>

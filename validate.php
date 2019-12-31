@@ -114,6 +114,15 @@
 				include_once 'formtipodocumento.html';
 			break;
 
+			# documento
+			case 'documento':	
+				include_once 'documento.html';			
+			break;
+
+			case 'caddocumento':
+				include_once 'formcaddocumento.html';
+			break;
+
 
 			case 'manager_users':
 				

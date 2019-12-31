@@ -79,17 +79,18 @@
 
 
                     <div class="row"> 
-                        <div class="form-group">
-                            <label>Codigo</label>
-                            <input type="text" name="codEst"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codEst"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,3)'>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Codigo Estante</label>
+                                <input type="text" name="codEst"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codEst"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,3)'>
+                            </div>
                         </div>
-                    </div>
-                    
-
-                    <div class="row"> 
-                        <div class="form-group">
-                            <label>Descricao</label>
-                            <input type="text" name="desEst" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_estante"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao do Corredor" required  >
+                        
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Descricao</label>
+                                <input type="text" name="desEst" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_estante"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao da Estante" required  >
+                            </div>
                         </div>
                     </div>
 

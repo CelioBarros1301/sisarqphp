@@ -78,6 +78,6 @@ cargo do combox conforme a seleçao do nivel superior  R E S O L V I D O
 28) Quando da rotina de liberacao de login usario não pode liberar ele mesmo
 
 29) Formatacao dos forms ( ARQUIVO , CORREDOR ,ESTANTE ,PRATELEIRA, CAIXA )
-    ( Placeholder )
+    ( Placeholder ) - R E S O L V I D O 
 
-30)Tipo de documento ver padrao do combo da empresa
+30)Tipo de documento ver padrao do combo da empresa R E S O L V I D O 

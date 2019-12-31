@@ -23,8 +23,12 @@
                     <div class="row">
                         <div class="form-group">    
                             <label> Empresa </label><br>	
-                            <select name="codEmp" <?=$readonly;?> class="form-control">
+                            <select name="codEmp" <?=$readonly;?> required class="form-control">
                                 <?php
+                                if ( $_GET["status"]=="i")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
                                 foreach ($tabelaEmpresa as $coluna){
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
                                 }
@@ -35,24 +39,25 @@
                     </div>        
             
                     <div class="row"> 
-                        <div class="form-group">
-                            <label>Codigo</label>
-                            <input type="text" name="codDoc"  maxlength="4"  value="<?=$_GET['status']!="i"?$_GET["codDoc"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,4)'>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Codigo Tipo</label>
+                                <input type="text" name="codDoc"  maxlength="4"  value="<?=$_GET['status']!="i"?$_GET["codDoc"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,4)'>
+                            </div>
                         </div>
-                    </div>
                     
-                    <div class="row"> 
-                        <div class="form-group">
-                            <label>Descricao</label>
-                            <input type="text" name="desDoc" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_documento"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Nome da Empresa" required  >
-                        </div>
+                        <div class="col-md-8"> 
+                            <div class="form-group">
+                                <label>Descricao Tipo Documento</label>
+                                <input type="text" name="desDoc" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_documento"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao Tipo de Documento" required  >
+                            </div>
+                        </div>        
                     </div>        
-
             
                     <div class="row"> 
                         <div class="form-group">
                             <label>Sigla</label>
-                            <input type="text" name="sigDoc" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_documento"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Nome da Empresa" required  >
+                            <input type="text" name="sigDoc" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_documento"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Sigla Tipo" required  >
                         </div>
                     </div>        
                     

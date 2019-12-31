@@ -100,24 +100,23 @@
 
 
                     <div class="row"> 
-                        <div class="form-group">
-                            <label>Codigo</label>
-                            <input type="text" name="codPra"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codPra"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo Corredor" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Codigo Prateleira</label>
+                                <input type="text" name="codPra"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codPra"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                                                    <div class="form-group">
+                                <label>Descricao</label>
+                                <input type="text" name="desPra" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_prateleira"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao da Prateleira" required  >
+                            </div>
                         </div>
                     </div>
-                    
-
-                    <div class="row"> 
-                        <div class="form-group">
-                            <label>Descricao</label>
-                            <input type="text" name="desPra" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_prateleira"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao do Corredor" required  >
-                        </div>
-                    </div>
-
                     <div class="row"> 
                         <div class="form-group">
                             <label>Sigla Prateleira</label>
-                            <input type="text" name="sigPra" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_prateleira"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Sigla da Estante" required  >
+                            <input type="text" name="sigPra" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_prateleira"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Sigla da Prateleira" required  >
                         </div>
                     </div>
                     

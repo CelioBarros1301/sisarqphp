@@ -43,10 +43,12 @@
         if ($acao=="i" ) 
         { 
             $tabelaEmpresa =$empresaPDO->lista("");
-            $tabelaArquivo =$arquivoPDO->lista("");
-            $tabelaCorredor=$corredorPDO->lista("");
-            $tabelaEstante =$estantePDO->lista("");
             
+            $tabelaArquivo =$arquivoPDO->listaArquivo($codEmpresa,"");
+            $tabelaCorredor=$corredorPDO->listaCorredor($codEmpresa,$codArquivo,"");
+            $tabelaEstante =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,"");
+            
+
             
         }
         else

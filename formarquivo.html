@@ -39,16 +39,18 @@
                     </div>        
             
                     <div class="row"> 
-                        <div class="form-group">
-                            <label>Codigo</label>
-                            <input type="text" name="codArq"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codArq"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Codigo Arquivo</label>
+                                <input type="text" name="codArq"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codArq"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,2)'>
+                            </div>
                         </div>
-                    </div>
                     
-                    <div class="row"> 
-                        <div class="form-group">
-                            <label>Descricao</label>
-                            <input type="text" name="desArq" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_arquivo"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Nome da Empresa" required  >
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Descricao</label>
+                                <input type="text" name="desArq" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_arquivo"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao do Arquivo" required  >
+                            </div>
                         </div>
                     </div>        
             

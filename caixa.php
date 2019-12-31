@@ -36,8 +36,7 @@
         if ($acao=="i" ) 
         { 
             $tabelaEmpresa=$empresaPDO->lista("");
-            $tabelaSetor  =$setorPDO->lista("");
-            
+            $tabelaSetor  =$setorPDO->listaSetor($codEmpresa,"");
         }
         else
         {

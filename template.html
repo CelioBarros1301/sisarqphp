@@ -309,7 +309,16 @@
                 {
                     window.location.href = "sisarq.php?option=cadestante&codEmp="+filtroEmpresa+"&codArq=&codCor=&codEst=&status=i";
                 }
+                if ( opcao=="cadprateleira" )
+                {
+                    window.location.href = "sisarq.php?option=cadprateleira&codEmp="+filtroEmpresa+"&codArq=&codCor=&codEst=&status=i";
+                }
+                if ( opcao=="cadcaixa" )
+                {
+                    window.location.href = "sisarq.php?option=cadcaixa&codEmp="+filtroEmpresa+"&codSet=&codCai=&status=i";
+                }
 
+  
             }                 
         </script>
 
@@ -317,11 +326,25 @@
             function changecomboarquivo(filtroEmpresa,filtroarquivo,opcao) {
                 if ( opcao=="cadestante" )
                 {
-                    window.location.href = "sisarq.php?option=cadestante&codEmp="+filtroEmpresa+"&codArq=01&codCor=0&codEst=&status=i";
+                    window.location.href = "sisarq.php?option=cadestante&codEmp="+filtroEmpresa+"&codArq="+filtroarquivo+"&codCor=&codEst=&status=i";
                 }
-
+                if ( opcao=="cadprateleira" )
+                {
+                    window.location.href = "sisarq.php?option=cadprateleira&codEmp="+filtroEmpresa+"&codArq="+filtroarquivo+"&codCor=&codEst=&codPra=&status=i";
+                }
+    
             }                 
         </script>
+
+        <script>
+            function changecombocorredor(filtroEmpresa,filtroarquivo,filtrocorredor,opcao) {
+                if ( opcao=="cadprateleira" )
+                {
+                    window.location.href = "sisarq.php?option=cadprateleira&codEmp="+filtroEmpresa+"&codArq="+filtroarquivo+"&codCor="+filtrocorredor+"&codEst=&codPra=&status=i";
+                }
+           
+            }                 
+</script>
 </body>
 
 </html>

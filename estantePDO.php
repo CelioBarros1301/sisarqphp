@@ -210,7 +210,7 @@ class EstantePDO
         $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT  cod_estante   CodEstante ,des_estante  Estante ";
-        $sql.=" FROM tb_estantes ";
+        $sql.="       FROM tb_estantes ";
         
         $smtm=$conexao -> prepare($sql);
         
@@ -230,20 +230,40 @@ class EstantePDO
             
             
         }
-        else
+        else if  ($codCorredor != "" )
         {
-        
-            $sql.= " WHERE cod_empresa =?  ";
-            $sql.= "       cod_arquivo =?  ";
-            $sql.= "       cod_corredor=?  ";
+            $sql.= " WHERE cod_empresa =?  AND ";
+            $sql.= "       cod_arquivo =?  AND ";
+            $sql.= "       cod_corredor=?      ";
             
             $smtm=$conexao->prepare($sql);
             
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codArquivo);
             $smtm->bindValue(3,$codCorredor);
+            $smtm->bindValue(4,$codEstante);
             
             
+        }
+        else if ($codArquivo != "" )
+        {
+        
+            $sql.= " WHERE cod_empresa =?  AND ";
+            $sql.= "       cod_arquivo =?      ";
+            
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+            
+            
+        } 
+        else
+        {
+            $result[0]["CodEstante"]="0";
+            $result[0]["Estante"]="=>Selecionar Estante<=";
+            $conexao=null;
+            return $result;
         }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);

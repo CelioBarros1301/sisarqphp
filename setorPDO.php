@@ -162,13 +162,20 @@ class SetorPDO
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codSetor);
         }
-        else
+        elseif ($codEmpresa != "" )
         {
         
             $sql.= " WHERE cod_empresa=?  ";
             $smtm=$conexao->prepare($sql);
             
             $smtm->bindValue(1,$codEmpresa);
+        }
+        else
+        {
+            $result[0]["CodSetor"]="0";
+            $result[0]["Setor"]="=>Selecionar Setor<=";
+            $conexao=null;
+            return $result;
         }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);

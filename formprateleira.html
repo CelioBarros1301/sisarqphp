@@ -23,9 +23,14 @@
                     <div class="row">
                         <div class="form-group">    
                             <label> Empresa </label><br>	
-                            <select name="codEmp" <?=$readonly;?> class="form-control">
+                            <select id="idEmpresa" name="codEmp" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
                                 <?php
+                                if ( $_GET["status"]=="i" && $_GET["codEmp"]=="0")
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                }
                                 foreach ($tabelaEmpresa as $coluna){
+                                    $selecao = $_GET["codEmp"]==$coluna["Codigo"]?"selected":"";
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
                                 }
                                 ?>
@@ -37,9 +42,14 @@
                     <div class="row"> 
                         <div class="form-group">    
                             <label> Arquivo </label><br>	
-                            <select name="codArq" <?=$readonly;?> class="form-control">
+                            <select id="idArquivo" name="codArq" <?=$readonly;?> class="form-control" onchange="changecomboarquivo(document.getElementById('idEmpresa').value,document.getElementById('idArquivo').value,'cadprateleira')">
                                 <?php
+                                if ( $_GET["status"]=="i" && ( $_GET["codArq"]=="0" || $_GET["codArq"]=="") )
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
+                                }
                                 foreach ($tabelaArquivo as $coluna){
+                                    $selecao = $_GET["codArq"]==$coluna["CodArquivo"]?"selected":"";
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
                                 }
                                 ?>
@@ -51,9 +61,15 @@
                     <div class="row"> 
                         <div class="form-group">    
                             <label> Corredor </label><br>	
-                            <select name="codCor" <?=$readonly;?> class="form-control">
+                            <select id="idCorredor" name="codCor" <?=$readonly;?> class="form-control" onchange="changecombocorredor(document.getElementById('idEmpresa').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,'cadrateleira')">
                                 <?php
+                                if ( $_GET["status"]=="i" && ( $_GET["codCor"]=="0" || $_GET["codCor"]=="") )
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Corredor<=</option>';	
+                                }
                                 foreach ($tabelaCorredor as $coluna){
+                                    $selecao = $_GET["codCor"]==$coluna["CodCorredor"]?"selected":"";
+                                  
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
                                 }
                                 ?>
@@ -66,9 +82,14 @@
                     <div class="row"> 
                         <div class="form-group">    
                             <label> Estante </label><br>	
-                            <select name="codEst" <?=$readonly;?> class="form-control">
+                            <select id="idEstante" name="codEst" <?=$readonly;?> class="form-control">
                                 <?php
+                                if ( $_GET["status"]=="i" && ( $_GET["codEst"]=="0" || $_GET["codEst"]=="") )
+                                { 
+                                    echo '<option disabled selected value=0>=>Selecionar Estante<=</option>';	
+                                }
                                 foreach ($tabelaEstante as $coluna){
+                                    $selecao = $_GET["codEst"]==$coluna["CodEstante"]?"selected":"";
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodEstante"] .'">' .$coluna["Estante"] ."</option>";                     
                                 }
                                 ?>

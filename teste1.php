@@ -4,6 +4,8 @@
     require_once("estantePDO.php");
 
     require_once("prateleiraPDO.php");
+    require_once("autorizadoPDO.php");
+    
 
    
     $prateleiraPDO= new PrateleiraPDO();
@@ -12,10 +14,11 @@
     $codCorredor="002";
     $codEstante='001';
     $codPrateleira='01';
+    $autorizadoPDO= new AutorizadoPDO();
 
-
-    
-    $registro=$prateleiraPDO->delete($codEmpresa ,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
+    $tabelaAutorizado =$autorizadoPDO->lista("");
+    var_dump($tabelaAutorizado);
+    ##$registro=$prateleiraPDO->delete($codEmpresa ,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
    
     /*
     $corredorPDO= new CorredorPDO();

@@ -38,6 +38,16 @@
 				include_once 'formautorizado.html';
 			break;
 			
+
+			# Setor Autorizado
+			case 'setorautorizado':	
+				include_once 'setorautorizado.html';			
+			break;
+
+			case 'cadsetorautorizado':
+				include_once 'formsetorautorizado.html';
+			break;
+			
 			# usuario
 			case 'usuario':	
 				include_once 'usuario.html';			
@@ -169,7 +179,19 @@
 				$_SESSION['transacao']="Autorizados";
 			break;
 			
+			# Setor Autorizado
+			case 'setorautorizado':	
+				$_SESSION['transacao']="Acesso a Empresas";
+			break;
+
+			case 'cadsetorautorizado':
+				$_SESSION['transacao']="Acesso a Empresas";
+			break;
+
 			
+
+
+
 			# arquivo
 			case 'arquivo':	
 				$_SESSION['transacao']="Arquivos";				

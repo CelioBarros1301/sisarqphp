@@ -137,13 +137,16 @@ class AutorizadoPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT cod_autorizado Codigo,nom_autorizado Nome, emp_autorizado Empresa,cel_autorizado Celular ";
+        $sql="SELECT cod_autorizado CodAutorizado,";
+        $sql.="      nom_autorizado Autorizado   ,";
+        $sql.="      emp_autorizado Empresa      ,";
+        $sql.="      cel_autorizado Celular       ";
         $sql.=" FROM tb_autorizados ";
         $smtm=$conexao -> prepare($sql);
         
-        if (isset($filtro))
+        if ( isset($filtro) && $filtro!="" )
         {
-            $sql.= " WHERE nom_autorizado like '%?%'";
+            $sql.= " WHERE cod_autorizado=?";
             $smtm->bindValue(1,$filtro);
         }
         $smtm->execute();
@@ -151,6 +154,10 @@ class AutorizadoPDO
         $conexao=null;
         return  $result;
     }
+
+
+
+    
 
 }
 ?>

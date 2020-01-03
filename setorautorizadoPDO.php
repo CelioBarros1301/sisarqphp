@@ -46,10 +46,12 @@ class SetorAutorizadoPDO
             
             $sql.=' VALUES ( ';
             $sql.='?,?,?)';
-         
-            $smtm->bindValue(1,$setor->getCodigoAutorizado());
-            $smtm->bindValue(2,$setor->getCodigoEmpresa());
-            $smtm->bindValue(3,$setor->getCodigoSetor());
+           
+            $smtm=$conexao->prepare($sql);
+       
+            $smtm->bindValue(1,$setorautorizado->getCodigoAutorizado());
+            $smtm->bindValue(2,$setorautorizado->getCodigoEmpresa());
+            $smtm->bindValue(3,$setorautorizado->getCodigoSetor());
             $result=$smtm->execute();
             
             return $result;

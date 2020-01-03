@@ -14,13 +14,12 @@
     require("autorizadoPDO.php");
     
     $setorautorizadoPDO = new SetorAutorizadoPDO();
-    $SetorAutorizado    = new SetorAutorizado();
+    $setorautorizado    = new SetorAutorizado();
     
     $setorPDO           = new SetorPDO();
     $empresaPDO         = new EmpresaPDO();
     $autorizadoPDO      = new AutorizadoPDO();    
 
-        
     
     # Array para guarda os nome das Colunas doa DataTable
     $dataTableColunas = array(); 
@@ -109,7 +108,7 @@
                 $registro=$setorautorizadoPDO->delete($codId);
             break;
         }
-        ##header("location:sisarq.php?option=setorautorizado");
+        header("location:sisarq.php?option=setorautorizado");
     }
      
 ?>

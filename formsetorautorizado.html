@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="form-group">    
                             <label> Autorizado </label><br>	
-                            <select id="idAutorizado" name="codAut" <?=$readonly;?> class="form-control" onchange="changecombocorredor(document.getElementById('idEmpresa').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,'cadrateleira')">
+                            <select id="idAutorizado" name="codAut" <?=$readonly;?> class="form-control" >
                                 <?php
                                 if ( $_GET["status"]=="i" && ( $_GET["codEmp"]=="0" || $_GET["codEmp"]=="") )
                                 { 
@@ -42,7 +42,7 @@
                     <div class="row"> 
                         <div class="form-group">    
                             <label> Empresa </label><br>	
-                            <select id="idEmpresa" name="codEmp" <?=$readonly;?> class="form-control" onchange="changecombocorredor(document.getElementById('idEmpresa').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,'cadrateleira')">
+                            <select id="idEmpresa" name="codEmp" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadsetorautorizado')">
                                 <?php
                                 if ( $_GET["status"]=="i" && ( $_GET["codEmp"]=="0" || $_GET["codEmp"]=="") )
                                 { 
@@ -62,7 +62,7 @@
                     <div class="row"> 
                         <div class="form-group">    
                             <label> Setor </label><br>	
-                            <select id="idSetor" name="codSet" <?=$readonly;?> class="form-control" onchange="changecombocorredor(document.getElementById('idEmpresa').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,'cadrateleira')">
+                            <select id="idSetor" name="codSet" <?=$readonly;?> class="form-control" >
                                 <?php
                                 if ( $_GET["status"]=="i" && ( $_GET["codSet"]=="0" || $_GET["codSet"]=="") )
                                 { 
@@ -78,11 +78,16 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label hidden >id</label>
+                                                            
+                        <input  type="hidden" name="codId"  value="<?=$_GET['status']!="i"?$registro["id_setaut"]:"";?> class="form-control"  required  >
+                    </div>
                     
 
                     <div class="form-group">
                         <label hidden >Operacao</label>
-                        <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control" placeholder="Nome da Empresa" required  >
+                        <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control"  required  >
                     </div>
                                                           
                     <button type="submit" class="btn btn-primary"  aria-pressed="true">

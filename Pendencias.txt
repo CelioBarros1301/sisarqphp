@@ -4,7 +4,6 @@ PRIORIDADES:
 
 10)addslashes incluir do $_GET E $_POST
 
-37) CRUD Autorizado empresa
 
 
 
@@ -98,8 +97,14 @@ os dadosdo registro igual ao botao EDITAR
 
 36) Trocara as mensagem informando campo obrigatorio
 
-37) CRUD Autorizado empresa
+37) CRUD Autorizado empresa R E S O L V I D O 
 
+38) Dasboard - Qunatidade de Documento digitados por data(dia/mes/ano; Mes/Ano; Ano)
+    Quantidade de Documento em poder de terceiros
+    Quanidade de caixas por setor
+
+39) alterar parametros no funcao changecomboempresa(filtroautorizado,filtroEmpresa,opcao) 
+incluido o parametro filtroautorizado
 ==========================
 infomacoes sobre tabs
 

@@ -214,7 +214,7 @@ class EstantePDO
         
         $smtm=$conexao -> prepare($sql);
         
-        if ($codCorredor != "" )
+        if ($codEstante != "" )
         {
             $sql.= " WHERE cod_empresa =?  AND ";
             $sql.= "       cod_arquivo =?  AND ";
@@ -241,7 +241,6 @@ class EstantePDO
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codArquivo);
             $smtm->bindValue(3,$codCorredor);
-            $smtm->bindValue(4,$codEstante);
             
             
         }

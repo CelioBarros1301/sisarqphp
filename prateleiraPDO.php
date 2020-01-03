@@ -228,6 +228,62 @@ class PrateleiraPDO
         return  $result;
     }
 
+
+    public function listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,$codPrateleira)
+    {
+        $conexao=Conexao::getConnection();
+        $result=array();
+        $sql="SELECT cod_prataleira CodPrateleira,des_prateçeira Prateleira ";
+        $sql.=" FROM tb_prateleiras ";
+        
+        $smtm=$conexao -> prepare($sql);
+        
+        if ($codPrateleira != "" )
+        {
+            $sql.= " WHERE cod_empresa   =? AND ";
+            $sql.= "       cod_arquivo   =? AND ";
+            $sql.= "       cod_corredor  =? AND ";
+            $sql.= "       cod_estante   =? AND ";
+            $sql.= "       cod_prateleira=?     ";
+            
+            
+            $smtm=$conexao->prepare($sql);           
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+            $smtm->bindValue(3,$codCorredor);
+            $smtm->bindValue(4,$codEstante);
+            $smtm->bindValue(5,$codPrateleira);
+        }
+        elseif ($codEstante != "" )
+        {
+            
+            $sql.= " WHERE cod_empresa   =? AND ";
+            $sql.= "       cod_arquivo   =? AND ";
+            $sql.= "       cod_corredor  =? AND ";
+            $sql.= "       cod_estante   =?     ";
+            
+            
+            $smtm=$conexao->prepare($sql);
+            
+            $smtm->bindValue(1,$codEmpresa);
+            $smtm->bindValue(2,$codArquivo);
+            $smtm->bindValue(3,$codCorredor);
+            $smtm->bindValue(4,$codEstante);
+            
+        }
+        else
+        {
+            $result[0]["CodPrateleira"]="0";
+            $result[0]["Prateleira"]="=>Selecionar Prateleira<=";
+            $conexao=null;
+            return $result;
+        }
+        $smtm->execute();
+        $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
+        return  $result;
+    }
+
 }
 
 ?>

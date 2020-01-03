@@ -11,23 +11,25 @@
     require("estantePDO.php");
     require("corredorPDO.php");
     require("arquivoPDO.php");
+    require("setorautorizadoPDO.php");
     require("setorPDO.php");
     require("empresaPDO.php");
     require("autorizadoPDO.php");
     
    
-    $caixaPDO       = new CaixaPDO();
-    $prateleiraPDO  = new PrateleiraPDO();
-    $estantePDO     = new EstantePDO();
-    $corredorPDO    = new CorredorPDO();
-    $arquivoPDO     = new ArquivoPDO();
-    $setorPDO       = new SetorPDO();
-    $empresaPDO     = new EmpresaPDO();
-    $autorizadoPDO  = new AutorizadoPDO();
+    $caixaPDO           = new CaixaPDO();
+    $prateleiraPDO      = new PrateleiraPDO();
+    $estantePDO         = new EstantePDO();
+    $corredorPDO        = new CorredorPDO();
+    $arquivoPDO         = new ArquivoPDO();
+    $setorPDO           = new SetorPDO();
+    $empresaPDO         = new EmpresaPDO();
+    $setorautorizadoPDO = new SetorAutorizadoPDO();
+    $autorizadoPDO      = new AutorizadoPDO();
                
     # Array dados do filtro
     
-    if ( isset($_GET['status'])  && $_GET['status']=="F"  )
+    if ( isset($_GET['status'])  && $_GET['status']=="f"  )
     {
  
         $codAutorizado =isset($_GET['filCodAut'])?$_GET['filCodAut']:"";
@@ -39,14 +41,16 @@
         $codPrateleira =isset($_GET['filCodPra'])?$_GET['filCodPra']:"";
         $codCaixa      =isset($_GET['filCodCai'])?$_GET['filCodCai']:"";
     
-        
+        var_dump($_GET);
+
         $tabelaAutorizado =$autorizadoPDO->lista("");
-       # $tabelaEmpresa    =$empresaPDO->listaEmpresa($codEmpresa,$CodAutorizado);
-       # $tabelaSetor      =$empresaPDO->listaSetor($codEmpresa,$codAutorizado);
-        $tabelaArquivo    =$arquivoPDO->listaArquivo($codEmpresa,"");
-        $tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,"");
-        $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,"");
-        #$tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante);
+        $tabelaEmpresa    =$setorautorizadoPDO->listaEmpresa($codAutorizado,$codEmpresa);
+        $tabelaSetor      =$setorautorizadoPDO->listaSetor  ($codAutorizado,$codEmpresa,$codSetor);
+        $tabelaArquivo    =$arquivoPDO->listaArquivo($codEmpresa,$codArquivo);
+        $tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,$codCorredor);
+        $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,$codEstante);
+        $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
+        ##$tabelaCaixa      =$caixaPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante);
 
     }
     

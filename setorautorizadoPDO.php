@@ -120,29 +120,85 @@ class SetorAutorizadoPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT ";
+        $sql="SELECT DISTINCT ";
         $sql.="      empresa.cod_empresa       CodEmpresa   ,des_empresa    Empresa   ";
         $sql.=" FROM tb_setores_autorizados setorautorizado ";
         
         $sql.="     inner join tb_empresas empresa on";
         $sql.="           setorautorizado.cod_empresa=empresa.cod_empresa ";
-      
+       
         
-      
-
-        $smtm=$conexao -> prepare($sql);
-        
-        if (isset($filtro))
+        if ($autorizado!="")
         {
             $sql.= " WHERE cod_autorizado=?";
-            $smtm->bindValue(1,$filtro);
+            $smtm=$conexao -> prepare($sql);
+  
+            $smtm->bindValue(1,$autorizado);
+      
         }
+
+        else
+        {
+            $result[0]["CodEmpresa"]="0";
+            $result[0]["Empresa"]="=>Selecionar Empresa<=";
+            $conexao=null;
+            return $result;
+        }
+    
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;
         return  $result;
     }
 
+    public function listaSetor($autorizado,$empresa)
+    {
+        $conexao=Conexao::getConnection();
+        $result=array();
+        $sql="SELECT DISTINCT ";
+        $sql.="      setor.cod_setor       CodSetor   ,des_setor    Setor   ";
+        $sql.=" FROM tb_setores_autorizados setorautorizado ";
+        
+        $sql.="     inner join tb_setores setor on";
+        $sql.="           setorautorizado.cod_empresa=setor.cod_empresa AND ";
+        $sql.="           setorautorizado.cod_setor  =setor.cod_setor        ";
+        
+       
+        
+        if ($empresa!="")
+        {
+            $sql.= " WHERE setorautorizado.cod_autorizado=? AND ";
+            $sql.= "       setorautorizado.cod_empresa   =?     ";
+            
+            $smtm=$conexao -> prepare($sql);
+  
+            $smtm->bindValue(1,$autorizado);
+            $smtm->bindValue(2,$empresa);
+      
+        }
+        else if ($autorizado!="")
+        {
+            $sql.= " WHERE setorautorizado.cod_autorizado=?";
+            $smtm=$conexao -> prepare($sql);
+  
+            $smtm->bindValue(1,$autorizado);
+      
+        }
+
+
+        else
+        {
+            $result[0]["CodSetor"]="0";
+            $result[0]["Setor"]="=>Selecionar Setor<=";
+            $conexao=null;
+            return $result;
+        }
+    
+        $smtm->execute();
+        $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
+        return  $result;
+    }
 
     
 

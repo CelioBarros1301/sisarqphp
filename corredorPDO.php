@@ -194,7 +194,6 @@ class CorredorPDO
         $sql="SELECT cod_corredor  CodCorredor,des_corredor Corredor ";
         $sql.=" FROM tb_corredores ";
         
-        $smtm=$conexao -> prepare($sql);
         
         if ($codCorredor != "" )
         {
@@ -219,7 +218,7 @@ class CorredorPDO
             
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codArquivo);
-            
+            var_dump($sql);
         }
         else
         {

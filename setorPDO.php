@@ -164,7 +164,7 @@ class SetorPDO
         }
         elseif ($codEmpresa != "" )
         {
-        
+            
             $sql.= " WHERE cod_empresa=?  ";
             $smtm=$conexao->prepare($sql);
             

@@ -167,7 +167,7 @@ class ArquivoPDO
         else if($codEmpresa!="")
         {
             $sql.= " WHERE arquivo.cod_empresa=?  ";
-            
+                   
         }
         else
         {

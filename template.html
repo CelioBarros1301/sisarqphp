@@ -110,7 +110,7 @@
                     
                     <ul class="collapse list-unstyled" id="SubMenuDocumento">
                         <li>
-                            <a href="?option=documento&status=F">Cadastro</a>
+                            <a href="?option=documento&filCodAut=&status=f">Cadastro</a>
                         </li>
                         <li>
                             <a href="#">Solicitação</a>
@@ -332,7 +332,7 @@
                 {
                     window.location.href = "sisarq.php?option=cadprateleira&codEmp="+filtroEmpresa+"&codArq="+filtroarquivo+"&codCor=&codEst=&codPra=&status=i";
                 }
-    
+  
             }                 
         </script>
 
@@ -352,10 +352,38 @@
                 {
                     window.location.href = "sisarq.php?option=cadsetorautorizado&codId=&codAut=&codEmp="+filtroEmpresa+"&codSet=&status=i";
                 }
-        
+
+     
             }                 
         </script>
 
+        <script>
+            function changedocumento(campo,filtroautorizado,filtroEmpresa,filtroSetor,filtroArquivo,filtroCorredor,filtroEstante) {
+                if ( campo=="autorizado" )
+                {
+                    window.location.href = "sisarq.php?option=documento&filCodAut="+filtroautorizado +"&status=f";
+                }
+                if ( campo=="empresa" )
+                {
+                    window.location.href = "sisarq.php?option=documento&filCodAut="+filtroautorizado +"&filCodEmp="+filtroEmpresa+"&status=f";
+                }
+                if ( campo=="arquivo" )
+                {
+                    window.location.href = "sisarq.php?option=documento&filCodAut="+filtroautorizado +"&filCodEmp="+filtroEmpresa+"&filCodArq="+filtroArquivo+"&filCodSet="+filtroSetor+"&status=f";
+                }
+                if ( campo=="corredor" )
+                {
+                    window.location.href = "sisarq.php?option=documento&filCodAut="+filtroautorizado +"&filCodEmp="+filtroEmpresa+"&filCodArq="+filtroArquivo+"&filCodSet="+filtroSetor+"&filCodCor="+filtroCorredor+"&status=f";
+                }
+                if ( campo=="estante" )
+                {
+                    window.location.href = "sisarq.php?option=documento&filCodAut="+filtroautorizado +"&filCodEmp="+filtroEmpresa+"&filCodArq="+filtroArquivo+"&filCodSet="+filtroSetor+"&filCodCor="+filtroCorredor+"&filCodEst="+filtroEstante+"&status=f";
+                }
+                
+        
+            }                 
+        </script>
+        
 
 </body>
 

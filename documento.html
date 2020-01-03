@@ -8,6 +8,8 @@
     # Informacoes da regra de negocios e acesso aos dados
     include_once  "documento.php";
     
+    
+    
 ?>
 
 <div class="container">
@@ -34,15 +36,17 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Autorizado </label><br>
-                            <select id="idAutorizado" name="filCodAut" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <select id="idAutorizado" name="filCodAut" class="form-control" onchange="changedocumento('autorizado',document.getElementById('idAutorizado').value)">
                                 <?php
-                                if ( $_GET["status"]=="F" )
+                                $filCodAut=isset($_GET["filCodAut"])?$_GET["filCodAut"]:"";
+                                
+                                if ( $_GET["status"]=="f" && $filCodAut=="" )
                                 { 
                                     echo '<option disabled selected value=0>=>Selecionar Autorizado<=</option>';	
                                 }
                                 foreach ($tabelaAutorizado as $coluna){
-                                    $selecao = $_GET["filCodAut"]==$coluna["Codigo"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Nome"] ."</option>";                     
+                                    $selecao = $filCodAut==$coluna["CodAutorizado"]?"selected":"";
+                                    echo '<option '. $selecao. ' value="'. $coluna["CodAutorizado"] .'">' .$coluna["Autorizado"] ."</option>";                     
                                 }
                                 ?>
                             </select>                   
@@ -52,15 +56,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Empresa</label><br>
-                            <select id="idEmpresa" name="filCodEmp" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <select id="idEmpresa" name="filCodEmp"  class="form-control" onchange="changedocumento('empresa',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value)">
                                 <?php
-                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                $filCodEmp=isset($_GET["filCodEmp"])?$_GET["filCodEmp"]:"";
+                                if ( $_GET["status"]=="f" && $filCodEmp=="" )
                                 { 
                                     echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
                                 }
                                 foreach ($tabelaEmpresa as $coluna){
-                                    $selecao = $_GET["filCodEmp"]==$coluna["Codigo"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
+                                    $selecao = $filCodEmp==$coluna["CodEmpresa"]?"selected":"";
+                                    echo '<option '. $selecao. '  value="'. $coluna["CodEmpresa"] .'">' .$coluna["Empresa"] ."</option>";                     
                                 }
                                 ?>
                             </select>
@@ -71,15 +76,17 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Setor </label><br>
-                            <select id="idSetor" name="filCodSet" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <select id="idSetor" name="filCodSet"  class="form-control" >
                                 <?php
-                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
+                                $filCodSet=isset($_GET["filCodSet"])?$_GET["filCodSet"]:"";
+                                  
+                                if ( $_GET["status"]=="f" && $filCodSet=="" )
                                 { 
-                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                    echo '<option disabled selected value=0>=>Selecionar Setor<=</option>';	
                                 }
                                 foreach ($tabelaSetor as $coluna){
-                                    $selecao = $_GET["codSet"]==$coluna["CodSetor"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodSetor"] .'">' .$coluna["Setor"] ."</option>";                     
+                                    $selecao = $filCodSet==$coluna["CodSetor"]?"selected":"";
+                                    echo '<option '. $selecao. ' value="'. $coluna["CodSetor"] .'">' .$coluna["Setor"] ."</option>";                     
                                 }
                                 ?>
                             </select>
@@ -103,15 +110,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Arquivo</label><br>
-                            <select id="idArquivo" name="filCodArq" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <select id="idArquivo" name="filCodArq"  class="form-control" onchange="changedocumento('arquivo',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value)">
                                 <?php
-                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                $filCodArq=isset($_GET["filCodArq"])?$_GET["filCodArq"]:"";
+                                if ( $_GET["status"]=="f" && $filCodArq=="" )
+                                {
+                                      echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
                                 }
                                 foreach ($tabelaArquivo as $coluna){
-                                    $selecao = $_GET["filCodArq"]==$coluna["CodArquivo"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Setor"] ."</option>";                     
+                                    $selecao = $filCodArq==$coluna["CodArquivo"]?"selected":"";
+                                    echo '<option '. $selecao. ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
                                 }
                                 ?>
                             </select>
@@ -123,15 +131,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Corredor </label><br>
-                             <select id="idCorredor" name="filCodCor" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                             <select id="idCorredor" name="filCodCor"  class="form-control" onchange="changedocumento('corredor',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value)">
                                 <?php
-                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                $filCodCor=isset($_GET["filCodCor"])?$_GET["filCodCor"]:"";
+                                if ( $_GET["status"]=="f" && $filCodCor=="" )
+                                {
+                                      echo '<option disabled selected value=0>=>Selecionar Corredor<=</option>';	
                                 }
                                 foreach ($tabelaCorredor as $coluna){
-                                    $selecao = $_GET["filCodCor"]==$coluna["CodCorredor"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
+                                    $selecao = $filCodCor==$coluna["CodCorredor"]?"selected":"";
+                                    echo '<option '. $selecao. ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
                                 }
                                 ?>
                             </select>
@@ -142,15 +151,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Estante</label><br>
-                            <select id="idEstante" name="filCodEst" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <select id="idEstante" name="filCodEst"  class="form-control" onchange="changedocumento('estante',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,document.getElementById('idEstante').value)">
                                 <?php
-                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                $filCodEst=isset($_GET["filCodEst"])?$_GET["filCodEst"]:"";
+                                if ( $_GET["status"]=="f" && $filCodEst=="" )
+                                {
+                                      echo '<option disabled selected value=0>=>Selecionar Estante<=</option>';	
                                 }
                                 foreach ($tabelaEstante as $coluna){
-                                    $selecao = $_GET["filCodEst"]==$coluna["CodEstante"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodEstante"] .'">' .$coluna["Estante"] ."</option>";                     
+                                    $selecao = $filCodEst==$coluna["CodEstante"]?"selected":"";
+                                    echo '<option '. $selecao. ' value="'. $coluna["CodEstante"] .'">' .$coluna["Estante"] ."</option>";                     
                                 }
                                 ?>
                             </select>
@@ -162,15 +172,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Prateleira </label><br>
-                            <select id="idPrateleira" name="filCodPra" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <select id="idPrateleira" name="filCodPra" class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
                                 <?php
-                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                $filCodPra=isset($_GET["filCodPra"])?$_GET["filCodPra"]:"";
+                                if ( $_GET["status"]=="f" && $filCodPra=="" )
+                                {
+                                      echo '<option disabled selected value=0>=>Selecionar Prateleira<=</option>';	
                                 }
                                 foreach ($tabelaPrateleira as $coluna){
-                                    $selecao = $_GET["filCodPra"]==$coluna["CodPrateleira"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodPrateleira"] .'">' .$coluna["Prateleira"] ."</option>";                     
+                                    $selecao = $filCodPra==$coluna["CodPrateleira"]?"selected":"";
+                                    echo '<option '. $selecao. ' value="'. $coluna["CodPrateleira"] .'">' .$coluna["Prateleira"] ."</option>";                     
                                 }
                                 ?>
                             </select>
@@ -182,15 +193,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Caixa</label><br>
-                            <select id="idCaixa" name="filCodCai" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                            <select id="idCaixa" name="filCodCai" class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
                                 <?php
-                                if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                $filCodCai=isset($_GET["filCodCai"])?$_GET["filCodCai"]:"";
+                                if ( $_GET["status"]=="f" && $filCodCai=="" )
+                                {
+                                      echo '<option disabled selected value=0>=>Selecionar Caixa<=</option>';	
                                 }
                                 foreach ($tabelaCaixa as $coluna){
-                                    $selecao = $_GET["filCodCai"]==$coluna["CodCaixa"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodCaixa"] .'">' .$coluna["Caixa"] ."</option>";                     
+                                    $selecao = $filCodCai==$coluna["CodCaixa"]?"selected":"";
+                                    echo '<option '. $selecao. '  value="'. $coluna["CodCaixa"] .'">' .$coluna["Caixa"] ."</option>";                     
                                 }
                                 ?>
                             </select>

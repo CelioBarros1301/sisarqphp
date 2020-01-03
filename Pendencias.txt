@@ -52,7 +52,8 @@ gravar o masaddress na tabela de Usuario- sta_usuario. Utilizar o IP . Quando us
 se logar verificar login e senha(ok) e depois verificar se o ip da tabela e igual ao da maquina
 e libera o acesso ou ip da tabela for branco. Mostra a mensagem usario logando em outra estação R E S O L V I D O
 
-18)Incluir o Icone de Consulta nas grid so apresentar quando o usuario não tiver acesso a alteracao/delecao
+18)Incluir o Icone de Consulta nas grid so apresentar quando o 
+usuario não tiver acesso a alteracao/delecao
 
 19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
     alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
@@ -103,8 +104,8 @@ os dadosdo registro igual ao botao EDITAR
     Quantidade de Documento em poder de terceiros
     Quanidade de caixas por setor
 
-39) alterar parametros no funcao changecomboempresa(filtroautorizado,filtroEmpresa,opcao) 
-incluido o parametro filtroautorizado
+39) corregir esta dobrando a informação Selecionar nas  consultas da tabelas, incluir 
+o registro apos result final . o indice do array sera cont(result)
 ==========================
 infomacoes sobre tabs
 

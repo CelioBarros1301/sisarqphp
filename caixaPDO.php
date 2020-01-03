@@ -191,7 +191,7 @@ class CaixaPDO
         
         $smtm=$conexao -> prepare($sql);
         
-        if ($codCorredor != "" )
+        if ($codCaixa != "" )
         {
             $sql.= " WHERE cod_empresa =?  AND ";
             $sql.= "       cod_setor   =?  AND ";
@@ -204,17 +204,25 @@ class CaixaPDO
             $smtm->bindValue(3,$codCaixa);
             
         }
-        else
+        elseif ($codSetor != "" )
         {
         
-            $sql.= " WHERE cod_empresa=?  ";
-            $sql.= "       cod_setor  =?  ";
+            $sql.= " WHERE cod_empresa=? AND ";
+            $sql.= "       cod_setor  =?     ";
             
             $smtm=$conexao->prepare($sql);
             
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codSetor);
             
+        }
+        else
+        {
+            $result[0]["CodCaixa"]="0";
+            $result[0]["Caixa"]="=>Selecionar Caixa<=";
+            $conexao=null;
+            return $result;
+
         }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);

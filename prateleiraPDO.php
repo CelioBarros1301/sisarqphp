@@ -233,7 +233,7 @@ class PrateleiraPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT cod_prataleira CodPrateleira,des_prateçeira Prateleira ";
+        $sql="SELECT cod_prateleira CodPrateleira,des_prateleira Prateleira ";
         $sql.=" FROM tb_prateleiras ";
         
         $smtm=$conexao -> prepare($sql);
@@ -253,6 +253,8 @@ class PrateleiraPDO
             $smtm->bindValue(3,$codCorredor);
             $smtm->bindValue(4,$codEstante);
             $smtm->bindValue(5,$codPrateleira);
+
+            echo "prateleira";
         }
         elseif ($codEstante != "" )
         {
@@ -269,7 +271,7 @@ class PrateleiraPDO
             $smtm->bindValue(2,$codArquivo);
             $smtm->bindValue(3,$codCorredor);
             $smtm->bindValue(4,$codEstante);
-            
+            var_dump($sql);
         }
         else
         {

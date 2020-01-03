@@ -38,16 +38,16 @@
                             <label>Autorizado </label><br>
                             <select id="idAutorizado" name="filCodAut" class="form-control" onchange="changedocumento('autorizado',document.getElementById('idAutorizado').value)">
                                 <?php
-                                $filCodAut=isset($_GET["filCodAut"])?$_GET["filCodAut"]:"";
-                                
-                                if ( $_GET["status"]=="f" && $filCodAut=="" )
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Autorizado<=</option>';	
-                                }
-                                foreach ($tabelaAutorizado as $coluna){
-                                    $selecao = $filCodAut==$coluna["CodAutorizado"]?"selected":"";
-                                    echo '<option '. $selecao. ' value="'. $coluna["CodAutorizado"] .'">' .$coluna["Autorizado"] ."</option>";                     
-                                }
+                                    $filCodAut=isset($_GET["filCodAut"])?$_GET["filCodAut"]:"";
+                                    
+                                    if ( $_GET["status"]=="f" && $filCodAut=="" )
+                                    { 
+                                        echo '<option disabled selected value=0>=>Selecionar Autorizado<=</option>';	
+                                    }
+                                    foreach ($tabelaAutorizado as $coluna){
+                                        $selecao = $filCodAut==$coluna["CodAutorizado"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodAutorizado"] .'">' .$coluna["Autorizado"] ."</option>";                     
+                                    }
                                 ?>
                             </select>                   
                          
@@ -58,15 +58,15 @@
                             <label>Empresa</label><br>
                             <select id="idEmpresa" name="filCodEmp"  class="form-control" onchange="changedocumento('empresa',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value)">
                                 <?php
-                                $filCodEmp=isset($_GET["filCodEmp"])?$_GET["filCodEmp"]:"";
-                                if ( $_GET["status"]=="f" && $filCodEmp=="" )
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
-                                }
-                                foreach ($tabelaEmpresa as $coluna){
-                                    $selecao = $filCodEmp==$coluna["CodEmpresa"]?"selected":"";
-                                    echo '<option '. $selecao. '  value="'. $coluna["CodEmpresa"] .'">' .$coluna["Empresa"] ."</option>";                     
-                                }
+                                    $filCodEmp=isset($_GET["filCodEmp"])?$_GET["filCodEmp"]:"";
+                                    if ( $_GET["status"]=="f" && $filCodEmp=="" )
+                                    { 
+                                        echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                    }
+                                    foreach ($tabelaEmpresa as $coluna){
+                                        $selecao = $filCodEmp==$coluna["CodEmpresa"]?"selected":"";
+                                        echo '<option '. $selecao. '  value="'. $coluna["CodEmpresa"] .'">' .$coluna["Empresa"] ."</option>";                     
+                                    }
                                 ?>
                             </select>
                         </div>
@@ -76,18 +76,18 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Setor </label><br>
-                            <select id="idSetor" name="filCodSet"  class="form-control" >
+                            <select id="idSetor" name="filCodSet"  class="form-control" onchange="changedocumento('setor',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value)">
                                 <?php
-                                $filCodSet=isset($_GET["filCodSet"])?$_GET["filCodSet"]:"";
-                                  
-                                if ( $_GET["status"]=="f" && $filCodSet=="" )
-                                { 
-                                    echo '<option disabled selected value=0>=>Selecionar Setor<=</option>';	
-                                }
-                                foreach ($tabelaSetor as $coluna){
-                                    $selecao = $filCodSet==$coluna["CodSetor"]?"selected":"";
-                                    echo '<option '. $selecao. ' value="'. $coluna["CodSetor"] .'">' .$coluna["Setor"] ."</option>";                     
-                                }
+                                    $filCodSet=isset($_GET["filCodSet"])?$_GET["filCodSet"]:"";
+                                    
+                                    if ( $_GET["status"]=="f" && $filCodSet=="" )
+                                    { 
+                                        echo '<option disabled selected value=0>=>Selecionar Setor<=</option>';	
+                                    }
+                                    foreach ($tabelaSetor as $coluna){
+                                        $selecao = $filCodSet==$coluna["CodSetor"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodSetor"] .'">' .$coluna["Setor"] ."</option>";                     
+                                    }
                                 ?>
                             </select>
                         </div>
@@ -112,15 +112,15 @@
                             <label>Arquivo</label><br>
                             <select id="idArquivo" name="filCodArq"  class="form-control" onchange="changedocumento('arquivo',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value)">
                                 <?php
-                                $filCodArq=isset($_GET["filCodArq"])?$_GET["filCodArq"]:"";
-                                if ( $_GET["status"]=="f" && $filCodArq=="" )
-                                {
-                                      echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
-                                }
-                                foreach ($tabelaArquivo as $coluna){
-                                    $selecao = $filCodArq==$coluna["CodArquivo"]?"selected":"";
-                                    echo '<option '. $selecao. ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
-                                }
+                                    $filCodArq=isset($_GET["filCodArq"])?$_GET["filCodArq"]:"";
+                                    if ( $_GET["status"]=="f" && $filCodArq=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
+                                    }
+                                    foreach ($tabelaArquivo as $coluna){
+                                        $selecao = $filCodArq==$coluna["CodArquivo"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
+                                    }
                                 ?>
                             </select>
                             
@@ -133,15 +133,15 @@
                             <label>Corredor </label><br>
                              <select id="idCorredor" name="filCodCor"  class="form-control" onchange="changedocumento('corredor',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value)">
                                 <?php
-                                $filCodCor=isset($_GET["filCodCor"])?$_GET["filCodCor"]:"";
-                                if ( $_GET["status"]=="f" && $filCodCor=="" )
-                                {
-                                      echo '<option disabled selected value=0>=>Selecionar Corredor<=</option>';	
-                                }
-                                foreach ($tabelaCorredor as $coluna){
-                                    $selecao = $filCodCor==$coluna["CodCorredor"]?"selected":"";
-                                    echo '<option '. $selecao. ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
-                                }
+                                    $filCodCor=isset($_GET["filCodCor"])?$_GET["filCodCor"]:"";
+                                    if ( $_GET["status"]=="f" && $filCodCor=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Corredor<=</option>';	
+                                    }
+                                    foreach ($tabelaCorredor as $coluna){
+                                        $selecao = $filCodCor==$coluna["CodCorredor"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
+                                    }
                                 ?>
                             </select>
                             
@@ -153,15 +153,15 @@
                             <label>Estante</label><br>
                             <select id="idEstante" name="filCodEst"  class="form-control" onchange="changedocumento('estante',document.getElementById('idAutorizado').value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,document.getElementById('idEstante').value)">
                                 <?php
-                                $filCodEst=isset($_GET["filCodEst"])?$_GET["filCodEst"]:"";
-                                if ( $_GET["status"]=="f" && $filCodEst=="" )
-                                {
-                                      echo '<option disabled selected value=0>=>Selecionar Estante<=</option>';	
-                                }
-                                foreach ($tabelaEstante as $coluna){
-                                    $selecao = $filCodEst==$coluna["CodEstante"]?"selected":"";
-                                    echo '<option '. $selecao. ' value="'. $coluna["CodEstante"] .'">' .$coluna["Estante"] ."</option>";                     
-                                }
+                                    $filCodEst=isset($_GET["filCodEst"])?$_GET["filCodEst"]:"";
+                                    if ( $_GET["status"]=="f" && $filCodEst=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Estante<=</option>';	
+                                    }
+                                    foreach ($tabelaEstante as $coluna){
+                                        $selecao = $filCodEst==$coluna["CodEstante"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodEstante"] .'">' .$coluna["Estante"] ."</option>";                     
+                                    }
                                 ?>
                             </select>
       
@@ -174,15 +174,15 @@
                             <label>Prateleira </label><br>
                             <select id="idPrateleira" name="filCodPra" class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
                                 <?php
-                                $filCodPra=isset($_GET["filCodPra"])?$_GET["filCodPra"]:"";
-                                if ( $_GET["status"]=="f" && $filCodPra=="" )
-                                {
-                                      echo '<option disabled selected value=0>=>Selecionar Prateleira<=</option>';	
-                                }
-                                foreach ($tabelaPrateleira as $coluna){
-                                    $selecao = $filCodPra==$coluna["CodPrateleira"]?"selected":"";
-                                    echo '<option '. $selecao. ' value="'. $coluna["CodPrateleira"] .'">' .$coluna["Prateleira"] ."</option>";                     
-                                }
+                                    $filCodPra=isset($_GET["filCodPra"])?$_GET["filCodPra"]:"";
+                                    if ( $_GET["status"]=="f" && $filCodPra=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Prateleira<=</option>';	
+                                    }
+                                    foreach ($tabelaPrateleira as $coluna){
+                                        $selecao = $filCodPra==$coluna["CodPrateleira"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodPrateleira"] .'">' .$coluna["Prateleira"] ."</option>";                     
+                                    }
                                 ?>
                             </select>
                         </div>
@@ -195,15 +195,15 @@
                             <label>Caixa</label><br>
                             <select id="idCaixa" name="filCodCai" class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
                                 <?php
-                                $filCodCai=isset($_GET["filCodCai"])?$_GET["filCodCai"]:"";
-                                if ( $_GET["status"]=="f" && $filCodCai=="" )
-                                {
-                                      echo '<option disabled selected value=0>=>Selecionar Caixa<=</option>';	
-                                }
-                                foreach ($tabelaCaixa as $coluna){
-                                    $selecao = $filCodCai==$coluna["CodCaixa"]?"selected":"";
-                                    echo '<option '. $selecao. '  value="'. $coluna["CodCaixa"] .'">' .$coluna["Caixa"] ."</option>";                     
-                                }
+                                    $filCodCai=isset($_GET["filCodCai"])?$_GET["filCodCai"]:"";
+                                    if ( $_GET["status"]=="f" && $filCodCai=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Caixa<=</option>';	
+                                    }
+                                    foreach ($tabelaCaixa as $coluna){
+                                        $selecao = $filCodCai==$coluna["CodCaixa"]?"selected":"";
+                                        echo '<option '. $selecao. '  value="'. $coluna["CodCaixa"] .'">' .$coluna["Caixa"] ."</option>";                     
+                                    }
                                 ?>
                             </select>
                           
@@ -229,16 +229,17 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Tipo</label><br>
-                        <select id="idTipo" name="filCodTip" <?=$readonly;?> class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
+                        <select id="idTipo" name="filCodTip"  class="form-control" onchange="changecomboempresa(document.getElementById('idEmpresa').value,'cadprateleira')">
                             <?php
-                            if ( $_GET["status"]=="F" && $_GET["codEmp"]=="0")
-                            { 
-                                echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
-                            }
-                            foreach ($tabelaTipoDocumento as $coluna){
-                                $selecao = $_GET["filTipDoc"]==$coluna["CodTipo"]?"selected":"";
-                                echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodTipo"] .'">' .$coluna["TipoDocumento"] ."</option>";                     
-                            }
+                                $filCodTip=isset($_GET["filCodTip"])?$_GET["filCodTip"]:"";
+                                if ( $_GET["status"]=="f" && $filCodTip=="" )
+                                {
+                                    echo '<option disabled selected value=0>=>Selecionar Tipo Documento<=</option>';	
+                                }
+                                foreach ($tabelaTipoDocumento as $coluna){
+                                    $selecao = $filTipDoc==$coluna["CodTipo"]?"selected":"";
+                                    echo '<option '. $selecao. '  value="'. $coluna["CodTipo"] .'">' .$coluna["TipoDocumento"] ."</option>";                     
+                                }
                             ?>
                         </select>
     
@@ -249,23 +250,32 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Status</label><br>
-                        <select name="filCodSta"  class="form-control" id="filCodSta" placeholder="first name" title="enter your first name if any.">
-                        <option value=0>Informatica sad lsiajdlsajdklsa jdlksad</option>
-                        <option value=1>Contabilidade</option>
+                        <select name="filCodSta"  class="form-control" id="filCodSta"  >
+                            <?php
+                                $filCodSta=isset($_GET["filCodSta"])?$_GET["filCodSta"]:"";
+                                if ( $_GET["status"]=="f" && $filCodSta=="" )
+                                {
+                                    echo '<option disabled selected value=0>=>Selecionar Status Documento<=</option>';	
+                                }
+                                foreach ($tabelaStatusDocumento as $coluna){
+                                    $selecao = $filCodSta==$coluna["CodStatus"]?"selected":"";
+                                    echo '<option '. $selecao. '  value="'. $coluna["CodStatus"] .'">' .$coluna["Status"] ."</option>";                     
+                                } 
+                            ?>                   
                         </select> 
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Numero </label><br>
-                        <input  name="filNumDoc"  class="form-control" id="filNunDoc" placeholder="first name" title="enter your first name if any.">
+                        <input  name="filNumDoc"  class="form-control" id="filNunDoc" placeholder="Informar Numero documento" >
                     </div>
                 </div>
             
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Emissão </label><br>
-                        <input  name="filEmiDoc"  class="form-control" id="filEmiDoc" placeholder="first name" title="enter your first name if any.">
+                        <input  name="filEmiDoc"  class="form-control" id="filEmiDoc" placeholder="Informar Emissao Documento" >
                     </div>
                 </div>
             </div>
@@ -285,7 +295,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Exercicio </label><br>
-                        <input  name="filAnoExe"  class="form-control" id="filAnoExe" placeholder="first name" title="enter your first name if any.">
+                        <input  name="filAnoExe"  class="form-control" id="filAnoExe" placeholder="Informar Ano Exercicio" >
                     </div>
                 </div>
 
@@ -293,14 +303,14 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Calendario </label><br>
-                        <input  name="filAnoCal"  class="form-control" id="filAnoCal" placeholder="first name" title="enter your first name if any.">
+                        <input  name="filAnoCal"  class="form-control" id="filAnoCal" placeholder="Informar Ano Calendario">
                     </div>
                 </div>
             
                 <div class="col-md-8">
                     <div class="form-group">
                         <label>Texto </label><br>
-                        <input  name="filTexDoc"  class="form-control" id="filTextDoc" placeholder="first name" title="enter your first name if any.">
+                        <input  name="filTexDoc"  class="form-control" id="filTextDoc" placeholder="Informar Texto do documento">
                     </div>
                 </div>
             </div>

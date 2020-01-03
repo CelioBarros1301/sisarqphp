@@ -12,8 +12,6 @@
     require("corredorPDO.php");
     require("arquivoPDO.php");
     require("setorautorizadoPDO.php");
-    require("setorPDO.php");
-    require("empresaPDO.php");
     require("autorizadoPDO.php");
     
    
@@ -22,8 +20,6 @@
     $estantePDO         = new EstantePDO();
     $corredorPDO        = new CorredorPDO();
     $arquivoPDO         = new ArquivoPDO();
-    $setorPDO           = new SetorPDO();
-    $empresaPDO         = new EmpresaPDO();
     $setorautorizadoPDO = new SetorAutorizadoPDO();
     $autorizadoPDO      = new AutorizadoPDO();
                
@@ -41,8 +37,7 @@
         $codPrateleira =isset($_GET['filCodPra'])?$_GET['filCodPra']:"";
         $codCaixa      =isset($_GET['filCodCai'])?$_GET['filCodCai']:"";
     
-        var_dump($_GET);
-
+       
         $tabelaAutorizado =$autorizadoPDO->lista("");
         $tabelaEmpresa    =$setorautorizadoPDO->listaEmpresa($codAutorizado,$codEmpresa);
         $tabelaSetor      =$setorautorizadoPDO->listaSetor  ($codAutorizado,$codEmpresa,$codSetor);
@@ -50,7 +45,7 @@
         $tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,$codCorredor);
         $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,$codEstante);
         $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
-        ##$tabelaCaixa      =$caixaPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante);
+        $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,$codCaixa);
 
     }
     

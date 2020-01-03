@@ -218,7 +218,7 @@ class CorredorPDO
             
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codArquivo);
-            var_dump($sql);
+           
         }
         else
         {

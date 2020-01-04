@@ -1,0 +1,136 @@
+Public Sub Preencher_documento(ByVal strTipo As String)
+    Dim strSql As String, strArquivo As String
+    Dim strMsg As String
+    Dim lngLinha As Long
+    Dim lngMaxLinha As Long
+    Dim strCaixa As String
+    Dim IntCt As Integer, intQtd As Integer
+    Dim intCol As Integer, intColIni As Integer
+    Dim intColFin As Integer
+    Dim intQtLinha As Integer, intLinha As Integer
+    Dim strSetor As String, intLinIni As Integer
+    Dim strDocIni As String, strDocFin As String
+    '
+    Dim intQtdLinha  As Integer, strDescricao As String
+    lngLinha = 0
+    lngMaxLinha = 0
+   
+    If cbo_empresa.ListIndex = -1 Then
+        strMsg = "Selecionar Empresa" + Chr(13)
+        MsgBox strMsg, vbInformation, "Cadastro de Documento"
+        Exit Sub
+    End If
+    '
+    strSql = ""
+    strSql = "SELECT t_documento.*           ," & vbCrLf
+    strSql = strSql & "des_sala              ," & vbCrLf
+    strSql = strSql & "des_fileira           ," & vbCrLf
+    strSql = strSql & "des_estante           ," & vbCrLf
+    strSql = strSql & "des_prateleira        ," & vbCrLf
+    strSql = strSql & "des_caixa             ," & vbCrLf
+    strSql = strSql & "des_setor             ," & vbCrLf
+    strSql = strSql & "des_doc                " & vbCrLf
+    strSql = strSql & "FROM                   " & vbCrLf
+    strSql = strSql & "t_documento           ," & vbCrLf
+    strSql = strSql & "t_sala                ," & vbCrLf
+    strSql = strSql & "t_fileira             ," & vbCrLf
+    strSql = strSql & "t_estante             ," & vbCrLf
+    strSql = strSql & "t_prateleira          ," & vbCrLf
+    strSql = strSql & " t_caixa              ," & vbCrLf
+    strSql = strSql & "t_tipo_documento      ," & vbCrLf
+    strSql = strSql & "t_setor                " & vbCrLf
+    strSql = strSql & "WHERE                  " & vbCrLf
+    '
+    strSql = strSql & "t_documento.cod_emp =t_sala.cod_emp              AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala=t_sala.cod_sala             AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp    =t_fileira.cod_emp        AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala   =t_fileira.cod_sala       AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_fileira=t_fileira.cod_fileira    AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp    =t_estante.cod_emp        AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala   =t_estante.cod_sala       AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_fileira=t_estante.cod_fileira    AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_estante=t_estante.cod_estante    AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp       =t_prateleira.cod_emp        AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala      =t_prateleira.cod_sala       AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_fileira   =t_prateleira.cod_fileira    AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_estante   =t_prateleira.cod_estante    AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_prateleira=t_prateleira.cod_prateleira AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp  =t_caixa.cod_emp   AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_setor=t_caixa.cod_setor AND  " & vbCrLf
+    strSql = strSql & "t_documento.cod_caixa=t_caixa.cod_caixa AND " & vbCrLf
+     
+    strSql = strSql & "t_documento.cod_emp=t_tipo_documento.cod_emp  AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_doc=t_tipo_documento.cod_doc  AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp  =t_setor.cod_emp   AND  " & vbCrLf
+    strSql = strSql & "t_documento.cod_setor=t_setor.cod_setor AND  " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp='" & Right("00" & Trim(Str(cbo_empresa.ItemData(cbo_empresa.ListIndex))), 2) & "'" & vbCrLf
+    '
+    If cbo_sala.ListIndex <> 0 Then
+        strSql = strSql & "AND t_documento.cod_sala='" & Right("00" & Trim(Str(cbo_sala.ItemData(cbo_sala.ListIndex))), 2) & "'" & vbCrLf
+    End If
+    '
+    If cbo_fileira.ListIndex <> 0 Then
+        strSql = strSql & "AND t_documento.cod_fileira='" & Right("000" & Trim(Str(cbo_fileira.ItemData(cbo_fileira.ListIndex))), 3) & "'" & vbCrLf
+    End If
+    '
+    If cbo_estante.ListIndex <> 0 Then 'And cbo_estante.ListIndex <> -1 Then
+        strSql = strSql & "AND t_documento.cod_estante='" & Right("000" & Trim(Str(cbo_estante.ItemData(cbo_estante.ListIndex))), 3) & "'" & vbCrLf
+    End If
+    '
+    If cbo_prateleira.ListIndex <> 0 Then 'And cbo_prateleira.ListIndex <> -1 Then
+        strSql = strSql & "AND t_documento.cod_prateleira='" & Right("000" & Trim(Str(cbo_prateleira.ItemData(cbo_prateleira.ListIndex))), 3) & "'" & vbCrLf
+    End If
+    '
+    If cbo_setor.ListCount <> -1 Then
+         strSql = strSql & " AND t_documento.cod_setor='" & Right("0000" & Trim(Str(cbo_setor.ItemData(cbo_setor.ListIndex))), 3) & "'" & vbCrLf
+    End If
+    '
+    If lst_caixa.ListIndex <> 0 Then
+        For IntCt = 1 To lst_caixa.ListIndex
+            If lst_caixa.Selected(IntCt) = True Then
+                strCaixa = strCaixa & "'" & Right("0000" & Trim(Str(lst_caixa.ItemData(IntCt))), 4) & "',"
+            End If
+        Next
+        If strCaixa <> "" Then
+            strCaixa = " AND t_documento.cod_caixa in (" & Left(strCaixa, Len(strCaixa) - 1) & ")"
+            strSql = strSql & strCaixa & vbCrLf
+        End If
+    End If
+    '
+    If txt_exercicio.Text <> "" Then
+        strSql = strSql & "AND t_documento.ref_exer='" & txt_exercicio.Text & "'" & vbCrLf
+    End If
+    '
+    If txt_calendario.Text <> "" Then
+        strSql = strSql & "AND t_documento.ref_calen='" & txt_calendario.Text & "'" & vbCrLf
+    End If
+    '
+    If cbo_tipo_doc.ListIndex <> 0 Then 'And cbo_tipo_doc.ListIndex <> -1 Then
+        strSql = strSql & "AND t_documento.cod_doc='" & Right("0000" & Trim(Str(cbo_tipo_doc.ItemData(cbo_tipo_doc.ListIndex))), 3) & "'" & vbCrLf
+    End If
+    '
+    If cbo_status.ListIndex <> 0 Then 'And cbo_status.ListIndex <> -1 Then
+        strSql = strSql & "AND t_documento.cod_status='" & Right("0000" & Trim(Str(cbo_status.ItemData(cbo_status.ListIndex))), 2) & "'" & vbCrLf
+    End If
+    '
+    If txt_no_doc <> "" Then
+        strSql = strSql & "AND (" & txt_no_doc.Text & " >= t_documento.no_doc_inicial And "
+        strSql = strSql & txt_no_doc.Text & "<= t_documento.no_doc_final )" & vbCrLf
+    End If
+    '
+    If msk_data_doc.Text <> "__/__/____" Then
+        strSql = strSql & "AND ( DateValue('" & msk_data_doc.Text & "') >= t_documento.data_doc_inicial And "
+        strSql = strSql & "Datevalue('" & msk_data_doc.Text & "') <= t_documento.data_doc_final )" & vbCrLf
+    End If
+    '
+    If txt_texto.Text <> "" Then
+        strSql = strSql & " AND descricao like '*" & txt_texto.Text & "*'" & vbCrLf
+    End If
+    '
+    strSql = strSql & " ORDER BY t_caixa.cod_caixa"

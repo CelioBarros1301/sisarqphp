@@ -7,7 +7,7 @@
 */
     
     require("estantePDO.php");
-    require("estante_Class.php");
+    require("Estante_Class.php");
 
     require("corredorPDO.php");
     require("arquivoPDO.php");

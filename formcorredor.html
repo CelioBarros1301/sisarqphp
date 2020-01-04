@@ -49,7 +49,7 @@
                                     echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
                                 }
                                 foreach ($tabelaArquivo as $coluna){
-                                    $selecao = $_GET["codArq"]==$coluna["CodigoArquivo"]?"selected":"";
+                                    $selecao = $_GET["codArq"]==$coluna["CodArquivo"]?"selected":"";
                                     echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
                                 }
                                 ?>

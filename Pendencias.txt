@@ -106,6 +106,12 @@ os dadosdo registro igual ao botao EDITAR
 
 39) corregir esta dobrando a informação Selecionar nas  consultas da tabelas, incluir 
 o registro apos result final . o indice do array sera cont(result)
+
+40) REFATORAR parte de todas arquivo de regras para teste se
+o $_GET EXISTE e alterar a os parametros de envio da url qdo
+tiver valores 
+
+$codPrateleira =isset($_GET['codPra'])?$_GET['codPra']:"";
 ==========================
 infomacoes sobre tabs
 

@@ -317,7 +317,12 @@
                 {
                     window.location.href = "sisarq.php?option=cadcaixa&codEmp="+filtroEmpresa+"&codSet=&codCai=&status=i";
                 }
+                if ( opcao=="cadsetorautorizado" )
+                {
+                    window.location.href = "sisarq.php?option=cadsetorautorizado&codId=&codAut=&codEmp="+filtroEmpresa+"&codSet=&status=i";
+                }
 
+     
   
             }                 
         </script>
@@ -346,16 +351,7 @@
             }                 
         </script>
 
-        <script>
-            function changecomboempresa(filtroEmpresa,opcao) {
-                if ( opcao=="cadsetorautorizado" )
-                {
-                    window.location.href = "sisarq.php?option=cadsetorautorizado&codId=&codAut=&codEmp="+filtroEmpresa+"&codSet=&status=i";
-                }
-
      
-            }                 
-        </script>
 
         <script>
             function changedocumento(campo,filtroautorizado,filtroEmpresa,filtroSetor,filtroArquivo,filtroCorredor,filtroEstante) {

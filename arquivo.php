@@ -7,7 +7,7 @@
 */
     
     require("arquivoPDO.php");
-    require("arquivo_Class.php");
+    require("Arquivo_Class.php");
     require("empresaPDO.php");
     
     $arquivoPDO= new ArquivoPDO();

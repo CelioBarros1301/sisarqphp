@@ -7,7 +7,7 @@
 */
     
     require("corredorPDO.php");
-    require("corredor_Class.php");
+    require("Corredor_Class.php");
 
     require("arquivoPDO.php");
     require("empresaPDO.php");

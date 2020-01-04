@@ -37,7 +37,7 @@
         $codArquivo    =$_GET['codArq'];
         $codCorredor   =$_GET['codCor'];
         $codEstante    =$_GET['codEst'];
-        $codPrateleira =$_GET['codPra'];
+        $codPrateleira =isset($_GET['codPra'])?$_GET['codPra']:"";
         
   
         if ($acao=="i" ) 

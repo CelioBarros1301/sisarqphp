@@ -1,0 +1,131 @@
+CREATE VIEW view_documento AS
+
+ SELECT documento.cod_documento     Identificador     ,
+        tipo.cod_documento          CodTipo           ,       
+        tipo.des_documento          Tipo              ,       
+        documento.no_ini_documento  NumeroInicialDoc  ,
+        documento.no_fin_documento  NumeroFinalDoc    ,
+        documento.dt_ini_documento  DataInicialDoc    ,
+        documento.dt_fin_documento  DataFinalDoc      ,
+        documento.dt_des_documento  DataDestruicao    ,
+        documento.dt_arq_documento  DataArquivamento  ,
+        documento.des_documento     DescricaoDocumento,
+        documento.ref_exe_documento AnoExercicio      ,
+        documento.ref_cal_documento AnoCalendario     ,
+        empresa.cod_empresa         CodEmpresa        ,
+        empresa.des_empresa         Empresa           ,
+        arquivo.cod_arquivo         CodArquivo        ,
+        arquivo.des_arquivo         Arquivo           ,
+        corredor.cod_corredor       CodCorredor       ,
+        corredor.des_corredor       Corredor          ,
+        estante.cod_estante         CodEstante        ,
+        estante.des_estante         Estante           ,
+        prateleira.cod_prateleira   CodPrateleira     ,
+        prateleira.des_prateleira   Prateleira        ,
+        caixa.cod_caixa             CodCaixa          ,
+        caixa.des_caixa             Caixa             ,
+        setor.cod_setor             CodSetor          ,
+        setor.des_setor             Setor             ,
+        status.cod_status           CodStatus         ,
+        status.des_status           Status
+   
+ FROM  tb_documentos documento
+       
+       INNER JOIN tb_empresas empresa on
+                  documento.cod_empresa = empresa.cod_empresa
+       
+       INNER JOIN tb_arquivos arquivo  on
+                  documento.cod_empresa = arquivo.cod_empresa AND
+                  documento.cod_arquivo = arquivo.cod_arquivo
+
+       INNER JOIN tb_corredores corredor on   
+                  documento.cod_empresa  = corredor.cod_empresa AND
+                  documento.cod_arquivo  = corredor.cod_arquivo AND
+                  documento.cod_corredor = corredor.cod_corredor
+
+       INNER JOIN tb_estantes estante on 
+                  documento.cod_empresa  = estante.cod_empresa  AND
+                  documento.cod_arquivo  = estante.cod_arquivo  AND
+                  documento.cod_corredor = estante.cod_corredor AND
+                  documento.cod_estante  = estante.cod_estante
+
+       INNER JOIN tb_prateleiras prateleira  on 
+                  documento.cod_empresa    = prateleira.cod_empresa    AND
+                  documento.cod_arquivo    = prateleira.cod_arquivo    AND
+                  documento.cod_corredor   = prateleira.cod_corredor   AND
+                  documento.cod_estante    = prateleira.cod_estante    AND
+                  documento.cod_prateleira = prateleira.cod_prateleira
+   
+       INNER JOIN tb_caixas caixa on  
+                  documento.cod_empresa  = caixa.cod_empresa    AND
+                  documento.cod_setor    = caixa.cod_setor      AND
+                  documento.cod_caixa    = caixa.cod_caixa
+      
+       INNER JOIN tb_setores setor   on
+                  documento.cod_empresa  = setor.cod_empresa  AND
+                  documento.cod_setor    = setor.cod_setor  
+                  
+       INNER JOIN tb_tipo_documentos  tipo   on
+                  documento.cod_empresa     = tipo.cod_empresa  AND
+                  documento.tip_documento   = tipo.cod_documento
+
+       INNER JOIN tb_status  status   on
+                  documento.cod_status      = status.cod_status  
+                  
+              
+
+
+ strSql = strSql & "t_documento.cod_emp  =t_caixa.cod_emp   AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_setor=t_caixa.cod_setor AND  " & vbCrLf
+    strSql = strSql & "t_documento.cod_caixa=t_caixa.cod_caixa AND " & vbCrLf
+   
+               
+ 
+ 
+ vbCrLf
+    strSql = strSql & "des_sala              ," & vbCrLf
+    strSql = strSql & "des_fileira           ," & vbCrLf
+    strSql = strSql & "des_estante           ," & vbCrLf
+    strSql = strSql & "des_prateleira        ," & vbCrLf
+    strSql = strSql & "des_caixa             ," & vbCrLf
+    strSql = strSql & "des_setor             ," & vbCrLf
+    strSql = strSql & "des_doc                " & vbCrLf
+    strSql = strSql & "FROM                   " & vbCrLf
+    strSql = strSql & "t_documento           ," & vbCrLf
+    strSql = strSql & "t_sala                ," & vbCrLf
+    strSql = strSql & "t_fileira             ," & vbCrLf
+    strSql = strSql & "t_estante             ," & vbCrLf
+    strSql = strSql & "t_prateleira          ," & vbCrLf
+    strSql = strSql & " t_caixa              ," & vbCrLf
+    strSql = strSql & "t_tipo_documento      ," & vbCrLf
+    strSql = strSql & "t_setor                " & vbCrLf
+    strSql = strSql & "WHERE                  " & vbCrLf
+    '
+    strSql = strSql & "t_documento.cod_emp =t_sala.cod_emp              AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala=t_sala.cod_sala             AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp    =t_fileira.cod_emp        AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala   =t_fileira.cod_sala       AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_fileira=t_fileira.cod_fileira    AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp    =t_estante.cod_emp        AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala   =t_estante.cod_sala       AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_fileira=t_estante.cod_fileira    AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_estante=t_estante.cod_estante    AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp       =t_prateleira.cod_emp        AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_sala      =t_prateleira.cod_sala       AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_fileira   =t_prateleira.cod_fileira    AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_estante   =t_prateleira.cod_estante    AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_prateleira=t_prateleira.cod_prateleira AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp  =t_caixa.cod_emp   AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_setor=t_caixa.cod_setor AND  " & vbCrLf
+    strSql = strSql & "t_documento.cod_caixa=t_caixa.cod_caixa AND " & vbCrLf
+     
+    strSql = strSql & "t_documento.cod_emp=t_tipo_documento.cod_emp  AND " & vbCrLf
+    strSql = strSql & "t_documento.cod_doc=t_tipo_documento.cod_doc  AND " & vbCrLf
+    
+    strSql = strSql & "t_documento.cod_emp  =t_setor.cod_emp   AND  " & vbCrLf
+    strSql = strSql & "t_documento.cod_setor=t_setor.cod_setor AND  " & vbCrLf
+    

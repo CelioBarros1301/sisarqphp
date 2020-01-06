@@ -258,7 +258,14 @@
 				$_SESSION['transacao']="Tipo de Documentos";	
 			break;
 
+			# documento
+			case 'documento':	
+				$_SESSION['transacao']="Documentos";			
+			break;
 
+			case 'caddocumento':
+				$_SESSION['transacao']="Documentos";
+			break;
 
 			# usuario
 			case 'usuario':	

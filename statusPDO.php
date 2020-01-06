@@ -125,7 +125,7 @@ class StatusPDO
         $result=array();
         $sql="SELECT status.cod_status CodStatus,status.des_status Status," ;  
         $sql.="      status.tip_status Tipo ";
-        $sql.=" FROM tb_status statuso ";
+        $sql.=" FROM tb_status status ";
         
         if ($filtro!="")
         { 

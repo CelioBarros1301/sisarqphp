@@ -51,7 +51,7 @@ class TipoDocumentoPDO
             if ($tipodocumento->getCodigoDocumento()=="0000")
             {
                 $sql.='?,';
-                $sql.='(SELECT ifnull(right(concat("00",max(documento.cod_documento)+1),4),"0001") from tb_tipo_documentos documento ';
+                $sql.='(SELECT ifnull(right(concat("0000",max(documento.cod_documento)+1),4),"0001") from tb_tipo_documentos documento ';
                 $sql.='where documento.cod_empresa=' . "'". $tipodocumento->getCodigoEmpresa() ."'),";
                 $sql.='?,?)';
               
@@ -165,11 +165,11 @@ $result=$smtm->execute();
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT    cod_documento CodDocumento,des_documento Documento ";
+        $sql="SELECT    cod_documento CodTipo,des_documento Tipo ";
         $sql.=" FROM tb_tipo_documentos documento ";
         
         
-        if ($codArquivo!="")
+        if ($codDocumento!="")
         { 
             $sql.= " WHERE documento.cod_empresa  =? and ";
             $sql.= "       documento.cod_documento=?     ";
@@ -182,7 +182,7 @@ $result=$smtm->execute();
         }
         $smtm=$conexao -> prepare($sql);
         
-        if ($codArquivo!="")
+        if ($codDocumento!="")
         {
             $smtm->bindValue(1,$codEmpresa);
             $smtm->bindValue(2,$codDocumento);

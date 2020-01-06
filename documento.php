@@ -14,7 +14,13 @@
     require("setorautorizadoPDO.php");
     require("autorizadoPDO.php");
     
-   
+    require("tipodocumentoPDO.php");
+    require("statusPDO.php");
+
+    require("documentoPDO.php");
+
+    
+
     $caixaPDO           = new CaixaPDO();
     $prateleiraPDO      = new PrateleiraPDO();
     $estantePDO         = new EstantePDO();
@@ -22,21 +28,27 @@
     $arquivoPDO         = new ArquivoPDO();
     $setorautorizadoPDO = new SetorAutorizadoPDO();
     $autorizadoPDO      = new AutorizadoPDO();
+
+    $tipodocumentoPDO   = new TipoDocumentoPDO();
+    $statusPDO          = new StatusPDO();
+
                
-    # Array dados do filtro
+    # Array dados do filtro - Tab de Filro
     
-    if ( isset($_GET['status'])  && $_GET['status']=="f"  )
+    if ( isset($_GET['status'])  && ( $_GET['status']=="f" || $_GET['status']=="g"  ) )
     {
  
-        $codAutorizado =isset($_GET['filCodAut'])?$_GET['filCodAut']:"";
-        $codEmpresa    =isset($_GET['filCodEmp'])?$_GET['filCodEmp']:"";
-        $codSetor      =isset($_GET['filCodSet'])?$_GET['filCodSet']:"";
-        $codArquivo    =isset($_GET['filCodArq'])?$_GET['filCodArq']:"";
-        $codCorredor   =isset($_GET['filCodCor'])?$_GET['filCodCor']:"";
-        $codEstante    =isset($_GET['filCodEst'])?$_GET['filCodEst']:"";
-        $codPrateleira =isset($_GET['filCodPra'])?$_GET['filCodPra']:"";
-        $codCaixa      =isset($_GET['filCodCai'])?$_GET['filCodCai']:"";
-    
+        $codAutorizado  =isset($_GET['filCodAut'])?$_GET['filCodAut']:"";
+        $codEmpresa     =isset($_GET['filCodEmp'])?$_GET['filCodEmp']:"";
+        $codSetor       =isset($_GET['filCodSet'])?$_GET['filCodSet']:"";
+        $codArquivo     =isset($_GET['filCodArq'])?$_GET['filCodArq']:"";
+        $codCorredor    =isset($_GET['filCodCor'])?$_GET['filCodCor']:"";
+        $codEstante     =isset($_GET['filCodEst'])?$_GET['filCodEst']:"";
+        $codPrateleira  =isset($_GET['filCodPra'])?$_GET['filCodPra']:"";
+        $codCaixa       =isset($_GET['filCodCai'])?$_GET['filCodCai']:"";
+        $codTipo        =isset($_GET['filCodTip'])?$_GET['filCodTip']:"";
+        $codStatus      =isset($_GET['filCodSta'])?$_GET['filCodSta']:"";
+ 
        
         $tabelaAutorizado =$autorizadoPDO->lista("");
         $tabelaEmpresa    =$setorautorizadoPDO->listaEmpresa($codAutorizado,$codEmpresa);
@@ -46,9 +58,40 @@
         $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,$codEstante);
         $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
         $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,$codCaixa);
-
+        $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,$codTipo);
+        $tabelaStatus     =$statusPDO->lista("");
     }
-    
+
+    # Gerando a grid dos documentos conforme o filtro
+    if ( isset($_GET['status'])  && $_GET['status']=="g"  )
+    {
+        $documentoPDO= new DocumentoPDO();
+        $filtro=Array();
+        $filtro['codAutorizado'] =isset($_GET['filCodAut'])?$_GET['filCodAut']:"";
+        $filtro['codEmpresa']    =isset($_GET['filCodEmp'])?$_GET['filCodEmp']:"";
+        $filtro['codSetor']      =isset($_GET['filCodSet'])?$_GET['filCodSet']:"";
+        $filtro['codArquivo']    =isset($_GET['filCodArq'])?$_GET['filCodArq']:"";
+        $filtro['codCorredor']   =isset($_GET['filCodCor'])?$_GET['filCodCor']:"";
+        $filtro['codEstante']    =isset($_GET['filCodEst'])?$_GET['filCodEst']:"";
+        $filtro['codPrateleira'] =isset($_GET['filCodPra'])?$_GET['filCodPra']:"";
+        $filtro['codCaixa']      =isset($_GET['filCodCai'])?$_GET['filCodCai']:"";
+        $filtro['codTipo']       =isset($_GET['filCodTip'])?$_GET['filCodTip']:"";
+        $filtro['codStatus']     =isset($_GET['filCodSta'])?$_GET['filCodSta']:"";
+ 
+        $filtro['numDocumento']  =isset($_GET['filNumDoc'])?$_GET['filNumDoc']:"";
+        $filtro['emiDocumento']  =isset($_GET['filEmiDoc'])?$_GET['filEmiDoc']:"";
+        $filtro['exeDocumento']  =isset($_GET['filAnoExe'])?$_GET['filAnoExe']:"";
+        $filtro['calDocumento']  =isset($_GET['filAnoCal'])?$_GET['filAnoCal']:"";
+        $filtro['texDocumento']  =isset($_GET['filTexDoc'])?$_GET['filTexDoc']:"";
+        
+        $dataTable=$documentoPDO->lista($filtro);
+        if ( $dataTable ) 
+        {
+            $dataTableColunas = array_keys($dataTable[0]);
+        }
+       # header("location:sisarq.php?option=documento");
+   
+    }
     /*
     # Array para guarda os nome das Colunas doa DataTable
     $dataTableColunas = array(); 
@@ -99,7 +142,6 @@
             $filtroEmpresa=$_GET['filtroEmp'];
         }    
        
-        $tabelaEmpresa=$empresaPDO->lista("");
             
         $dataTable=$prateleiraPDO->lista($filtroEmpresa);
         if ( $dataTable ) 
@@ -161,4 +203,5 @@
         ##header("location:sisarq.php?option=prateleira&filtroEmp=$filtroEmpresa");
     }
      */
+
 ?>

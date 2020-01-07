@@ -354,7 +354,7 @@
      
 
         <script>
-            function changedocumento(campo,filtroautorizado,filtroEmpresa,filtroSetor,filtroArquivo,filtroCorredor,filtroEstante) {
+            function changedocumento(campo,filtroautorizado,filtroEmpresa,filtroSetor,filtroArquivo,filtroCorredor,filtroEstante,filtroCaixa) {
                 if ( campo=="autorizado" )
                 {
                     window.location.href = "sisarq.php?option=documento&filCodAut="+filtroautorizado +"&status=f";
@@ -380,8 +380,31 @@
                 {
                     window.location.href = "sisarq.php?option=documento&filCodAut="+filtroautorizado +"&filCodEmp="+filtroEmpresa+"&filCodArq="+filtroArquivo+"&filCodSet="+filtroSetor+"&filCodCor="+filtroCorredor+"&filCodEst="+filtroEstante+"&status=f";
                 }
-                
-        
+                // Processo de evento de cadastro de documento
+
+                if ( campo=="dempresa" )
+                {
+                    window.location.href = "sisarq.php?option=caddocumento&CodEmp="+filtroEmpresa+"&status=i";
+                }
+
+                if ( campo=="dsetor" )
+                {
+                    window.location.href = "sisarq.php?option=caddocumento&CodEmp="+filtroEmpresa+"&CodSet="+filtroSetor+"&status=i";
+                }
+                if ( campo=="darquivo" )
+                {
+                    window.location.href = "sisarq.php?option=caddocumento&CodEmp="+filtroEmpresa+"&CodSet="+filtroSetor+"&CodArq="+filtroArquivo+"&CodCai="+filtroCaixa+"&status=i";
+                }
+                if ( campo=="dcorredor" )
+                {
+                    window.location.href = "sisarq.php?option=caddocumento&CodEmp="+filtroEmpresa+"&CodSet="+filtroSetor+"&CodArq="+filtroArquivo+"&CodCor="+filtroCorredor+"&CodCai="+filtroCaixa+"&status=i";
+                }
+                if ( campo=="destante" )
+                {
+                    window.location.href = "sisarq.php?option=caddocumento&CodEmp="+filtroEmpresa+"&CodSet="+filtroSetor+"&CodArq="+filtroArquivo+"&CodCor="+filtroCorredor+"&CodEst="+filtroEstante+"&CodCai="+filtroCaixa+"&status=i";
+                }
+
+
             }                 
         </script>
         

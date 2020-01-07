@@ -6,18 +6,18 @@
 *  Regra: 
 */
     
-    require("caixaPDO.php");
-    require("prateleiraPDO.php");
-    require("estantePDO.php");
-    require("corredorPDO.php");
-    require("arquivoPDO.php");
+    require("caixaPDO.php"          );
+    require("prateleiraPDO.php"     );
+    require("estantePDO.php"        );
+    require("corredorPDO.php"       );
+    require("arquivoPDO.php"        );
+    require("empresaPDO.php"        );
+    require("setorPDO.php"          );
     require("setorautorizadoPDO.php");
-    require("autorizadoPDO.php");
-    
-    require("tipodocumentoPDO.php");
-    require("statusPDO.php");
-
-    require("documentoPDO.php");
+    require("autorizadoPDO.php"     );
+    require("tipodocumentoPDO.php"  );
+    require("statusPDO.php"         );
+    require("documentoPDO.php"      );
 
     
 
@@ -92,7 +92,105 @@
        # header("location:sisarq.php?option=documento");
    
     }
-    /*
+
+    # Preencher Formulario com os dados 
+        
+    if (isset($_GET['status']) && ( $_GET['status']=="i" || $_GET['status']=="a" || $_GET['status']=="e" ) )
+    {
+        $acao=$_GET['status'];
+
+        $empresaPDO    = new EmpresaPDO();
+        $setorPDO      = new SetorPDO();
+        $documentoPDO= new DocumentoPDO();
+        
+
+        $codDocumento   =isset($_GET['CodDoc'])?$_GET['CodDoc']:"";
+        $codEmpresa     =isset($_GET['CodEmp'])?$_GET['CodEmp']:"";
+        $codSetor       =isset($_GET['CodSet'])?$_GET['CodSet']:"";
+        $codArquivo     =isset($_GET['CodArq'])?$_GET['CodArq']:"";
+        $codCorredor    =isset($_GET['CodCor'])?$_GET['CodCor']:"";
+        $codEstante     =isset($_GET['CodEst'])?$_GET['CodEst']:"";
+        $codPrateleira  =isset($_GET['CodPra'])?$_GET['CodPra']:"";
+        $codCaixa       =isset($_GET['CodCai'])?$_GET['CodCai']:"";
+        $codTipo        =isset($_GET['CodTip'])?$_GET['CodTip']:"";
+        
+        if ($_GET['status']=='i')
+        {
+            $tabelaEmpresa    =$empresaPDO->lista("");
+            $tabelaSetor      =$setorPDO->listaSetor  ($codEmpresa,"");
+            $tabelaArquivo    =$arquivoPDO->listaArquivo($codEmpresa,"");
+            $tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,"");
+            $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,"");
+            $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,"");
+            $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,"");
+            $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,"");
+        }
+        else
+        {
+            $tabelaEmpresa    =$empresaPDO->lista($codEmpresa);
+            $tabelaSetor      =$setorPDO->listaSetor  ($codEmpresa,$codSetor);
+            $tabelaArquivo    =$arquivoPDO->listaArquivo($codEmpresa,$codArquivo);
+            $tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,$codCorredor);
+            $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,$codEstante);
+            $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
+            $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,$codCaixa);
+            $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,$codTipo);
+        }
+        $registro=$documentoPDO->busca($codDocumento);   
+    }
+        # Verificar operacoes de Banco
+    if ( isset($_POST['operacao']))
+    {
+        $operacao=$_POST['operacao'];
+        
+        $codDocumento   =$_POST['CodDoc'];
+        $codEmpresa     =$_POST['CodEmp'];
+        $codSetor       =$_POST['CodSet'];
+        $codArquivo     =$_POST['CodArq'];
+        $codCorredor    =$_POST['CodCor'];
+        $codEstante     =$_POST['CodEst'];
+        $codPrateleira  =$_POST['CodPra'];
+        $codCaixa       =$_POST['CodCai'];
+        $codTipo        =$_POST['CodTip'];
+        
+        
+        # Gerando as informacoes do Objeto
+        #$corredor->setCodigoEmpresa($_POST['codEmp']);
+        #$corredor->setCodigoArquivo($_POST['codArq']);
+        #$corredor->setCodigoCorredor($_POST['codCor']);
+        ##$corredor->setDescricao($_POST['desCor']);
+        #$corredor->setSigla($_POST['sigCor']);
+        
+        switch ($operacao)
+        {
+            case 'a':
+                #$registro=$corredorPDO->update($corredor);
+            break;
+            case 'i':
+                try 
+                {
+                    $conexao =Conexao::getConnection();
+                    #$registro=$corredorPDO->insert($corredor);
+                    $conexao =null;
+                }
+                catch (PDOExecption $e  )
+                {
+                    $mensagem  = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
+                    $mensagem .= "\nErro: " . $e->getMessage();
+                    $conexao=null;
+                    throw new Exception($mensagem);
+                    
+                }
+               
+            break;
+            case 'e':
+                #$registro=$corredorPDO->delete($codEmpresa,$codArquivo,$codCorredor);
+            break;
+        }
+    }
+    
+
+/*
     # Array para guarda os nome das Colunas doa DataTable
     $dataTableColunas = array(); 
     $filtroEmpresa="";

@@ -340,7 +340,7 @@
                 <form action="" method="POST">
         
                     
-                    <a href="sisarq.php?option=cadcorredor&codEmp=0&codArq=&codCor=&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
+                    <a href="sisarq.php?option=caddocumento&codDoc=&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
                             aria-hidden="true"></i> Novo</a>
         
                     <button class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Filtro </button>
@@ -382,8 +382,21 @@
                                                 } 
                         
                                             ?>
-                        
-                        </tbody>
+                                            echo "<td>";
+                                                $link='href=sisarq.php?option=caddocumento&codDoc='. $dataTable[$i]['Identificador'].'&status=a';
+                                                echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
+                                                        echo '<i class="fa fa-edit"></i>';
+                                                echo '</a> ';
+                                                $link='href=sisarq.php?option=caddocumento&codDoc='. $dataTable[$i]['Identificador'].'&status=e';
+                                                echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
+                                                       echo '<i class="fa fa-trash"></i>';
+                                                echo '</a> ';
+                                                        
+                                            echo '</td>';    
+
+
+
+                                        </tbody>
         
                     </table>
                 

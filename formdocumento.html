@@ -1,0 +1,314 @@
+<?php
+
+    
+    if ( !isset($_SESSION['user'])){
+        #header("location: index.php");
+    }
+
+    # Informacoes da regra de negocios e acesso aos dados
+    include_once  "documento.php";
+    
+    
+    
+?>
+
+ <div class="row">
+        <div class="col-md-10 offset-1 col-sm-12">
+            <div class="documento-form">
+ 
+                <form action="usuario.php" method="POST">
+                      
+                <div class="row">
+                     
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Empresa</label><br>
+                            <select id="idEmpresa" name="CodEmp"  class="form-control" onchange="changedocumento('dempresa','',document.getElementById('idEmpresa').value)">
+                                <?php
+                                    $CodEmp=isset($_GET["CodEmp"])?$_GET["CodEmp"]:"";
+                                    $CodDoc=isset($_GET["CodDoc"])?$_GET["CodDoc"]:"";
+                                    
+                                    if (  $_GET["status"]=="i" && $CodDoc=="" )
+                                    { 
+                                        echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                    }
+                                    foreach ($tabelaEmpresa as $coluna){
+                                        $selecao = $CodEmp==$coluna["Codigo"]?"selected":"";
+                                        echo '<option '. $selecao. '  value="'. $coluna["Codigo"] .'">' .$coluna["Empresa"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Numero Documento </label><br>
+                            <input  name="CodDoc"  class="form-control" id="CodDoc" placeholder="Documento" value="<?=$_GET['status']!="i"?$_GET["codDoc"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,16)'> 
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Setor </label><br>
+                            <select id="idSetor" name="CodSet"  class="form-control" onchange="changedocumento('dsetor','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value)">
+                                <?php
+                                    $CodSet=isset($_GET["CodSet"])?$_GET["CodSet"]:"";
+                                    
+                                    if ( $_GET["status"]=="i" && $CodSet=="" )
+                                    { 
+                                        echo '<option disabled selected value="">=>Selecionar Setor<=</option>';	
+                                    }
+                                    foreach ($tabelaSetor as $coluna){
+                                        $selecao = $CodSet==$coluna["CodSetor"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodSetor"] .'">' .$coluna["Setor"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Caixa</label><br>
+                            <select id="idCaixa" name="CodCai" class="form-control" >
+                                <?php
+                                    $CodCai=isset($_GET["CodCai"])?$_GET["CodCai"]:"";
+                                    if ( $_GET["status"]=="i" && $CodCai=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Caixa<=</option>';	
+                                    }
+                                    foreach ($tabelaCaixa as $coluna){
+                                        $selecao = $CodCai==$coluna["CodCaixa"]?"selected":"";
+                                        echo '<option '. $selecao. '  value="'. $coluna["CodCaixa"] .'">' .$coluna["Caixa"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+                          
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <hr>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-center">Localização</p>
+                    </div>
+                    <div class="col-md-4">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Arquivo</label><br>
+                            <select id="idArquivo" name="CodArq"  class="form-control" onchange="changedocumento('darquivo','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,'','',document.getElementById('idCaixa').value)">
+                                <?php
+                                    $CodArq=isset($_GET["CodArq"])?$_GET["CodArq"]:"";
+                                    if ( $_GET["status"]=="i" && $CodArq=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
+                                    }
+                                    foreach ($tabelaArquivo as $coluna){
+                                        $selecao = $CodArq==$coluna["CodArquivo"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+                            
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Corredor </label><br>
+                             <select id="idCorredor" name="CodCor"  class="form-control" onchange="changedocumento('dcorredor',''.value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,'',document.getElementById('idCaixa').value)">
+                                <?php
+                                    $CodCor=isset($_GET["CodCor"])?$_GET["CodCor"]:"";
+                                    if ( $_GET["status"]=="i" && $CodCor=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Corredor<=</option>';	
+                                    }
+                                    foreach ($tabelaCorredor as $coluna){
+                                        $selecao = $CodCor==$coluna["CodCorredor"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+                            
+                        </div>
+                    </div>
+                
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Estante</label><br>
+                            <select id="idEstante" name="CodEst"  class="form-control" onchange="changedocumento('destante','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,document.getElementById('idEstante').value,document.getElementById('idCaixa').value)">
+                                <?php
+                                    $CodEst=isset($_GET["CodEst"])?$_GET["CodEst"]:"";
+                                    if ( $_GET["status"]=="i" && $CodEst=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Estante<=</option>';	
+                                    }
+                                    foreach ($tabelaEstante as $coluna){
+                                        $selecao = $CodEst==$coluna["CodEstante"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodEstante"] .'">' .$coluna["Estante"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+      
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Prateleira </label><br>
+                            <select id="idPrateleira" name="CodPra" class="form-control" >
+                                <?php
+                                    $CodPra=isset($_GET["CodPra"])?$_GET["CodPra"]:"";
+                                    if ( $_GET["status"]=="i" && $CodPra=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Prateleira<=</option>';	
+                                    }
+                                    foreach ($tabelaPrateleira as $coluna){
+                                        $selecao = $CodPra==$coluna["CodPrateleira"]?"selected":"";
+                                        echo '<option '. $selecao. ' value="'. $coluna["CodPrateleira"] .'">' .$coluna["Prateleira"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                </div>
+                
+         
+                <div class="row">
+                    <div class="col-md-4">
+                        <hr>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-center">Documento</p>
+                    </div>
+                    <div class="col-md-4">
+                        <hr>
+                    </div>
+                </div>            
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Tipo</label><br>
+                            <select id="idTipo" name="CodTip"  class="form-control" >
+                                <?php
+                                    $CodTip=isset($_GET["CodTip"])?$_GET["CodTip"]:"";
+                                    if ( $_GET["status"]=="i" && $CodTip=="" )
+                                    {
+                                        echo '<option disabled selected value=0>=>Selecionar Tipo Documento<=</option>';	
+                                    }
+                                    foreach ($tabelaTipo as $coluna){
+                                        $selecao = $CodTip==$coluna["CodTipo"]?"selected":"";
+                                        echo '<option '. $selecao. '  value="'. $coluna["CodTipo"] .'">' .$coluna["Tipo"] ."</option>";                     
+                                    }
+                                ?>
+                            </select>
+        
+                        </div>
+                    </div>
+                
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Numero Inicial </label><br>
+                            <input  name="NumIniDoc"  class="form-control" id="NumIniDoc" placeholder="Numero Inicial" >
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Numero Final</label><br>
+                            <input  name="NumFinDoc"  class="form-control" id="NumFinDoc" placeholder="Numero Final" >
+                        </div>
+                    </div>
+                
+       
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Exercicio </label><br>
+                            <input  name="AnoExe"  class="form-control" id="AnoExe" placeholder="Ano Exercicio" >
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Calendario </label><br>
+                            <input  name="AnoCal"  class="form-control" id="AnoCal" placeholder="Ano Calendario">
+                        </div>
+                    </div>
+       
+                </div>
+            
+                
+                <div class="row">
+                
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Emissão Inicial</label><br>
+                            <input type="date"  name="EmiIniDoc"  class="form-control" id="EmiIniDoc" placeholder="Emissao Inicial" >
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Emissão Final</label><br>
+                            <input  type="date" name="EmiFinDoc"  class="form-control" id="EmiFinDoc" placeholder="Emissao Final" >
+                        </div>
+                    </div>
+       
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="TextDoc">Detalhe Documento:</label>
+                            <textarea class="form-control" rows="5" id="TextDoc" placeholder="Detalhar Documento" ></textarea>
+                        </div>
+                    </div>
+                </div>
+               
+
+                <div class="form-group">
+                    <label hidden >Operacao</label>
+                    <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control" placeholder="Nome da Empresa" required  >
+                </div>
+                                                      
+                <button type="submit" class="btn btn-primary"  aria-pressed="true">
+                    
+                    <i class="fa fa-check-circle" style="font-size:24px;color:green;"></i>
+                    <?php 
+                        if ($_GET['status']=='e')
+                        {
+                            echo "Excluir";
+                        }
+                        else
+                        {
+                            echo "Salvar";
+                        }
+                    ?>
+                </button>
+
+                <button type="button" class="btn btn-primary" aria-pressed="true">
+                    <i class="fa fa-times " style="font-size:24px;color:red;"></i>
+                    Cancelar
+                </button>
+
+            </form>    
+
+            </div>
+        </div>
+</div>
+
+

@@ -18,6 +18,7 @@
     require("tipodocumentoPDO.php"  );
     require("statusPDO.php"         );
     require("documentoPDO.php"      );
+    require("Documento_Class.php"   );
 
     
 
@@ -31,6 +32,9 @@
 
     $tipodocumentoPDO   = new TipoDocumentoPDO();
     $statusPDO          = new StatusPDO();
+
+    $documentoPDO= new DocumentoPDO();
+        
 
                
     # Array dados do filtro - Tab de Filro
@@ -101,7 +105,6 @@
 
         $empresaPDO    = new EmpresaPDO();
         $setorPDO      = new SetorPDO();
-        $documentoPDO= new DocumentoPDO();
         
 
         $codDocumento   =isset($_GET['CodDoc'])?$_GET['CodDoc']:"";
@@ -152,13 +155,44 @@
         $codPrateleira  =$_POST['CodPra'];
         $codCaixa       =$_POST['CodCai'];
         $codTipo        =$_POST['CodTip'];
-        
-        
+        $numeroInicial  =$_POST['NumIniDoc'];
+        $numeroFinal    =$_POST['NumFinDoc'];
+        $anoExercicio   =$_POST['AnoExe'];
+        $anoCalendario  =$_POST['AnoCal'];
+        $emissaoInicial =$_POST['EmiIniDoc'];
+        $emissaoFinal   =$_POST['EmiFinDoc'];
+        $detalhe        =$_POST['TexDoc'];
+
+
+        $documento=new Documento();        
+       
         # Gerando as informacoes do Objeto
-        #$corredor->setCodigoEmpresa($_POST['codEmp']);
-        #$corredor->setCodigoArquivo($_POST['codArq']);
-        #$corredor->setCodigoCorredor($_POST['codCor']);
-        ##$corredor->setDescricao($_POST['desCor']);
+        
+        $documento->setIdDocumento   ($_POST['CodDoc']);
+        $documento->setCodigoEmpresa ($_POST['CodEmp']);
+        $documento->setCodigoSetor   ($_POST['CodSet']);
+        $documento->setCodigoArquivo($_POST['CodArq']);
+        $documento->setCodigoCorredor($_POST['CodCor']);
+        $documento->setCodigoEstante($_POST['CodEst']);
+        $documento->setCodigoPrateleira($_POST['CodPra']);
+        $documento->setCodigoCaixa($_POST['CodCai']);
+        $documento->setTipoDocumento($_POST['CodTip']);
+
+        $documento->setNumeroInicial($_POST['NumIniDoc']);
+        $documento->setNumeroFinal($_POST['NumFinDoc']);
+
+        $documento->setDataInicial($_POST['EmiIniDoc']);
+        $documento->setDataFinal($_POST['EmiFinDoc']);
+        $documento->setDataDestruicao($_POST['NumIniDoc']);
+        $documento->setDescricao($_POST['TexDoc']);
+
+        $documento->setAnoExercicio($_POST['AnoExe']);
+        $documento->setAnoCalendario($_POST['AnoCal']);
+        $documento->setCodigoStatus('02');
+        
+
+
+
         #$corredor->setSigla($_POST['sigCor']);
         
         switch ($operacao)
@@ -169,10 +203,9 @@
             case 'i':
                 try 
                 {
-                    $conexao =Conexao::getConnection();
-                    #$registro=$corredorPDO->insert($corredor);
-                    $conexao =null;
-                }
+                    $registro=$documentoPDO->insert($documento);
+                    $conexao=null;
+                    }
                 catch (PDOExecption $e  )
                 {
                     $mensagem  = "Drivers disponiveis: " . implode(",", PDO::getAvailableDrivers());
@@ -187,6 +220,8 @@
                 #$registro=$corredorPDO->delete($codEmpresa,$codArquivo,$codCorredor);
             break;
         }
+
+        header("location:sisarq.php?option=documento&status=f");
     }
     
 

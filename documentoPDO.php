@@ -1,6 +1,7 @@
 <?php
 
 require_once("Conexao_Class.php");
+require_once("utilitarios.php");
 
 class DocumentoPDO
 {
@@ -27,44 +28,103 @@ class DocumentoPDO
             
 
     }
-/*
-    public function insert($arquivo)
+
+    public function insert($documento)
     {
         
 
         try
         {
             $conexao=Conexao::getConnection();
-            $sql='INSERT INTO tb_arquivos ( ';
-            $sql.='`cod_empresa`,';
-            $sql.='`cod_arquivo`,';
-            $sql.='`des_arquivo`)';
+            $sql='INSERT INTO tb_documentos ( ';
+         
+            $sql.='`cod_documento`    ,';
+            $sql.='`cod_empresa`      ,';
+            $sql.='`cod_arquivo`      ,';
+            $sql.='`cod_corredor`     ,';
+            $sql.='`cod_estante`      ,';
+            $sql.='`cod_prateleira`   ,';
+            $sql.='`cod_caixa`        ,';
+            $sql.='`cod_setor`        ,';
+            $sql.='`tip_documento`    ,';
+            $sql.='`no_ini_documento` ,';
+            $sql.='`no_fin_documento` ,';
+            $sql.='`dt_ini_documento` ,';
+            $sql.='`dt_fin_documento` ,';
+            $sql.='`dt_des_documento` ,';
+            $sql.='`cod_status`       ,';
+            $sql.='`des_documento`    ,';
+            $sql.='`ref_exe_documento`,';
+            $sql.='`ref_cal_documento`,';
+            $sql.='`cod_status_ant`)'   ;
+            $sql.=' VALUES ('            ;
             
-            $sql.=' VALUES ( ';
-            if ($arquivo->getCodigoArquivo()=="00")
+         
+            if ($documento->getIdDocumento()=="0000000000000000")
             {
-                $sql.='?,';
-                $sql.='(SELECT ifnull(right(concat("00",max(arquivo.cod_arquivo)+1),2),"01") from tb_arquivos arquivo where arquivo.cod_empresa=' . "'". $arquivo->getCodigoEmpresa() ."'),";
-                $sql.='?)';
-              
+                $sql.='(SELECT CONCAT("' .$documento->getCodigoEmpresa().'"'. ', ifnull(right(concat("00000000000000000",CAST(max(documento.cod_documento) AS UNSIGNED)+1),16),"0000000000000001")) from tb_documentos documento where documento.cod_empresa="'.$documento->getCodigoEmpresa().'"),';
+                $sql.='?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+                var_dump($sql);
+                
+                $smtm=$conexao->prepare($sql);
+
+                $smtm->bindValue(1,$documento->getCodigoEmpresa());
+                $smtm->bindValue(2,$documento->getCodigoArquivo());
+                $smtm->bindValue(3,$documento->getCodigoCorredor());
+                $smtm->bindValue(4,$documento->getCodigoEstante());
+                $smtm->bindValue(5,$documento->getCodigoPrateleira());
+                $smtm->bindValue(6,$documento->getCodigoCaixa());
+                $smtm->bindValue(7,$documento->getCodigoSetor());
+            
+                $smtm->bindValue(8,$documento->getTipoDocumento());
+
+                $smtm->bindValue(9,$documento->getNumeroInicial());
+                $smtm->bindValue(10,$documento->getNumeroFinal());
+
+                $smtm->bindValue(11,$documento->getDataInicial());
+                $smtm->bindValue(12,$documento->getDataFinal());
+                $smtm->bindValue(13,$documento->getDataDestruicao());
+                $smtm->bindValue(14,$documento->getCodigoStatus());
+                $smtm->bindValue(15,$documento->getDescricao());
+            
+
+                $smtm->bindValue(16,$documento->getAnoExercicio());
+                $smtm->bindValue(17,$documento->getAnoCalendario());
+                $smtm->bindValue(18,$documento->getCodigoStatus());
+
             }
             else
             {
-                $sql.='?,?,?)';
-            }
+
+                $sql.=' (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+                $smtm=$conexao->prepare($sql);
+
+                $smtm->bindValue(1,$documento->getIdDocumento());
+                $smtm->bindValue(2,$documento->getCodigoEmpresa());
+                $smtm->bindValue(3,$documento->getCodigoArquivo());
+                $smtm->bindValue(4,$documento->getCodigoCorredor());
+                $smtm->bindValue(5,$documento->getCodigoEstante());
+                $smtm->bindValue(6,$documento->getCodigoPrateleira());
+                $smtm->bindValue(7,$documento->getCodigoCaixa());
+                $smtm->bindValue(8,$documento->getCodigoSetor());
             
-            $smtm=$conexao->prepare($sql);
-            if ($arquivo->getCodigoArquivo()=="00")
-            { 
-                $smtm->bindValue(1,$arquivo->getCodigoEmpresa());
-                $smtm->bindValue(2,$arquivo->getDescricao());
-            }
-            else
-            {
-                $smtm->bindValue(1,$arquivo->getCodigoEmpresa());
-                $smtm->bindValue(2,$arquivo->getCodigoArquivo());
-                $smtm->bindValue(3,$arquivo->getDescricao());
-            }
+                $smtm->bindValue(9,$documento->getTipoDocumento());
+
+                $smtm->bindValue(10,$documento->getNumeroInicial());
+                $smtm->bindValue(11,$documento->getNumeroFinal());
+
+                $smtm->bindValue(12,DateToUsa($documento->getDataInicial()));
+                $smtm->bindValue(13,DateToUsa($documento->getDataFinal()));
+                $smtm->bindValue(14,DateToUsa($documento->getDataDestruicao()));
+                $smtm->bindValue(15,$documento->setCodigoStatus());
+                $smtm->bindValue(16,$documento->getDescricao());
+            
+
+                $smtm->bindValue(17,$documento->getAnoExercicio());
+                $smtm->bindValue(18,$documento->getAnoCalendario());
+                $smtm->bindValue(19,$documento->getCodigoStatus());
+            }    
+         
             $result=$smtm->execute();
             
             return $result;
@@ -78,44 +138,76 @@ class DocumentoPDO
     }
 
 
-    public function update($arquivo)
+    public function update($documento)
     {
         $conexao=Conexao::getConnection();
-        $sql="UPDATE  tb_arquivos SET ";
-        $sql.='`des_arquivo`=? ';
-       
-        $sql.= " WHERE cod_empresa=? and ";
-        $sql.= "       cod_arquivo=? ";
+        $sql="UPDATE  tb_documentos SET ";
+        $sql.='`cod_empresa`      =?,';
+        $sql.='`cod_arquivo`      =?,';
+        $sql.='`cod_corredor`     =?,';
+        $sql.='`cod_estante`      =?,';
+        $sql.='`cod_prateleira`   =?,';
+        $sql.='`cod_caixa`        =?,';
+        $sql.='`cod_setor`        =?,';
+        $sql.='`tip_documento`    =?,';
+        $sql.='`no_ini_documento` =?,';
+        $sql.='`no_fin_documento` =?,';
+        $sql.='`dt_ini_documento` =?,';
+        $sql.='`dt_fin_documento` =?,';
+        $sql.='`dt_des_documento` =?,';
+        $sql.='`des_documento`    =?,';
+        $sql.='`ref_exe_documento`=?,';
+        $sql.='`ref_cal_documento`=?' ;
+               
+        $sql.= " WHERE cod_doc=? ";
         
         
         $smtm=$conexao->prepare($sql);
         
-        $smtm->bindValue(1,$arquivo->getDescricao());
-        $smtm->bindValue(2,$arquivo->getcodigoEmpresa());
-        $smtm->bindValue(3,$arquivo->getcodigoArquivo());
-        
+        $smtm->bindValue(1,$documento->getCodigoEmpresa());
+        $smtm->bindValue(2,$documento->getCodigoArquivo());
+        $smtm->bindValue(3,$documento->getCodigoCorredor());
+        $smtm->bindValue(4,$documento->getCodigoEstante());
+        $smtm->bindValue(5,$documento->getCodigoPrateleira());
+        $smtm->bindValue(6,$documento->getCodigoCaixa());
+        $smtm->bindValue(7,$documento->getCodigoSetor());
+       
+        $smtm->bindValue(8,$documento->getTipoDocumento());
+
+        $smtm->bindValue(9,$documento->getNumeroInicial());
+        $smtm->bindValue(10,$documento->getNumeroFinal());
+
+        $smtm->bindValue(11,DateToUsa($documento->getDataInicial()));
+        $smtm->bindValue(12,DateToUsa($documento->getDataFinal()));
+        $smtm->bindValue(13,DateToUsa($documento->getDataDestruicao()));
+        $smtm->bindValue(14,$documento->getDescricao());
+       
+
+        $smtm->bindValue(15,$documento->getAnoExercicio());
+        $smtm->bindValue(16,$documento->getAnoCalendario());
+        $smtm->bindValue(17,$documento->getdDocumento());
+    
+    
         $result=$smtm->execute();
         $conexao=null;
         return $result;
     }
 
-    public function delete($codEmpresa,$codArquivo)
+    public function delete($codDocumento)
     {
         $conexao=Conexao::getConnection();
-        $sql="DELETE  FROM  tb_arquivos ";
-        $sql.= " WHERE cod_empresa=? and ";
-        $sql.= "       cod_arquivo=?  ";
+        $sql="DELETE  FROM  tb_documentos ";
+        $sql.= " WHERE cod_documento=? ";
         
         $smtm=$conexao->prepare($sql);
-        $smtm->bindValue(1,$codEmpresa);
-        $smtm->bindValue(2,$codArquivo);
+        $smtm->bindValue(1,$codDocumento);
         $result=$smtm->execute();
         ##$conexao->commit();
         $conexao=null;
         return $result;
     }
 
-*/
+
     public function lista($filtro)
     {
         $conexao=Conexao::getConnection();

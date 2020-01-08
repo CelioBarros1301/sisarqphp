@@ -4,6 +4,8 @@ PRIORIDADES:
 
 10)addslashes incluir do $_GET E $_POST
 
+44) incluir no formdocumento Data Destruicao
+45) Verificar propriedade REQUIRED nos campos dos forms
 
 
 
@@ -118,6 +120,10 @@ tiver valores
 43) Ver o cadastro de setores por empresa
 
 $codPrateleira =isset($_GET['codPra'])?$_GET['codPra']:"";
+
+44) incluir no formdocumento Data Destruicao
+
+45) Verificar propriedade REQUIRED nos campos dos forms
 ==========================
 infomacoes sobre tabs
 
@@ -138,3 +144,7 @@ https://getbootstrap.com.br/docs/4.1/utilities/borders/
 
 
 https://www.w3schools.com/bootstrap4/bootstrap_ref_js_tab.asp
+
+
+LOCK DE TABELA MYSQL:
+http://underpop.online.fr/m/mysql/manual/mysql-reference-lock-tables.html

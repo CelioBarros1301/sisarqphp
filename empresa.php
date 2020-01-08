@@ -1,6 +1,9 @@
 <?php
     
     require("empresaPDO.php");
+    require("referenciaPDO.php");
+    require("Referencia_Class.php");
+    
     $empresaPDO = new EmpresaPDO();
 
     $nomeColunas = array();
@@ -36,7 +39,7 @@
             case 'a':
                 $registro=$empresaPDO->update($codigo,$descricao);
             break;
-            case 'i':
+            case 'i':   
                 $registro=$empresaPDO->insert($codigo,$descricao);
             break;
             case 'e':

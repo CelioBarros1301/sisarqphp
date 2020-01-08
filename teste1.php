@@ -5,9 +5,14 @@
 
     require_once("prateleiraPDO.php");
     require_once("autorizadoPDO.php");
+    require_once("utilitarios.php");
     
 
-   
+    echo DateToBrasil("2020-01-08");
+    echo DateToUsa("08/01/2020");
+
+
+    /*
     $prateleiraPDO= new PrateleiraPDO();
     $codEmpresa="011";
     $codArquivo="01";
@@ -20,7 +25,7 @@
     var_dump($tabelaAutorizado);
     ##$registro=$prateleiraPDO->delete($codEmpresa ,$codArquivo,$codCorredor,$codEstante,$codPrateleira);
    
-    /*
+    
     $corredorPDO= new CorredorPDO();
     $codEmpresa="011";
     $codArquivo="01";

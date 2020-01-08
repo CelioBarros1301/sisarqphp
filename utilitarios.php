@@ -84,8 +84,18 @@ function getOs(){
         return false;
     }
  }
+function DateToBrasil($dataUsa)
+{
+    $data=explode("-",$dataUsa);
+    return $data[2]."/".$data[1]."/".$data[0];
+}
+function DateToUsa($dataBra)
+{
+    $data=explode("/",$dataBra);
+    return $data[2]."-".$data[1]."-".$data[0];
+}
 
- echo getOs();
+
  ?>
 
  

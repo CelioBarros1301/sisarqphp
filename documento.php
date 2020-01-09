@@ -33,15 +33,36 @@
     $tipodocumentoPDO   = new TipoDocumentoPDO();
     $statusPDO          = new StatusPDO();
 
-    $documentoPDO= new DocumentoPDO();
-        
+    $documentoPDO       = new DocumentoPDO();
+     
+    
+
+    $codAutorizado  ="";
+    $codEmpresa     ="";
+    $codSetor       ="";
+    $codArquivo     ="";
+    $codCorredor    ="";
+    $codEstante     ="";
+    $codPrateleira  ="";
+    $codCaixa       ="";
+    $codTipo        ="";
+    $codStatus      ="";
+    $codDocumento   ="";
+
+
 
                
+    # Array para guarda os nome das Colunas doa DataTable
+        
+    $dataTableColunas = array(); 
+    $dataTable        = array();
+   
     # Array dados do filtro - Tab de Filro
-    
+   
     if ( isset($_GET['status'])  && ( $_GET['status']=="f" || $_GET['status']=="g"  ) )
     {
  
+    
         $codAutorizado  =isset($_GET['filCodAut'])?$_GET['filCodAut']:"";
         $codEmpresa     =isset($_GET['filCodEmp'])?$_GET['filCodEmp']:"";
         $codSetor       =isset($_GET['filCodSet'])?$_GET['filCodSet']:"";
@@ -69,8 +90,9 @@
     # Gerando a grid dos documentos conforme o filtro
     if ( isset($_GET['status'])  && $_GET['status']=="g"  )
     {
-        $documentoPDO= new DocumentoPDO();
         $filtro=Array();
+    
+        
         $filtro['codAutorizado'] =isset($_GET['filCodAut'])?$_GET['filCodAut']:"";
         $filtro['codEmpresa']    =isset($_GET['filCodEmp'])?$_GET['filCodEmp']:"";
         $filtro['codSetor']      =isset($_GET['filCodSet'])?$_GET['filCodSet']:"";
@@ -98,26 +120,32 @@
     }
 
     # Preencher Formulario com os dados 
+    $codDocumento   =isset($_GET['codDoc'])?$_GET['codDoc']:"";
+        
         
     if (isset($_GET['status']) && ( $_GET['status']=="i" || $_GET['status']=="a" || $_GET['status']=="e" ) )
     {
-        $acao=$_GET['status'];
-
+       
         $empresaPDO    = new EmpresaPDO();
         $setorPDO      = new SetorPDO();
         
-
-        $codDocumento   =isset($_GET['CodDoc'])?$_GET['CodDoc']:"";
-        $codEmpresa     =isset($_GET['CodEmp'])?$_GET['CodEmp']:"";
-        $codSetor       =isset($_GET['CodSet'])?$_GET['CodSet']:"";
-        $codArquivo     =isset($_GET['CodArq'])?$_GET['CodArq']:"";
-        $codCorredor    =isset($_GET['CodCor'])?$_GET['CodCor']:"";
-        $codEstante     =isset($_GET['CodEst'])?$_GET['CodEst']:"";
-        $codPrateleira  =isset($_GET['CodPra'])?$_GET['CodPra']:"";
-        $codCaixa       =isset($_GET['CodCai'])?$_GET['CodCai']:"";
-        $codTipo        =isset($_GET['CodTip'])?$_GET['CodTip']:"";
+        # Localizar Registro Quando da Alteracao/Exclusao
         
-        if ($_GET['status']=='i')
+        if ($_GET['status']!='i')
+        {
+            $registro       =$documentoPDO->busca($codDocumento);
+            $codEmpresa     =$registro["cod_empresa"];
+            $codSetor       =$registro['cod_setor'];
+            $codArquivo     =$registro['cod_arquivo'];
+            $codCorredor    =$registro['cod_corredor'];
+            $codEstante     =$registro['cod_estante'];
+            $codPrateleira  =$registro['cod_prateleira'];
+            $codCaixa       =$registro['cod_estante'];
+            $codTipo        =$registro['tip_documento'];
+        
+
+        }
+        if ($_GET['status']!='e')
         {
             $tabelaEmpresa    =$empresaPDO->lista("");
             $tabelaSetor      =$setorPDO->listaSetor  ($codEmpresa,"");
@@ -127,6 +155,7 @@
             $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,"");
             $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,"");
             $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,"");
+            $tabelaStatus     =$statusPDO->lista("");
         }
         else
         {
@@ -139,7 +168,8 @@
             $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,$codCaixa);
             $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,$codTipo);
         }
-        $registro=$documentoPDO->busca($codDocumento);   
+        
+           
     }
         # Verificar operacoes de Banco
     if ( isset($_POST['operacao']))
@@ -161,6 +191,7 @@
         $anoCalendario  =$_POST['AnoCal'];
         $emissaoInicial =$_POST['EmiIniDoc'];
         $emissaoFinal   =$_POST['EmiFinDoc'];
+        $dataDestruicao =$_POST['DesDoc'];
         $detalhe        =$_POST['TexDoc'];
 
 
@@ -183,7 +214,7 @@
 
         $documento->setDataInicial($_POST['EmiIniDoc']);
         $documento->setDataFinal($_POST['EmiFinDoc']);
-        $documento->setDataDestruicao($_POST['NumIniDoc']);
+        $documento->setDataDestruicao($_POST['DesDoc']);
         $documento->setDescricao($_POST['TexDoc']);
 
         $documento->setAnoExercicio($_POST['AnoExe']);

@@ -334,6 +334,8 @@
           </div><!-- Tab de Consulta-->
 
           <div id="menu1" class="container tab-pane fade"><!-- Tab de Grid-->
+            
+            
             <div class="row">
                 <div class="col-sm-10" >
                         
@@ -352,51 +354,51 @@
                     <table class="table compact table-fixed table-striped table-bordered table-hover table-sm dt-responsive nowrap"
                                     style="width:100%" id="tbpadrao">
         
-                                    <thead>
-                                            <tr>
-                                                <?php foreach ($dataTableColunas as $coluna)
-                                                    {
-                                                    echo "<th>". $coluna. "</th>";
-                                                    }
-                                                    if ( count($dataTable)>0  )
-                                                    {        
-                                                        echo "<th>Ações</th>";
-                                                    }
-                                                    else
-                                                    {
-                                                        echo "<th> </th>";
-                                                    }
-                                                ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php for ($i=0;$i < count($dataTable);$i++ ) {
-                                                    echo "<tr>";
-                                                    
-                                                        foreach ($dataTable[$i] as $campo){
-                                                            echo "<td>";
-                                                                echo $campo;
-                                                            echo "</td>";
-                                                        }    
-                                                        
-                                                } 
-                        
-                                            ?>
+                        <thead>
+                                <tr>
+                                    <?php foreach ($dataTableColunas as $coluna)
+                                        {
+                                        echo "<th>". $coluna. "</th>";
+                                        }
+                                        if ( count($dataTable)>0  )
+                                        {        
+                                            echo "<th>Ações</th>";
+                                        }
+                                        else
+                                        {
+                                            echo "<th> </th>";
+                                        }
+                                    ?>
+                                </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                for ($i=0;$i < count($dataTable);$i++ )
+                                {
+                                    echo "<tr>";
+                                    
+                                        foreach ($dataTable[$i] as $campo){
                                             echo "<td>";
-                                                $link='href=sisarq.php?option=caddocumento&codDoc='. $dataTable[$i]['Identificador'].'&status=a';
-                                                echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
-                                                        echo '<i class="fa fa-edit"></i>';
-                                                echo '</a> ';
-                                                $link='href=sisarq.php?option=caddocumento&codDoc='. $dataTable[$i]['Identificador'].'&status=e';
-                                                echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
-                                                       echo '<i class="fa fa-trash"></i>';
-                                                echo '</a> ';
-                                                        
-                                            echo '</td>';    
-
-
-
-                                        </tbody>
+                                                echo $campo;
+                                            echo "</td>";
+                                        }    
+                                        
+                                        echo "<td>";
+                                            $link='href=sisarq.php?option=caddocumento&codDoc='. $dataTable[$i]['Identificador'].'&status=a';
+                                            echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
+                                                    echo '<i class="fa fa-edit"></i>';
+                                            echo '</a> ';
+                                            $link='href=sisarq.php?option=caddocumento&codDoc='. $dataTable[$i]['Identificador'].'&status=e';
+                                            echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
+                                                echo '<i class="fa fa-trash"></i>';
+                                            echo '</a> ';
+                                                    
+                                        echo '</td>';
+                                                    
+                                    echo "</tr>";
+                                } 
+                            ?>
+                        </tbody>
         
                     </table>
                 

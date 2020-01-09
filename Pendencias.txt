@@ -4,7 +4,7 @@ PRIORIDADES:
 
 10)addslashes incluir do $_GET E $_POST
 
-44) incluir no formdocumento Data Destruicao
+
 45) Verificar propriedade REQUIRED nos campos dos forms
 
 
@@ -121,7 +121,7 @@ tiver valores
 
 $codPrateleira =isset($_GET['codPra'])?$_GET['codPra']:"";
 
-44) incluir no formdocumento Data Destruicao
+44) incluir no formdocumento Data Destruicao R E S O L V I D O 
 
 45) Verificar propriedade REQUIRED nos campos dos forms
 ==========================
@@ -148,3 +148,7 @@ https://www.w3schools.com/bootstrap4/bootstrap_ref_js_tab.asp
 
 LOCK DE TABELA MYSQL:
 http://underpop.online.fr/m/mysql/manual/mysql-reference-lock-tables.html
+
+
+
+https://tryphp.w3schools.com/showphp.php?filename=demo_form_validation_complete 

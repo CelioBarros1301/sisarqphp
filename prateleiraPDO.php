@@ -254,7 +254,6 @@ class PrateleiraPDO
             $smtm->bindValue(4,$codEstante);
             $smtm->bindValue(5,$codPrateleira);
 
-            echo "prateleira";
         }
         elseif ($codEstante != "" )
         {
@@ -271,7 +270,6 @@ class PrateleiraPDO
             $smtm->bindValue(2,$codArquivo);
             $smtm->bindValue(3,$codCorredor);
             $smtm->bindValue(4,$codEstante);
-            var_dump($sql);
         }
         else
         {

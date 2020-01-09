@@ -7,7 +7,7 @@
 
     # Informacoes da regra de negocios e acesso aos dados
     include_once  "documento.php";
-    
+
     
     
 ?>
@@ -31,6 +31,10 @@
                                     if (  $_GET["status"]=="i" && $CodDoc=="" )
                                     { 
                                         echo '<option disabled selected value=0>=>Selecionar Empresa<=</option>';	
+                                    }
+                                    else
+                                    {
+                                        $CodEmp=$registro['cod_empresa'];  
                                     }
                                     foreach ($tabelaEmpresa as $coluna){
                                         $selecao = $CodEmp==$coluna["Codigo"]?"selected":"";
@@ -58,6 +62,10 @@
                                     { 
                                         echo '<option disabled selected value="">=>Selecionar Setor<=</option>';	
                                     }
+                                    else
+                                    {
+                                        $CodSet=$registro['cod_setor'];
+                                    }
                                     foreach ($tabelaSetor as $coluna){
                                         $selecao = $CodSet==$coluna["CodSetor"]?"selected":"";
                                         echo '<option '. $selecao. ' value="'. $coluna["CodSetor"] .'">' .$coluna["Setor"] ."</option>";                     
@@ -76,6 +84,10 @@
                                     if ( $_GET["status"]=="i" && $CodCai=="" )
                                     {
                                         echo '<option disabled selected value=0>=>Selecionar Caixa<=</option>';	
+                                    }
+                                    else
+                                    {
+                                        $CodCai=$registro['cod_caixa'];
                                     }
                                     foreach ($tabelaCaixa as $coluna){
                                         $selecao = $CodCai==$coluna["CodCaixa"]?"selected":"";
@@ -112,6 +124,10 @@
                                     {
                                         echo '<option disabled selected value=0>=>Selecionar Arquivo<=</option>';	
                                     }
+                                    else
+                                    {
+                                        $CodArq=$registro['cod_arquivo'];
+                                    }
                                     foreach ($tabelaArquivo as $coluna){
                                         $selecao = $CodArq==$coluna["CodArquivo"]?"selected":"";
                                         echo '<option '. $selecao. ' value="'. $coluna["CodArquivo"] .'">' .$coluna["Arquivo"] ."</option>";                     
@@ -133,6 +149,10 @@
                                     {
                                         echo '<option disabled selected value=0>=>Selecionar Corredor<=</option>';	
                                     }
+                                    else
+                                    {
+                                        $CodCod=$registro['cod_corredor'];
+                                    }
                                     foreach ($tabelaCorredor as $coluna){
                                         $selecao = $CodCor==$coluna["CodCorredor"]?"selected":"";
                                         echo '<option '. $selecao. ' value="'. $coluna["CodCorredor"] .'">' .$coluna["Corredor"] ."</option>";                     
@@ -152,6 +172,10 @@
                                     if ( $_GET["status"]=="i" && $CodEst=="" )
                                     {
                                         echo '<option disabled selected value=0>=>Selecionar Estante<=</option>';	
+                                    }
+                                    else
+                                    {
+                                        $CodEst=$registro['cod_estante'];
                                     }
                                     foreach ($tabelaEstante as $coluna){
                                         $selecao = $CodEst==$coluna["CodEstante"]?"selected":"";
@@ -173,6 +197,10 @@
                                     if ( $_GET["status"]=="i" && $CodPra=="" )
                                     {
                                         echo '<option disabled selected value=0>=>Selecionar Prateleira<=</option>';	
+                                    }
+                                    else
+                                    {
+                                        $CodPra=$registro['cod_prateleira'];
                                     }
                                     foreach ($tabelaPrateleira as $coluna){
                                         $selecao = $CodPra==$coluna["CodPrateleira"]?"selected":"";
@@ -212,6 +240,10 @@
                                     {
                                         echo '<option disabled selected value=0>=>Selecionar Tipo Documento<=</option>';	
                                     }
+                                    else
+                                    {
+                                            $CodTip=$registro['tip_documento'];
+                                    }
                                     foreach ($tabelaTipo as $coluna){
                                         $selecao = $CodTip==$coluna["CodTipo"]?"selected":"";
                                         echo '<option '. $selecao. '  value="'. $coluna["CodTipo"] .'">' .$coluna["Tipo"] ."</option>";                     
@@ -225,14 +257,14 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Numero Inicial </label><br>
-                            <input  name="NumIniDoc"  class="form-control" id="NumIniDoc" placeholder="Numero Inicial" >
+                            <input  name="NumIniDoc"  class="form-control" id="NumIniDoc" value="<?=$_GET['status']!="i"?$registro["no_ini_documento"]:"";?>" placeholder="Numero Inicial" >
                         </div>
                     </div>
 
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Numero Final</label><br>
-                            <input  name="NumFinDoc"  class="form-control" id="NumFinDoc" placeholder="Numero Final" >
+                            <input  name="NumFinDoc"  class="form-control" id="NumFinDoc" value="<?=$_GET['status']!="i"?$registro["no_fin_documento"]:"";?>" placeholder="Numero Final" >
                         </div>
                     </div>
                 
@@ -240,7 +272,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Exercicio </label><br>
-                            <input  name="AnoExe"  class="form-control" id="AnoExe" placeholder="Ano Exercicio" >
+                            <input  name="AnoExe"  class="form-control" placeholder="Ano Exercicio" id="AnoExe" value="<?=$_GET['status']!="i"?$registro["ref_exe_documento"]:"";?>" >
                         </div>
                     </div>
 
@@ -248,7 +280,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Calendario </label><br>
-                            <input  name="AnoCal"  class="form-control" id="AnoCal" placeholder="Ano Calendario">
+                            <input  name="AnoCal"  class="form-control" id="AnoCal" placeholder="Ano Calendario" value="<?=$_GET['status']!="i"?$registro["ref_cal_documento"]:"";?>" >
                         </div>
                     </div>
        
@@ -260,21 +292,32 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Emissão Inicial</label><br>
-                            <input type="date"  name="EmiIniDoc"  class="form-control" id="EmiIniDoc" placeholder="Emissao Inicial" >
+                            <input type="date"  name="EmiIniDoc"  class="form-control" id="EmiIniDoc" placeholder="Emissao Inicial" value="<?=$_GET['status']!="i"?$registro["dt_ini_documento"]:"";?>" >
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Emissão Final</label><br>
-                            <input  type="date" name="EmiFinDoc"  class="form-control" id="EmiFinDoc" placeholder="Emissao Final" >
+                            <input  type="date" name="EmiFinDoc"  class="form-control" id="EmiFinDoc" placeholder="Emissao Final" value="<?=$_GET['status']!="i"?$registro["dt_fin_documento"]:"";?>" >
                         </div>
                     </div>
-       
-                    <div class="col-md-6">
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Data Destruicao</label><br>
+                            <input  type="date" name="DesDoc"  class="form-control" id="DesDoc" placeholder="Destruicao" value="<?=$_GET['status']!="i"?$registro["dt_des_documento"]:"";?>" >
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="TexDoc">Detalhe Documento:</label>
-                            <textarea name ="TexDoc" class="form-control" rows="5" id="TexDoc" placeholder="Detalhar Documento" ></textarea>
+                            <textarea name ="TexDoc" class="form-control" rows="3" id="TexDoc" placeholder="Detalhar Documento"  ><?=$_GET['status']!="i"?$registro["des_documento"]:"";?></textarea>
                         </div>
                     </div>
                 </div>

@@ -268,8 +268,6 @@
                 $registro=$documentoPDO->delete($_POST['CodDoc']);
             break;
         }
-
         header("location:sisarq.php?option=documento&status=f");
     }
-
 ?>

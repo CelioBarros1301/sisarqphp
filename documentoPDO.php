@@ -64,7 +64,6 @@ class DocumentoPDO
             {
                 $sql.='(SELECT CONCAT("' .$documento->getCodigoEmpresa().'"'. ', ifnull(right(concat("00000000000000000000",CAST(max(documento.cod_documento) AS UNSIGNED)+1),17),"00000000000000001")) from tb_documentos documento where documento.cod_empresa="'.$documento->getCodigoEmpresa().'"),';
                 $sql.='?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-                var_dump($sql);
                 
                 $smtm=$conexao->prepare($sql);
 

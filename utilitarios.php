@@ -87,15 +87,20 @@ function getOs(){
 function DateToBrasil($dataUsa)
 {
     $data=explode("-",$dataUsa);
-    return $data[2]."/".$data[1]."/".$data[0];
+    if ( count($data)>1 )
+    {
+        return $data[2]."/".$data[1]."/".$data[0];
+    }
+    return $dataUsa;
 }
 function DateToUsa($dataBra)
 {
     $data=explode("/",$dataBra);
-    return $data[2]."-".$data[1]."-".$data[0];
+    if ( count($data)>1 )
+    {
+        return $data[2]."-".$data[1]."-".$data[0];
+    }
+    return $dataBra;
+    
 }
-
-
  ?>
-
- 

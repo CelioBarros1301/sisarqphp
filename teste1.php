@@ -9,14 +9,13 @@
     require_once("utilitarios.php");
     require_once("documentoPDO.php");
     
-    $documentoPDO= new DocumentoPDO();
+   
+    $data="2010-01-01";
 
-    $registro=$documentoPDO->busca("01100000000000000001");
-    var_dump($registro);
-
-    echo DateToBrasil("2020-01-08");
-    echo DateToUsa("08/01/2020");
-
+    echo  DateToUsa($data). "<br>";
+    echo count(DateToUsa($data));
+    
+    
 
     /*
     $prateleiraPDO= new PrateleiraPDO();

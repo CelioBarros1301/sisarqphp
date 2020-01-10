@@ -7,7 +7,9 @@
 
     # Informacoes da regra de negocios e acesso aos dados
     include_once  "documento.php";
-
+    $selecao=$_GET["status"]!="i"?"selected":"";
+    $readonly=$_GET['status']!="i"?"readonly":"";
+   
     
     
 ?>
@@ -23,7 +25,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Empresa</label><br>
-                            <select id="idEmpresa" name="CodEmp"  class="form-control" onchange="changedocumento('dempresa','',document.getElementById('idEmpresa').value)">
+                            <select id="idEmpresa" name="CodEmp"  class="form-control" onchange="changedocumento('dempresa','',document.getElementById('idEmpresa').value)" <?=$_GET['status']=="e"?"readonly":"";?>>
                                 <?php
                                     $CodEmp=isset($_GET["CodEmp"])?$_GET["CodEmp"]:"";
                                     $CodDoc=isset($_GET["CodDoc"])?$_GET["CodDoc"]:"";
@@ -54,7 +56,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Setor </label><br>
-                            <select id="idSetor" name="CodSet"  class="form-control" onchange="changedocumento('dsetor','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value)">
+                            <select id="idSetor" name="CodSet"  class="form-control" onchange="changedocumento('dsetor','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value)" <?=$_GET['status']=="e"?"readonly":"";?>>
                                 <?php
                                     $CodSet=isset($_GET["CodSet"])?$_GET["CodSet"]:"";
                                     
@@ -78,7 +80,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Caixa</label><br>
-                            <select id="idCaixa" name="CodCai" class="form-control" >
+                            <select id="idCaixa" name="CodCai" class="form-control" <?=$_GET['status']=="e"?"readonly":"";?>>
                                 <?php
                                     $CodCai=isset($_GET["CodCai"])?$_GET["CodCai"]:"";
                                     if ( $_GET["status"]=="i" && $CodCai=="" )
@@ -117,7 +119,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Arquivo</label><br>
-                            <select id="idArquivo" name="CodArq"  class="form-control" onchange="changedocumento('darquivo','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,'','',document.getElementById('idCaixa').value)">
+                            <select id="idArquivo" name="CodArq"  class="form-control"   <?=$_GET['status']=="e"?"readonly":"";?> onchange="changedocumento('darquivo','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,'','',document.getElementById('idCaixa').value)">
                                 <?php
                                     $CodArq=isset($_GET["CodArq"])?$_GET["CodArq"]:"";
                                     if ( $_GET["status"]=="i" && $CodArq=="" )
@@ -142,7 +144,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Corredor </label><br>
-                             <select id="idCorredor" name="CodCor"  class="form-control" onchange="changedocumento('dcorredor',''.value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,'',document.getElementById('idCaixa').value)">
+                             <select id="idCorredor" name="CodCor"  class="form-control" <?=$_GET['status']=="e"?"readonly":"";?> onchange="changedocumento('dcorredor',''.value,document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,'',document.getElementById('idCaixa').value)">
                                 <?php
                                     $CodCor=isset($_GET["CodCor"])?$_GET["CodCor"]:"";
                                     if ( $_GET["status"]=="i" && $CodCor=="" )
@@ -166,7 +168,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Estante</label><br>
-                            <select id="idEstante" name="CodEst"  class="form-control" onchange="changedocumento('destante','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,document.getElementById('idEstante').value,document.getElementById('idCaixa').value)">
+                            <select id="idEstante" name="CodEst"  class="form-control" <?=$_GET['status']=="e"?"readonly":"";?> onchange="changedocumento('destante','',document.getElementById('idEmpresa').value,document.getElementById('idSetor').value,document.getElementById('idArquivo').value,document.getElementById('idCorredor').value,document.getElementById('idEstante').value,document.getElementById('idCaixa').value)">
                                 <?php
                                     $CodEst=isset($_GET["CodEst"])?$_GET["CodEst"]:"";
                                     if ( $_GET["status"]=="i" && $CodEst=="" )
@@ -191,7 +193,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Prateleira </label><br>
-                            <select id="idPrateleira" name="CodPra" class="form-control" >
+                            <select id="idPrateleira" name="CodPra"  <?=$_GET['status']=="e"?"readonly":"";?>  class="form-control" >
                                 <?php
                                     $CodPra=isset($_GET["CodPra"])?$_GET["CodPra"]:"";
                                     if ( $_GET["status"]=="i" && $CodPra=="" )
@@ -233,7 +235,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Tipo</label><br>
-                            <select id="idTipo" name="CodTip"  class="form-control" >
+                            <select id="idTipo" name="CodTip"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" >
                                 <?php
                                     $CodTip=isset($_GET["CodTip"])?$_GET["CodTip"]:"";
                                     if ( $_GET["status"]=="i" && $CodTip=="" )
@@ -257,14 +259,14 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Numero Inicial </label><br>
-                            <input  name="NumIniDoc"  class="form-control" id="NumIniDoc" value="<?=$_GET['status']!="i"?$registro["no_ini_documento"]:"";?>" placeholder="Numero Inicial" >
+                            <input  name="NumIniDoc"  class="form-control" <?=$_GET['status']=="e"?"readonly":"";?> id="NumIniDoc" value="<?=$_GET['status']!="i"?$registro["no_ini_documento"]:"";?>" placeholder="Numero Inicial" >
                         </div>
                     </div>
 
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Numero Final</label><br>
-                            <input  name="NumFinDoc"  class="form-control" id="NumFinDoc" value="<?=$_GET['status']!="i"?$registro["no_fin_documento"]:"";?>" placeholder="Numero Final" >
+                            <input  name="NumFinDoc"  class="form-control" <?=$_GET['status']=="e"?"readonly":"";?> id="NumFinDoc" value="<?=$_GET['status']!="i"?$registro["no_fin_documento"]:"";?>" placeholder="Numero Final" >
                         </div>
                     </div>
                 
@@ -272,7 +274,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Exercicio </label><br>
-                            <input  name="AnoExe"  class="form-control" placeholder="Ano Exercicio" id="AnoExe" value="<?=$_GET['status']!="i"?$registro["ref_exe_documento"]:"";?>" >
+                            <input  name="AnoExe"  class="form-control" <?=$_GET['status']=="e"?"readonly":"";?> placeholder="Ano Exercicio" id="AnoExe" value="<?=$_GET['status']!="i"?$registro["ref_exe_documento"]:"";?>" >
                         </div>
                     </div>
 
@@ -280,7 +282,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Calendario </label><br>
-                            <input  name="AnoCal"  class="form-control" id="AnoCal" placeholder="Ano Calendario" value="<?=$_GET['status']!="i"?$registro["ref_cal_documento"]:"";?>" >
+                            <input  name="AnoCal"  class="form-control" <?=$_GET['status']=="e"?"readonly":"";?> id="AnoCal" placeholder="Ano Calendario" value="<?=$_GET['status']!="i"?$registro["ref_cal_documento"]:"";?>" >
                         </div>
                     </div>
        
@@ -292,21 +294,21 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Emissão Inicial</label><br>
-                            <input type="date"  name="EmiIniDoc"  class="form-control" id="EmiIniDoc" placeholder="Emissao Inicial" value="<?=$_GET['status']!="i"?$registro["dt_ini_documento"]:"";?>" >
+                            <input type="date"  name="EmiIniDoc"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" id="EmiIniDoc" placeholder="Emissao Inicial" value="<?=$_GET['status']!="i"?$registro["dt_ini_documento"]:"";?>" >
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Emissão Final</label><br>
-                            <input  type="date" name="EmiFinDoc"  class="form-control" id="EmiFinDoc" placeholder="Emissao Final" value="<?=$_GET['status']!="i"?$registro["dt_fin_documento"]:"";?>" >
+                            <input  type="date" name="EmiFinDoc" <?=$_GET['status']=="e"?"readonly":"";?>  class="form-control" id="EmiFinDoc" placeholder="Emissao Final" value="<?=$_GET['status']!="i"?$registro["dt_fin_documento"]:"";?>" >
                         </div>
                     </div>
                     
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Data Destruicao</label><br>
-                            <input  type="date" name="DesDoc"  class="form-control" id="DesDoc" placeholder="Destruicao" value="<?=$_GET['status']!="i"?$registro["dt_des_documento"]:"";?>" >
+                            <input  type="date" name="DesDoc"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" id="DesDoc" placeholder="Destruicao" value="<?=$_GET['status']!="i"?$registro["dt_des_documento"]:"";?>" >
                         </div>
                     </div>
                     
@@ -317,7 +319,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="TexDoc">Detalhe Documento:</label>
-                            <textarea name ="TexDoc" class="form-control" rows="3" id="TexDoc" placeholder="Detalhar Documento"  ><?=$_GET['status']!="i"?$registro["des_documento"]:"";?></textarea>
+                            <textarea name ="TexDoc" <?=$_GET['status']=="e"?"readonly":"";?> Class="form-control" rows="3" id="TexDoc" placeholder="Detalhar Documento"> <?=$_GET['status']!="i"?$registro["des_documento"]:"";?></textarea>
                         </div>
                     </div>
                 </div>

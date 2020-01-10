@@ -20,8 +20,7 @@
     require("documentoPDO.php"      );
     require("Documento_Class.php"   );
 
-    
-
+   
     $caixaPDO           = new CaixaPDO();
     $prateleiraPDO      = new PrateleiraPDO();
     $estantePDO         = new EstantePDO();
@@ -34,9 +33,7 @@
     $statusPDO          = new StatusPDO();
 
     $documentoPDO       = new DocumentoPDO();
-     
-    
-
+   
     $codAutorizado  ="";
     $codEmpresa     ="";
     $codSetor       ="";
@@ -140,24 +137,32 @@
             $codCorredor    =$registro['cod_corredor'];
             $codEstante     =$registro['cod_estante'];
             $codPrateleira  =$registro['cod_prateleira'];
-            $codCaixa       =$registro['cod_estante'];
+            $codCaixa       =$registro['cod_caixa'];
             $codTipo        =$registro['tip_documento'];
         
 
         }
-        if ($_GET['status']!='e')
-        {
-            $tabelaEmpresa    =$empresaPDO->lista("");
-            $tabelaSetor      =$setorPDO->listaSetor  ($codEmpresa,"");
-            $tabelaArquivo    =$arquivoPDO->listaArquivo($codEmpresa,"");
-            $tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,"");
-            $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,"");
-            $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,"");
-            $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,"");
-            $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,"");
-            $tabelaStatus     =$statusPDO->lista("");
-        }
         else
+        {
+            $codEmpresa     =isset($_GET['CodEmp'])?$_GET['CodEmp']:"";
+            $codSetor       =isset($_GET['CodSet'])?$_GET['CodSet']:"";
+            $codArquivo     =isset($_GET['CodArq'])?$_GET['CodArq']:"";
+            $codCorredor    =isset($_GET['CodCor'])?$_GET['CodCor']:"";
+            $codEstante     =isset($_GET['CodEst'])?$_GET['CodEst']:"";
+            $codPrateleira  =isset($_GET['CodPra'])?$_GET['CodPra']:"";
+            $codCaixa       =isset($_GET['CodCai'])?$_GET['CodCai']:"";
+        
+            #$tabelaEmpresa    =$empresaPDO->lista("");
+            #$tabelaSetor      =$setorPDO->listaSetor  ($codEmpresa,"");
+            #$tabelaArquivo    =$arquivoPDO->listaArquivo($codEmpresa,"");
+            #$tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,"");
+            #$tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,"");
+            #$tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,"");
+            #$tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,"");
+            #$tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,"");
+            #$tabelaStatus     =$statusPDO->lista("");
+        }
+        if ( $_GET['status']=='e' )
         {
             $tabelaEmpresa    =$empresaPDO->lista($codEmpresa);
             $tabelaSetor      =$setorPDO->listaSetor  ($codEmpresa,$codSetor);
@@ -168,7 +173,19 @@
             $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,$codCaixa);
             $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,$codTipo);
         }
-        
+        else
+        {
+            $tabelaEmpresa    =$empresaPDO->lista("");
+            $tabelaSetor      =$setorPDO->listaSetor  ($codEmpresa,"");
+            $tabelaArquivo    =$arquivoPDO->listaArquivo($codEmpresa,"");
+            $tabelaCorredor   =$corredorPDO->listaCorredor($codEmpresa,$codArquivo,"");
+            $tabelaEstante    =$estantePDO->listaEstante($codEmpresa,$codArquivo,$codCorredor,"");
+            $tabelaPrateleira =$prateleiraPDO->listaPrateleira($codEmpresa,$codArquivo,$codCorredor,$codEstante,"");
+            $tabelaCaixa      =$caixaPDO->listaCaixa($codEmpresa,$codSetor,"");
+            $tabelaTipo       =$tipodocumentoPDO->listaTipoDocumento($codEmpresa,"");
+            $tabelaStatus     =$statusPDO->lista("");
+
+        }
            
     }
         # Verificar operacoes de Banco
@@ -229,7 +246,7 @@
         switch ($operacao)
         {
             case 'a':
-                #$registro=$corredorPDO->update($corredor);
+                $registro=$documentoPDO->update($documento);
             break;
             case 'i':
                 try 
@@ -248,7 +265,7 @@
                
             break;
             case 'e':
-                #$registro=$corredorPDO->delete($codEmpresa,$codArquivo,$codCorredor);
+                $registro=$documentoPDO->delete($_POST['CodDoc']);
             break;
         }
 

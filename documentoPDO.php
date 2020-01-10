@@ -140,6 +140,9 @@ class DocumentoPDO
 
     public function update($documento)
     {
+        
+        var_dump($documento);
+
         $conexao=Conexao::getConnection();
         $sql="UPDATE  tb_documentos SET ";
         $sql.='`cod_empresa`      =?,';
@@ -159,7 +162,7 @@ class DocumentoPDO
         $sql.='`ref_exe_documento`=?,';
         $sql.='`ref_cal_documento`=?' ;
                
-        $sql.= " WHERE cod_doc=? ";
+        $sql.= " WHERE cod_documento=? ";
         
         
         $smtm=$conexao->prepare($sql);
@@ -185,9 +188,9 @@ class DocumentoPDO
 
         $smtm->bindValue(15,$documento->getAnoExercicio());
         $smtm->bindValue(16,$documento->getAnoCalendario());
-        $smtm->bindValue(17,$documento->getdDocumento());
-    
-    
+       
+        $smtm->bindValue(17,$documento->getIdDocumento());
+       
         $result=$smtm->execute();
         $conexao=null;
         return $result;
@@ -196,8 +199,8 @@ class DocumentoPDO
     public function delete($codDocumento)
     {
         $conexao=Conexao::getConnection();
-        $sql="DELETE  FROM  tb_documentos ";
-        $sql.= " WHERE cod_documento=? ";
+        $sql="DELETE  FROM  tb_documentos   ";
+        $sql.= "      WHERE cod_documento=? ";
         
         $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$codDocumento);

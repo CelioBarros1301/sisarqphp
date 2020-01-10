@@ -141,8 +141,6 @@ class DocumentoPDO
     public function update($documento)
     {
         
-        var_dump($documento);
-
         $conexao=Conexao::getConnection();
         $sql="UPDATE  tb_documentos SET ";
         $sql.='`cod_empresa`      =?,';

@@ -79,7 +79,7 @@ cargo do combox conforme a seleçao do nivel superior  R E S O L V I D O
 
 27) Criar usuario Administrador e Supervisor com senha padrao e nao permitir excluir 
 
-28) Quando da rotina de liberacao de login usario não pode liberar ele mesmo
+28) Quando da rotina de liberacao de login usario não pode liberar ele mesmo R E S O L V I D O 
 
 29) Formatacao dos forms ( ARQUIVO , CORREDOR ,ESTANTE ,PRATELEIRA, CAIXA )
     ( Placeholder ) - R E S O L V I D O 

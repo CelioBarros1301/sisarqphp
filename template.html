@@ -3,7 +3,8 @@
     # Recuperando os dados da sessão
     $user = $_SESSION['user'];
     $perfil=($user['per_usuario']=="1"?"Admin":"Padrao");
-      
+
+          
 ?>
 <!DOCTYPE html>
 <html>
@@ -140,7 +141,7 @@
                             }
                         ?>    
                         <li>
-                            <a href="#">Liberar Login</a>
+                            <a href="?option=liberausuario">Liberar Login</a>
                         </li>
                         <?php 
                             if ($perfil=="Admin")

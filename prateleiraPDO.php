@@ -81,7 +81,7 @@ class PrateleiraPDO
             {
                 $sql.='?,?,?,?,?,?,?)';
             }
-            echo $sql ;
+            
             $smtm=$conexao->prepare($sql);
             if ($prateleira->getCodigoPrateleira()=="00")
             { 

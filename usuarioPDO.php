@@ -130,12 +130,30 @@ class UsuarioPDO
         return $result;
     }
 
+    public function libera($login)
+    {
+        $conexao=Conexao::getConnection();
+        $sql="UPDATE  tb_usuarios SET ";
+        $sql.='`sta_usuario`=""';
+       
+        $sql.= " WHERE id_usu=?";
+        
+        $smtm=$conexao->prepare($sql);
+        
+        $smtm->bindValue(1,$login);
+        
+        $result=$smtm->execute();
+        ##$conexao->commit();
+        $conexao=null;
+        return $result;
+    }
+
 
     public function lista($filtro)
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT id_usu Codigo,log_usuario Login ,";
+        $sql="SELECT id_usu Codigo,log_usuario Login ";
         $sql.="CASE WHEN per_usuario ='1' THEN 'Administrador' ELSE 'Usuario Padrao' END as Perfil";
         $sql.=" FROM tb_usuarios ";
         $smtm=$conexao -> prepare($sql);
@@ -145,6 +163,26 @@ class UsuarioPDO
             $sql.= " WHERE log_usuario like '%?%'";
             $smtm->bindValue(1,$filtro);
         }
+        $smtm->execute();
+        $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
+        return  $result;
+    }
+
+    public function listalibera($login)
+    {
+        $conexao=Conexao::getConnection();
+        $result=array();
+        $sql="SELECT id_usu Codigo,log_usuario Login ,";
+        $sql.="CASE WHEN per_usuario ='1' THEN 'Administrador' ELSE 'Usuario Padrao' END as Perfil";
+        $sql.=" FROM tb_usuarios ";
+        $sql.= " WHERE sta_usuario != ? AND ";
+        $sql.= "       id_usu      != ?     ";
+        
+        
+        $smtm=$conexao -> prepare($sql);
+        $smtm->bindValue(1,"");
+        $smtm->bindValue(2,$login);
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;

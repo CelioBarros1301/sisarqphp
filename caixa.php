@@ -81,7 +81,7 @@
         $caixa->setCodigoCaixa($_POST['codCai']);
         $caixa->setDescricao($_POST['desCai']);
         
-        echo var_dump ($caixa);
+       
         switch ($operacao)
         {
             case 'a':

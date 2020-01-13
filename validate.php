@@ -56,7 +56,12 @@
 			case 'cadusuario':
 				include_once 'formusuario.html';
 			break;
-					
+			
+			case 'liberausuario':
+				include_once 'liberausuario.html';
+			break;
+			
+
 			# arquivo
 			case 'arquivo':	
 				include_once 'arquivo.html';			
@@ -132,6 +137,8 @@
 			case 'caddocumento':
 				include_once 'formdocumento.html';
 			break;
+
+
 
 
 			case 'manager_users':

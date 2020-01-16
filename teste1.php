@@ -12,8 +12,27 @@
    
     $data="2010-01-01";
 
-    echo  DateToUsa($data). "<br>";
-    echo count(DateToUsa($data));
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    echo time(). "<br>";
+    
     
     
 

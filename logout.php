@@ -18,7 +18,7 @@
 	$usuario->setSenha(base64_decode($registro['sen_usuario']));
 	$usuario->setPerfil($registro['per_usuario']);
 	$usuario->setStatus("");
-	$registro=$usuarioPDO->update($usuario);
+	##$registro=$usuarioPDO->update($usuario);
 
 
 	# Destruindo a sessão

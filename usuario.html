@@ -59,7 +59,7 @@
                                                     echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
                                                             echo '<i class="fa fa-edit"></i>';
                                                     echo '</a> ';
-                                                    if ( $user['log_usuario']!=$dataTable[$i]['Login'] )
+                                                    if ( $user['log_usuario']!=$dataTable[$i]['Login'] && ( $dataTable[$i]['Codigo']!=1  && $dataTable[$i]['Codigo']!=2 ) )
                                                         {
                                                          $link='href=sisarq.php?option=cadusuario&id='.$dataTable[$i]['Codigo'] .'&status=e';
                                                             echo '<a name="edit" class="btn btn-danger btn-sm"'.$link.'>';

@@ -153,16 +153,16 @@ class UsuarioPDO
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql="SELECT id_usu Codigo,log_usuario Login ";
+        $sql="SELECT id_usu Codigo,log_usuario Login , ";
         $sql.="CASE WHEN per_usuario ='1' THEN 'Administrador' ELSE 'Usuario Padrao' END as Perfil";
         $sql.=" FROM tb_usuarios ";
         $smtm=$conexao -> prepare($sql);
-        
+        /*
         if (isset($filtro))
         {
             $sql.= " WHERE log_usuario like '%?%'";
             $smtm->bindValue(1,$filtro);
-        }
+        }*/
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;

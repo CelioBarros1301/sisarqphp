@@ -5,12 +5,20 @@
 		
 		
 		$_SESSION['transacao']="";
-		if(!isset($_GET['option'])){
+		if( !isset($_GET['option']) && !isset($_POST['option']) ){
 			return false;
 		}
 		global $user;
-		
-		switch($_GET['option']){
+		if (isset($_GET['option']))
+		{
+			$option=$_GET['option'];
+		}
+		if (isset($_POST['option']))
+		{
+			$option=$_POST['option'];
+		}
+	
+		switch($option){
 			
 			case "painel":				
 				include_once 'painel.html';
@@ -39,6 +47,7 @@
 			break;
 			
 
+
 			# Setor Autorizado
 			case 'setorautorizado':	
 				include_once 'setorautorizado.html';			
@@ -61,6 +70,12 @@
 				include_once 'liberausuario.html';
 			break;
 			
+			#SQL
+			case 'comandosql':
+				include_once 'comandosql.html';
+			break;
+			
+
 
 			# arquivo
 			case 'arquivo':	

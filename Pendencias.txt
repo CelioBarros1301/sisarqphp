@@ -77,7 +77,7 @@ cargo do combox conforme a seleçao do nivel superior  R E S O L V I D O
 
 26) Quando não tem registro na tabela o max esta retornando null R E S O L V I D O 
 
-27) Criar usuario Administrador e Supervisor com senha padrao e nao permitir excluir 
+27) Criar usuario Administrador e Supervisor com senha padrao e nao permitir excluir  R E S O L V I D O
 
 28) Quando da rotina de liberacao de login usario não pode liberar ele mesmo R E S O L V I D O 
 
@@ -113,7 +113,8 @@ o registro apos result final . o indice do array sera cont(result)
 o $_GET EXISTE e alterar a os parametros de envio da url qdo
 tiver valores 
 
-41) Quando do cadastro de empresa incluir linha na tabela tb_referencia
+41) Quando do cadastro de empresa incluir linha na tabela tb_referencia  VERIFICAR SE NECESSARIO
+CRIADO A OPCAO DE GERAR O PROXIMO DOCUMENTO VIA SELECT MAX
 
 42)http://phpsqlbr.blogspot.com/2009/04/cookies-no-php.html (cookie)
 
@@ -152,3 +153,22 @@ http://underpop.online.fr/m/mysql/manual/mysql-reference-lock-tables.html
 
 
 https://tryphp.w3schools.com/showphp.php?filename=demo_form_validation_complete 
+
+cookie:http://www.devwilliam.com.br/php/sistema-de-login-com-cookies-no-php
+LER:
+$email = (isset($_COOKIE['CookieEmail'])) ? base64_decode($_COOKIE['CookieEmail']) : '';
+$senha = (isset($_COOKIE['CookieSenha'])) ? base64_decode($_COOKIE['CookieSenha']) : '';
+$lembrete = (isset($_COOKIE['CookieLembrete'])) ? base64_decode($_COOKIE['CookieLembrete']) : '';
+$checked = ($lembrete == 'SIM') ? 'checked' : '';
+
+SETAR:
+           $expira = time() + 60*60*24*30; 
+		   setCookie('CookieLembrete', base64_encode('SIM'), $expira);
+		   setCookie('CookieEmail', base64_encode($email), $expira);
+		   setCookie('CookieSenha', base64_encode($senha), $expira);
+
+ZERAR:
+ $expira = time() + 60*60*24*30; 
+		   setCookie('CookieLembrete', base64_encode('SIM'), $expira);
+		   setCookie('CookieEmail', base64_encode($email), $expira);
+		   setCookie('CookieSenha', base64_encode($senha), $expira);

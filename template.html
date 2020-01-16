@@ -54,7 +54,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="?option=empresa">Empresas</a>
+                    <a href="?option=empresa"><i class="fa fa-building"></i> Empresas</a>
                 </li>
 
                 <li class="active">
@@ -62,7 +62,7 @@
                     
                     <ul class="collapse list-unstyled" id="SubMenuAutorizado">
                         <li>
-                            <a href="?option=autorizado">Cadastro</a>
+                            <a href="?option=autorizado"><i class="fa fa-users"></i> Cadastro</a>
                         </li>
                         <li>
                             <a href="?option=setorautorizado&filtroAut=">Acesso a Empresas</a>
@@ -141,15 +141,15 @@
                             }
                         ?>    
                         <li>
-                            <a href="?option=liberausuario">Liberar Login</a>
+                            <a href="?option=liberausuario"><i class="fa fa-unlock-alt" ></i> Liberar Login</a>
                         </li>
                         <?php 
-                            if ($perfil=="Admin")
-                            {
+                            #if ($perfil=="Admin")
+                            #{
                                 echo "<li>";
-                                    echo '<a href="#">SQL</a>';
+                                    echo '<a href="?option=comandosql&status=f"><i class="fa fa-database"></i> SQL</a>';
                                 echo "</li>";
-                            }
+                            #}
                        ?>
                     </ul>
                 </li>

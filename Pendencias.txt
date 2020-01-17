@@ -22,10 +22,10 @@ antes de submeter o form
 
 4) Analiase a troca do login de acesso do sistema pelo email
 
-5) Configura o botao cancelar 0 redirecionar para a tela de GRID
+5) Configura o botao cancelar 0 redirecionar para a tela de GRID R E S O L V I D O
 
 6) Criar botao de atualizacao da tela de grid, para executar uma nova consulta para preenchimento 
-da grid
+da grid- 
 
 7) Incluir campo na tabela de autorizados para HABILITAR/DESABILITAR autorizacao de acesso
 
@@ -55,7 +55,7 @@ se logar verificar login e senha(ok) e depois verificar se o ip da tabela e igua
 e libera o acesso ou ip da tabela for branco. Mostra a mensagem usario logando em outra estação R E S O L V I D O
 
 18)Incluir o Icone de Consulta nas grid so apresentar quando o 
-usuario não tiver acesso a alteracao/delecao
+usuario não tiver acesso a alteracao/delecao R E S O L V I D O
 
 19) Realizar o tratamento quando da alteracao do arquivo não seleciona a empresa correta. SOLUCAO:
     alterar o script da tabela de empresa para selecionar somenete a empresa do registro a ser alterado
@@ -125,6 +125,11 @@ $codPrateleira =isset($_GET['codPra'])?$_GET['codPra']:"";
 44) incluir no formdocumento Data Destruicao R E S O L V I D O 
 
 45) Verificar propriedade REQUIRED nos campos dos forms
+
+46) Ativar a funcionalidade botao de consulta da grid R E S O L V I D O
+
+
+
 ==========================
 infomacoes sobre tabs
 

@@ -94,6 +94,13 @@
                                                            echo '<i class="fa fa-trash"></i>';
                                                     echo '</a> ';
                                                             
+                                                    $link='href=sisarq.php?option=cadcorredor&codEmp='. $dataTable[$i]['CodEmpresa'].'&codArq='. $dataTable[$i]['CodArquivo'] .'&codCor='. $dataTable[$i]['CodCorredor'].'&status=v';
+                                                    echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
+                                                        echo '<i class="fa fa-eye"></i>';
+                                                    echo '</a> ';
+
+                                                
+
                                                 echo '</td>';
                                                               
                                             echo "</tr>";

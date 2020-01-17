@@ -8,6 +8,8 @@
     # Informacoes do banco
     
     include_once  "empresa.php";
+    $readonlyCampo=($_GET['status']=="e" || $_GET['status']=="v")?"readonly":"";
+ 
      
 ?>
 
@@ -28,7 +30,7 @@
                     
                     <div class="form-group">
                         <label>Empresa</label>
-                        <input type="text" name="desEmp" maxlength="80" value="<?=$_GET['status']!="i"?$registro["Empresa"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Nome da Empresa" required  >
+                        <input type="text" name="desEmp" maxlength="80" value="<?=$_GET['status']!="i"?$registro["Empresa"]:"";?>"  <?=$readonlyCampo?> class="form-control" placeholder="Nome da Empresa" required  >
                     </div>
                     
                     <div class="form-group">
@@ -36,7 +38,7 @@
                         <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control" placeholder="Nome da Empresa" required  >
                     </div>
                                                           
-                    <button type="submit" class="btn btn-primary"  aria-pressed="true">
+                    <button type="submit" class="btn btn-primary"  <?=$_GET['status']=='v'?'hidden':'';?> aria-pressed="true">
                         
                         <i class="fa fa-check-circle" style="font-size:24px;color:green;"></i>
                         <?php 
@@ -51,7 +53,7 @@
                         ?>
                     </button>
 
-                    <button type="button" class="btn btn-primary" aria-pressed="true">
+                    <button type="button" class="btn btn-primary" aria-pressed="true" onclick="history.back();">
                         <i class="fa fa-times " style="font-size:24px;color:red;"></i>
                         Cancelar
                     </button> 

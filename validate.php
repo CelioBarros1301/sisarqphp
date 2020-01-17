@@ -1,8 +1,12 @@
 <?php  
-    
 	
 	function validate_options(){
 		
+		# Montando o Menu do Sistema
+
+		include_once "menuPDO.php";
+	    $menuPDO=new  MenuPDO();
+		$menu=$menuPDO->lista();
 		
 		$_SESSION['transacao']="";
 		if( !isset($_GET['option']) && !isset($_POST['option']) ){

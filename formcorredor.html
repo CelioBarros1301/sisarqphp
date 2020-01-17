@@ -10,6 +10,9 @@
     include_once  "corredor.php";
     ##$selecao=$_GET["status"]!="i"?"selected":"";
     $readonly=$_GET['status']!="i"?"readonly":"";
+
+    $readonlyCampo=($_GET['status']=="e" || $_GET['status']=="v")?"readonly":"";
+ 
                                                             
      
 ?>
@@ -63,14 +66,14 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Codigo Corredor</label>
-                                <input type="text" name="codCor"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codCor"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,3)'>
+                                <input type="text" name="codCor"  maxlength="3"  value="<?=$_GET['status']!="i"?$_GET["codCor"]:"";?>" <?=$readonlyCampo;?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,3)'>
                             </div>
                         </div>
                     
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label>Descricao</label>
-                                <input type="text" name="desCor" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_corredor"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao Corredor" required  >
+                                <input type="text" name="desCor" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_corredor"]:"";?>"  <?=$readonlyCampo;?> class="form-control" placeholder="Descricao Corredor" required  >
                             </div>
                         </div>
                     </div>        
@@ -78,7 +81,7 @@
                     <div class="row"> 
                         <div class="form-group">
                             <label>Sigla Corredor</label>
-                            <input type="text" name="sigCor" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_corredor"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Sigla do Corredor" required  >
+                            <input type="text" name="sigCor" maxlength="80" value="<?=$_GET['status']!="i"?$registro["sig_corredor"]:"";?>"  <?=$readonlyCampo;?> class="form-control" placeholder="Sigla do Corredor" required  >
                         </div>
                     </div>
                     
@@ -87,7 +90,7 @@
                         <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control" placeholder="Nome da Empresa" required  >
                     </div>
                                                           
-                    <button type="submit" class="btn btn-primary"  aria-pressed="true">
+                    <button type="submit" class="btn btn-primary"  <?=$_GET['status']=='v'?'hidden':'';?> aria-pressed="true">
                         
                         <i class="fa fa-check-circle" style="font-size:24px;color:green;"></i>
                         <?php 
@@ -102,7 +105,7 @@
                         ?>
                     </button>
 
-                    <button type="button" class="btn btn-primary" aria-pressed="true">
+                    <button type="button" class="btn btn-primary" aria-pressed="true" onclick="history.back();">
                         <i class="fa fa-times " style="font-size:24px;color:red;"></i>
                         Cancelar
                     </button> 

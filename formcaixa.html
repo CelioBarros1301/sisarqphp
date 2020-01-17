@@ -10,6 +10,9 @@
     include_once  "caixa.php";
     $selecao=$_GET["status"]!="i"?"selected":"";
     $readonly=$_GET['status']!="i"?"readonly":"";
+
+    $readonlyCampo=($_GET['status']=="e" || $_GET['status']=="v")?"readonly":"";
+ 
                                                             
      
 ?>
@@ -64,7 +67,7 @@
                   
                             <div class="form-group">
                                 <label>Codigo Caixa</label>
-                                <input type="text" name="codCai"  maxlength="5"  value="<?=$_GET['status']!="i"?$_GET["codCai"]:"";?>" <?=$_GET['status']!="i"?"readonly":"";?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,5)'>
+                                <input type="text" name="codCai"  maxlength="5"  value="<?=$_GET['status']!="i"?$_GET["codCai"]:"";?>" <?=$readonlyCampo;?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,5)'>
                             </div>
                         </div>
                     
@@ -72,7 +75,7 @@
                         <div class="col-md-8"> 
                             <div class="form-group">
                                 <label>Descricao</label>
-                                <input type="text" name="desCai" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_caixa"]:"";?>"  <?=$_GET['status']=="e"?"readonly":"";?> class="form-control" placeholder="Descricao da Caixa" required  >
+                                <input type="text" name="desCai" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_caixa"]:"";?>"  <?=$readonlyCampo;?> class="form-control" placeholder="Descricao da Caixa" required  >
                             </div>
                         </div>
                     </div>
@@ -83,7 +86,7 @@
                         <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control" placeholder="Nome da Empresa" required  >
                     </div>
                                                           
-                    <button type="submit" class="btn btn-primary"  aria-pressed="true">
+                    <button type="submit" class="btn btn-primary" <?=$_GET['status']=='v'?'hidden':'';?> aria-pressed="true">
                         
                         <i class="fa fa-check-circle" style="font-size:24px;color:green;"></i>
                         <?php 
@@ -98,7 +101,7 @@
                         ?>
                     </button>
 
-                    <button type="button" class="btn btn-primary" aria-pressed="true">
+                    <button type="button" class="btn btn-primary" aria-pressed="true" onclick="history.back();">
                         <i class="fa fa-times " style="font-size:24px;color:red;"></i>
                         Cancelar
                     </button> 

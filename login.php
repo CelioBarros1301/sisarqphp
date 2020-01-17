@@ -54,7 +54,5 @@
 
         header("location: index.php");
     }
-    echo "registro->". $registro['sta_usuario']. "<br/>";
-    echo "coooko->". $logado . "<br/>";
     
 ?>

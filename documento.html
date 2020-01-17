@@ -392,6 +392,14 @@
                                             echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
                                                 echo '<i class="fa fa-trash"></i>';
                                             echo '</a> ';
+                                            
+                                            $link='href=sisarq.php?option=caddocumento&codDoc='. $dataTable[$i]['Identificador'].'&status=v';
+                                            echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
+                                                echo '<i class="fa fa-eye"></i>';
+                                            echo '</a> ';
+
+
+
                                                     
                                         echo '</td>';
                                                     

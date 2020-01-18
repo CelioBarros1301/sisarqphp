@@ -1,6 +1,7 @@
 <?php
     include_once "Usuario_Class.php";
     include_once  "usuarioPDO.php";
+    include_once "menuPDO.php";
         
    
     #Dados dos Formularios
@@ -12,6 +13,11 @@
     $registro=$usuarioPDO->buscaLogin($email);
 
     $logado = isset($_COOKIE['CookieAcesso']) ? $_COOKIE['CookieAcesso'] : '';
+
+    # Ver Acessos Menu Permitidos
+    
+    $menuPDO= new MenuPDO();
+    $menu=$menuPDO->lista($registro['id_usu']);
 
     
     if (!$registro)
@@ -27,11 +33,15 @@
     elseif ($registro['sta_usuario']=$logado && $registro['sta_usuario']!=""){
         session_start();
         $_SESSION['user']=$registro;
-        echo "Logado";
         header("location: index.php");
+    }
+    elseif (count($menu)==0)
+    {
+        header("location: index.php?error=user_not_acess");   
     }
     else
     {
+        
         #Granando dados da Sessão
         session_start();
         $_SESSION['user']=$registro;

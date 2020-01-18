@@ -30,6 +30,8 @@
     $menuPDO= new MenuPDO();
 
     $menu=$menuPDO->lista();
+
+    var 
     $ulFechamento=false;
     $html='<ul class="list-unstyled components">';
     $inicioItem=true;

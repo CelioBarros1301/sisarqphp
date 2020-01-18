@@ -147,6 +147,9 @@
                                 if ( $_GET['error']=="user_log" ){
                                     echo '<span class="text-danger" >Usuário logado em outra estação</span>';
                                 }
+                                if ( $_GET['error']=="user_not_acess" ){
+                                    echo '<span class="text-danger" >Usuário Sem Permissão</span>';
+                                }
                             }
                         ?>
 

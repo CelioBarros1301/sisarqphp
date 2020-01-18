@@ -4,6 +4,58 @@
     $user = $_SESSION['user'];
     $perfil=($user['per_usuario']=="1"?"Admin":"Padrao");
 
+    
+    #--> Montando o Menu do Sistema
+
+    include_once "menuPDO.php";
+    
+    $menuPDO= new MenuPDO();
+    $menu=$menuPDO->lista($user['id_usu']);
+    
+    $ulFechamento=false;
+
+    # Variavel que guarda o Menu do Sistema
+    $menuHtml='<ul class="list-unstyled components">';
+    
+    $inicioItem=true;
+    $item="";
+    
+    foreach ($menu  as  $opcao) {
+    
+        if ( $opcao['sta_menu']=='1' )
+        {
+            if ($inicioItem)
+            {
+                $item=substr($opcao['seq_menu'],0,2);
+                $inicioItem=false;
+            }
+            if ( $item!=substr($opcao['seq_menu'],0,2) && $ulFechamento )
+            {
+                $item=$opcao['seq_menu'];
+                $ulFechamento=false;
+                $menuHtml.= "</ul>";
+            }
+            if ($opcao['tipo_menu']=='1')
+            {
+                $menuHtml.= '<li class="">';
+                $menuHtml.= '<a href=?option='.$opcao['href_menu'].'><i class="'. $opcao['icone_menu'].'"></i> '.$opcao['nome_menu'].'</a>';
+                $menuHtml.= '</li>';
+            }
+            if ($opcao['tipo_menu']=='0')
+            {
+                $subMenu='SubMenu'.$opcao['nome_menu'];
+                $menuHtml.= '<li class="">';
+                $menuHtml.= '<a href="#'.$subMenu.'" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">'.$opcao['nome_menu'].'</a>';
+                $menuHtml.= '<ul class="collapse list-unstyled" id="'.$subMenu.'">';
+                $ulFechamento=true;
+                $item=substr($opcao['seq_menu'],0,2);
+            }
+        }
+    }
+    $menuHtml.= '</ul>';
+    #--> Montando Menu
+
+
           
 ?>
 <!DOCTYPE html>
@@ -52,6 +104,10 @@
                 <h1>M E N U </h1>
             </div>
 
+            <?php
+              echo $menuHtml;
+            ?>
+            <!--
             <ul class="list-unstyled components">
                 <li>
                     <a href="?option=empresa"><i class="fa fa-building"></i> Empresas</a>
@@ -165,7 +221,7 @@
                     <a href="#">Sobre</a>
                 </li>
             </ul>
-     
+        -->
         </nav>
 
         <!-- Page Content  -->

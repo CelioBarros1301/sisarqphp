@@ -5,6 +5,14 @@
         #header("location: index.php");
     }
 
+    #--> Guardando Acesso as operacoes
+
+    include_once "menuPDO.php";
+    
+    $menuPDO= new MenuPDO();
+    $acoes=$menuPDO->listaMenu($user['id_usu'],"Cadastro Usuario");
+
+    
     # Informacoes da regra de negocio e acesso ao dados
     include_once  "usuario.php";
     
@@ -15,9 +23,13 @@
                 
         <form action="" method="POST">
             
-            <a href="sisarq.php?option=cadusuario&id=0&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
-                    aria-hidden="true"></i> Novo</a>
-
+            <?php
+                if ( $acoes['sta_inc']==1 )
+                {                 
+                echo '<a href="sisarq.php?option=cadusuario&id=0&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
+                        aria-hidden="true"></i> Novo</a>';
+                }
+            ?>
             <button class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Filtro </button>
             
             <h3>
@@ -55,23 +67,32 @@
                                                 }    
                                                 
                                                 echo "<td>";
-                                                    $link='href=sisarq.php?option=cadusuario&id='. $dataTable[$i]['Codigo']. '&status=a';
-                                                    echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
-                                                            echo '<i class="fa fa-edit"></i>';
-                                                    echo '</a> ';
-                                                    if ( $user['log_usuario']!=$dataTable[$i]['Login'] && ( $dataTable[$i]['Codigo']!=1  && $dataTable[$i]['Codigo']!=2 ) )
-                                                        {
-                                                         $link='href=sisarq.php?option=cadusuario&id='.$dataTable[$i]['Codigo'] .'&status=e';
-                                                            echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
-                                                                echo '<i class="fa fa-trash"></i>';
-                                                            echo '</a> ';
-                                                        } 
                                                     
-                                                    $link='href=sisarq.php?option=cadusuario&id='.$dataTable[$i]['Codigo'] .'&status=v';
-                                                    echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
-                                                        echo '<i class="fa fa-eye"></i>';
-                                                    echo '</a> ';
- 
+                                                    if ( $acoes['sta_alt']==1 )
+                                                    {
+                                                        $link='href=sisarq.php?option=cadusuario&id='. $dataTable[$i]['Codigo']. '&status=a';
+                                                        echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
+                                                                echo '<i class="fa fa-edit"></i>';
+                                                        echo '</a> ';
+                                                    }
+                                                    if ( $acoes['sta_exc']==1 )
+                                                    { 
+                                                        if ( $user['log_usuario']!=$dataTable[$i]['Login'] && ( $dataTable[$i]['Codigo']!=1  && $dataTable[$i]['Codigo']!=2 ) )
+                                                            {
+                                                            $link='href=sisarq.php?option=cadusuario&id='.$dataTable[$i]['Codigo'] .'&status=e';
+                                                                echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
+                                                                    echo '<i class="fa fa-trash"></i>';
+                                                                echo '</a> ';
+                                                            } 
+                                                        
+                                                    }
+                                                    if ( $acoes['sta_con']==1 )
+                                                    { 
+                                                        $link='href=sisarq.php?option=cadusuario&id='.$dataTable[$i]['Codigo'] .'&status=v';
+                                                        echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
+                                                            echo '<i class="fa fa-eye"></i>';
+                                                        echo '</a> ';
+                                                    }
                                                         
 
 

@@ -5,6 +5,13 @@
         #header("location: index.php");
     }
 
+    #--> Guardando Acesso as operacoes
+
+    include_once "menuPDO.php";
+    
+    $menuPDO= new MenuPDO();
+    $acoes=$menuPDO->listaMenu($user['id_usu'],"Arquivo");
+    
     # Informacoes da regra de negocio e acesso ao dados
     include_once  "arquivo.php";
     
@@ -15,8 +22,13 @@
                 
         <form action="" method="POST">
             
-            <a href="sisarq.php?option=cadarquivo&codEmp=000&codArq=00&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
-                    aria-hidden="true"></i> Novo</a>
+            <?php
+                if ( $acoes['sta_inc']==1 )
+                { 
+                echo '<a href="sisarq.php?option=cadarquivo&codEmp=000&codArq=00&status=i" class="btn btn-primary btn-xs"><i class="fa fa-file-text-o"
+                        aria-hidden="true"></i> Novo</a>';
+                }
+            ?>
 
             <button class="btn btn-primary btn-xs"><i class="fa fa-search" aria-hidden="true"></i> Filtro </button>
             
@@ -55,20 +67,29 @@
                                                 }    
                                                 
                                                 echo "<td>";
-                                                    $link='href=sisarq.php?option=cadarquivo&codEmp='. $dataTable[$i]['CodEmpresa'].'&codArq='. $dataTable[$i]['CodArquivo']. '&status=a';
-                                                    echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
-                                                            echo '<i class="fa fa-edit"></i>';
-                                                    echo '</a> ';
-                                                    $link='href=sisarq.php?option=cadarquivo&codEmp='. $dataTable[$i]['CodEmpresa'].'&codArq='. $dataTable[$i]['CodArquivo'] .'&status=e';
-                                                    echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
-                                                           echo '<i class="fa fa-trash"></i>';
-                                                    echo '</a> ';
-                                                            
-                                                    $link='href=sisarq.php?option=cadarquivo&codEmp='. $dataTable[$i]['CodEmpresa'].'&codArq='. $dataTable[$i]['CodArquivo'] .'&status=v';
-                                                    echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
-                                                        echo '<i class="fa fa-eye"></i>';
-                                                    echo '</a> ';
-                
+
+                                                    if ( $acoes['sta_alt']==1 )
+                                                    {
+                                                        $link='href=sisarq.php?option=cadarquivo&codEmp='. $dataTable[$i]['CodEmpresa'].'&codArq='. $dataTable[$i]['CodArquivo']. '&status=a';
+                                                        echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
+                                                                echo '<i class="fa fa-edit"></i>';
+                                                        echo '</a> ';
+                                                    }
+
+                                                    if ( $acoes['sta_exc']==1 )
+                                                    {
+                                                        $link='href=sisarq.php?option=cadarquivo&codEmp='. $dataTable[$i]['CodEmpresa'].'&codArq='. $dataTable[$i]['CodArquivo'] .'&status=e';
+                                                        echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
+                                                            echo '<i class="fa fa-trash"></i>';
+                                                        echo '</a> ';
+                                                    }        
+                                                    if ( $acoes['sta_con']==1 )
+                                                    {
+                                                        $link='href=sisarq.php?option=cadarquivo&codEmp='. $dataTable[$i]['CodEmpresa'].'&codArq='. $dataTable[$i]['CodArquivo'] .'&status=v';
+                                                        echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
+                                                            echo '<i class="fa fa-eye"></i>';
+                                                        echo '</a> ';
+                                                    }
                                                
                                                     echo '</td>';
                                                               

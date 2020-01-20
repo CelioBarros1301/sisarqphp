@@ -9,6 +9,26 @@ class MenuPDO
   
    
 
+    public function menu()
+    {
+        $conexao=Conexao::getConnection();
+        $result=array();
+
+        $sql = "SELECT   id_menu   CodMenu  , ";
+        $sql.= "         seq_menu  Sequencia, ";
+        $sql.= "         nome_menu Menu       ";
+        
+        $sql.= "FROM tb_menus menu ";
+        $sql.=" ORDER BY seq_menu,tipo_menu ";
+      
+        $smtm=$conexao->prepare($sql);
+        $smtm->execute();
+        $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
+        $conexao=null;
+        return  $result;
+    }
+    
+    
     public function lista($usuario)
     {
         $conexao=Conexao::getConnection();

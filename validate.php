@@ -48,6 +48,15 @@
 			break;
 			
 
+			# Acesso ao sistema
+			case 'acesso':	
+				include_once 'acessomenu.html';			
+			break;
+			case 'cadacesso':	
+				include_once 'formacesso.html';			
+			break;
+			
+
 
 			# Setor Autorizado
 			case 'setorautorizado':	
@@ -212,6 +221,13 @@
 			break;
 
 			
+			# Acesso ao sistema
+			case 'acesso':	
+				$_SESSION['transacao']="Acesso ao Sistama";			
+			break;
+			case 'cadacesso':	
+				$_SESSION['transacao']="Acesso ao Sistama";			
+			break;
 
 
 

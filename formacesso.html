@@ -12,7 +12,7 @@
     $readonly=$_GET['status']!="i"?"readonly":"";
 
     $readonlyCampo=($_GET['status']=="e" || $_GET['status']=="v")?"readonly":"";
- 
+   var_dump($tabelaMenu);
                                                             
      
 ?>
@@ -45,17 +45,17 @@
             
                     <div class="row"> 
                         <div class="form-group">    
-                            <label> Setor </label><br>	
+                            <label> SMenus </label><br>	
                             <select id="idMenu" name="codMenu" <?=$readonly;?> class="form-control">
                                 <?php
                                 $codMenu=isset($_GET["codMenu"])?$_GET["codMenu"]:"";
-                                if ( $_GET["status"]=="i" ))
+                                if ( $_GET["status"]=="i" )
                                 { 
                                     echo '<option disabled selected value=0>=>Selecionar Setor<=</option>';	
                                 }
-                                foreach ($tabelaMenur as $coluna){
+                                foreach ($tabelaMenu as $coluna){
                                     $selecao = $codMenu==$coluna["CodMenu"]?"selected":"";
-                                    echo '<option '. $selecao. ' '. $readonly . ' value="'. $coluna["CodMenu"] .'">' .$coluna["Sequencia]."-".$coluna["Menu"] ."</option>";                     
+                                    #echo '<option ' . $selecao. ' '. $readonly . ' value='. $coluna["CodMenu"] . '>' .$coluna["Sequencia]."-".$coluna["Menu"] ."</option>";                     
                                 }
                                 ?>
                                  

@@ -121,33 +121,32 @@ class AcessoMenuPDO
     }
 
 
-    public function listaAcesso($codUsario)
+    public function listaAcesso($codUsuario)
     {
         $conexao=Conexao::getConnection();
         $result=array();
-        $sql ="SELECT acesso.id_menu_usuario CodAcesso,id_menu CodMenu ," ; 
-        $sql.="       menu.seq_menu          Ordem     , nome_menu Menu," ;
-        $sql.="       acesso.sta_menu        Menu      , " ;
-        $sql.="       acesso.sta_inc         Incluir   , " ;
-        $sql.="       acesso.sta_alt         Alterar   , " ;
-        $sql.="       acesso.sta_conc        Consultar , " ;
-        $sql.="       acesso.sta_exc         Excluir   , " ;
-        $sql.="       acesso.sta_rel         Relatorio  " ;
+        $sql ="SELECT acesso.id_menu_usuario CodAcesso , ";
+        $sql.="       menu.seq_menu          Ordem     , " ;
+        $sql.="       nome_menu              Opcao     , " ;
+        $sql.="CASE WHEN acesso.sta_menu='1' THEN 'SIM' ELSE 'NÃO'  END AS Menu      , " ;
+        $sql.="CASE WHEN acesso.sta_inc='1'  THEN 'SIM' ELSE 'NÃO'  END AS Incluir   , " ;
+        $sql.="CASE WHEN acesso.sta_alt='1'  THEN 'SIM' ELSE 'NÃO'  END AS Alterar   , " ;
+        $sql.="CASE WHEN acesso.sta_con='1'  THEN 'SIM' ELSE 'NÃO'  END AS Consultar , " ;
+        $sql.="CASE WHEN acesso.sta_exc='1'  THEN 'SIM' ELSE 'NÃO'  END AS Excluir   , " ;
+        $sql.="CASE WHEN acesso.sta_rel='1'  THEN 'SIM' ELSE 'NÃO'  END AS Relatorio  "  ;
         $sql.=" FROM tb_menu_usuarios acesso   ";
-        $sql.="     inner join tb_menus  menu on ";
-        $sql.="          acesso.id_menu=menu.id_menu";
-        
+        $sql.="      inner join tb_menus  menu on ";
+        $sql.="            acesso.id_menu=menu.id_menu";
         $sql.= " WHERE acesso.id_usu=?";
         
-        $smtm=$conexao -> prepare($sql);
-        
+        $smtm=$conexao->prepare($sql);
         $smtm->bindValue(1,$codUsuario);
-       
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;
         return  $result;
-    }
+        
+         }
 
     
 }

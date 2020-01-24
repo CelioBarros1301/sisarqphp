@@ -149,20 +149,24 @@ class UsuarioPDO
     }
 
 
-    public function lista($filtro)
+    public function lista($codUsuario)
     {
         $conexao=Conexao::getConnection();
         $result=array();
         $sql="SELECT id_usu Codigo,log_usuario Login , ";
         $sql.="CASE WHEN per_usuario ='1' THEN 'Administrador' ELSE 'Usuario Padrao' END as Perfil";
         $sql.=" FROM tb_usuarios ";
-        $smtm=$conexao -> prepare($sql);
-        /*
-        if (isset($filtro))
+        
+        if (isset($Usuario) && $codUsuario!="")
         {
-            $sql.= " WHERE log_usuario like '%?%'";
-            $smtm->bindValue(1,$filtro);
-        }*/
+            $sql.= " WHERE id_usu= ? ";
+            $smtm=$conexao -> prepare($sql);
+            $smtm->bindValue(1,$codUsuario);
+        }
+        else
+        {
+            $smtm=$conexao -> prepare($sql);
+        }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;

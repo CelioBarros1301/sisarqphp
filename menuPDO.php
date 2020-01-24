@@ -9,7 +9,7 @@ class MenuPDO
   
    
 
-    public function menu()
+    public function menu($codMenu)
     {
         $conexao=Conexao::getConnection();
         $result=array();
@@ -19,9 +19,16 @@ class MenuPDO
         $sql.= "         nome_menu Menu       ";
         
         $sql.= "FROM tb_menus menu ";
+        if ($codMenu!="")
+        {
+            $sql.= " WHERE  id_menu=?";
+        }
         $sql.=" ORDER BY seq_menu,tipo_menu ";
-      
         $smtm=$conexao->prepare($sql);
+        if ($codMenu!="")
+        {
+          $smtm->bindValue(1,$codMenu);
+        }
         $smtm->execute();
         $result=$smtm->fetchAll(PDO::FETCH_ASSOC);
         $conexao=null;
@@ -75,8 +82,4 @@ class MenuPDO
 
      
 }
-
-
-
-
 ?>

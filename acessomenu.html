@@ -13,7 +13,7 @@
     
     # Informacoes da regra de negocio e acesso ao dados
     include_once  "acessomenu.php";
-    
+    $user=$_SESSION['user']
     
 ?>
 <div class="row">
@@ -21,6 +21,32 @@
                 
         <form action="" method="POST">
             
+            <div class="form-group">    
+                <label > Usuario </label><br>
+                <?php
+                    $filtro=$user['id_usu'];
+                    $filtro= isset($_GET['filtroUsu'])?$_GET['filtroUsu']:$filtro;	
+                ?>
+                <select id="codigo" name="codUsu"  class="form-control" )">
+                    <?php
+                    foreach ($tabelaUsuario as $coluna){
+                        if ( $coluna["Codigo"]== $filtro )
+                        {
+                            $selecao="selected";
+                            
+                        }
+                        else 
+                        {
+                            $selecao="";
+                        }
+
+                        echo '<option '. $selecao. ' '. ' value="'. $coluna["Codigo"] .'">' .$coluna["Login"] ."</option>";                     
+                    }
+                    ?>
+                    
+                </select>
+            </div>
+
             <?php
                 if ( $acoes['sta_inc']==1 )
                 { 
@@ -33,7 +59,7 @@
             
             <h3>
                 <i class="fa fa-plus"></i>
-                Lista de Usuarios
+                Acesso do Usuario
             </h3>
             <table class="table compact table-fixed table-striped table-bordered table-hover table-sm dt-responsive nowrap"
                             style="width:100%" id="tbpadrao">
@@ -69,7 +95,7 @@
 
                                                     if ( $acoes['sta_alt']==1 )
                                                     {
-                                                        $link='href=sisarq.php?option=cadacesso&codUsu='. $dataTable[$i]['Codigo'].'&status=a';
+                                                        $link='href=sisarq.php?option=cadacesso&codAce='. $dataTable[$i]['CodAcesso'].'&status=a';
                                                         echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
                                                                 echo '<i class="fa fa-edit"></i>';
                                                         echo '</a> ';
@@ -77,14 +103,14 @@
 
                                                     if ( $acoes['sta_exc']==1 )
                                                     {
-                                                        $link='href=sisarq.php?option=cadacesso&codUsu='. $dataTable[$i]['Codigo'].'&status=e';
+                                                        $link='href=sisarq.php?option=cadacesso&codAce='. $dataTable[$i]['CodAcesso'].'&status=e';
                                                         echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
                                                             echo '<i class="fa fa-trash"></i>';
                                                         echo '</a> ';
                                                     }        
                                                     if ( $acoes['sta_con']==1 )
                                                     {
-                                                        $link='href=sisarq.php?option=cadacesso&codUsuo='. $dataTable[$i]['Codigo'].'&status=v';
+                                                        $link='href=sisarq.php?option=cadacesso&codAce='. $dataTable[$i]['CodAcesso'].'&status=v';
                                                         echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
                                                             echo '<i class="fa fa-eye"></i>';
                                                         echo '</a> ';

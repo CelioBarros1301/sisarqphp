@@ -27,7 +27,7 @@
                     $filtro=$user['id_usu'];
                     $filtro= isset($_GET['filtroUsu'])?$_GET['filtroUsu']:$filtro;	
                 ?>
-                <select id="codigo" name="codUsu"  class="form-control" )">
+                <select id="codigo" name="codUsu"  class="form-control" onchange="changecombousuario(document.getElementById('codigo').value,'acesso')">
                     <?php
                     foreach ($tabelaUsuario as $coluna){
                         if ( $coluna["Codigo"]== $filtro )
@@ -96,7 +96,7 @@
                                                     if ( $acoes['sta_alt']==1 )
                                                     {
                                                         $link='href=sisarq.php?option=cadacesso&codAce='. $dataTable[$i]['CodAcesso'].'&status=a';
-                                                        echo '<a name="edit" class="btn btn-warning btn-sm"'.$link.'>';
+                                                        echo '<a name="edit" class="btn btn-warning btn-sm"' . $link .'>';
                                                                 echo '<i class="fa fa-edit"></i>';
                                                         echo '</a> ';
                                                     }
@@ -104,14 +104,14 @@
                                                     if ( $acoes['sta_exc']==1 )
                                                     {
                                                         $link='href=sisarq.php?option=cadacesso&codAce='. $dataTable[$i]['CodAcesso'].'&status=e';
-                                                        echo '<a name="delete" class="btn btn-danger btn-sm"'.$link.'>';
+                                                        echo '<a name="delete" class="btn btn-danger btn-sm"' . $link .'>';
                                                             echo '<i class="fa fa-trash"></i>';
                                                         echo '</a> ';
                                                     }        
                                                     if ( $acoes['sta_con']==1 )
                                                     {
                                                         $link='href=sisarq.php?option=cadacesso&codAce='. $dataTable[$i]['CodAcesso'].'&status=v';
-                                                        echo '<a name="view" class="btn btn-primary btn-sm"'.$link.'>';
+                                                        echo '<a name="view" class="btn btn-primary btn-sm"' . $link . '>';
                                                             echo '<i class="fa fa-eye"></i>';
                                                         echo '</a> ';
                                                     }

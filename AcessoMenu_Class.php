@@ -92,8 +92,18 @@ Class AcessoMenu
     }
     public function getStatusExcluir()
     {
+        return $this->statusExcluir;
+    }
+
+    public function setStatusRelatorio($codigo)
+    {
+        $this->statusRelatorio=$codigo;
+    }
+    public function getStatusRelatorio()
+    {
         return $this->statusRelatorio;
     }
+
 
     
 }

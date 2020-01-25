@@ -12,8 +12,6 @@
     $readonly=$_GET['status']!="i"?"readonly":"";
 
     $readonlyCampo=($_GET['status']=="e" || $_GET['status']=="v")?"readonly":"";
-   var_dump($tabelaMenu);
-                                                            
      
 ?>
 
@@ -21,12 +19,12 @@
         <div class="col-md-8 offset-3 col-sm-12">
             <div class="arquivo-form">
  
-                <form action="caixa.php" method="POST">
+                <form action="acessomenu.php" method="POST">
                     
                     <div class="row">
                         <div class="form-group">    
                             <label> Usuario </label><br>	
-                            <select id="idUsuario" name="codUsu" <?=$readonly;?> class="form-control" >
+                            <select id="idUsuario" name="codUsu" <?=$readonly;?> class="form-control" onchange="changecombousuario(document.getElementById('idUsuario').value,'cadacesso')">
                                 <?php
                                     $codUsu=isset($_GET["codUsu"])?$_GET["codUsu"]:"";
                                     if ( $_GET["status"]=="i" )
@@ -41,48 +39,95 @@
                                  
                             </select>
                         </div>
-                    </div>        
-            
+                    </div>     
                     <div class="row"> 
                         <div class="form-group">    
-                            <label> SMenus </label><br>	
-                            <select id="idMenu" name="codMenu" <?=$readonly;?> class="form-control">
+                            <label> Menus </label><br>	
+                            <select id="idMenu" name="codMenu" <?=$readonly;?> ">
                                 <?php
                                 $codMenu=isset($_GET["codMenu"])?$_GET["codMenu"]:"";
                                 if ( $_GET["status"]=="i" )
                                 { 
-                                    echo '<option disabled selected value=0>=>Selecionar Setor<=</option>';	
+                                    echo '<option disabled selected value=0>=>Selecionar Menu<=</option>';	
                                 }
                                 foreach ($tabelaMenu as $coluna){
                                     $selecao = $codMenu==$coluna["CodMenu"]?"selected":"";
-                                    #echo '<option ' . $selecao. ' '. $readonly . ' value='. $coluna["CodMenu"] . '>' .$coluna["Sequencia]."-".$coluna["Menu"] ."</option>";                     
+                                    echo '<option ' . $selecao . ' '. $readonly . ' value="'. $coluna["CodMenu"] . '">' .$coluna["Sequencia"]."-".$coluna["Opcao"] ."</option>";                     
                                 }
                                 ?>
                                  
                             </select>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-4">
+                            <hr bold>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-center">Permissões de Acesso</p>
+                        </div>
+                        <div class="col-md-4">
+                            <hr bold>
+                        </div>
+                    </div>            
+    
                     
                     <div class="row"> 
-                        <div class="col-md-4">
-                  
-                            <div class="form-group">
-                                <label>Codigo Caixa</label>
-                                <input type="text" name="codCai"  maxlength="5"  value="<?=$_GET['status']!="i"?$_GET["codCai"]:"";?>" <?=$readonlyCampo;?>  class="form-control " placeholder="Codigo" required  onkeypress='return SomenteNumero(event)' onblur='ZerosEsquerda(this,5)'>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" <?=$registro["sta_menu"]=='1'?'checked':"";?> <?=$_GET['status']=="e"?"disabled":"";?> class="custom-control-input" value="1"  id="menu" name="statMenu">
+                                    <label class="custom-control-label" for="menu">Menu</label>
+                                </div>
                             </div>
                         </div>
-                    
-
-                        <div class="col-md-8"> 
-                            <div class="form-group">
-                                <label>Descricao</label>
-                                <input type="text" name="desCai" maxlength="80" value="<?=$_GET['status']!="i"?$registro["des_caixa"]:"";?>"  <?=$readonlyCampo;?> class="form-control" placeholder="Descricao da Caixa" required  >
-                            </div>
-                        </div>
-                    </div>
                         
-                    
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" <?=$registro["sta_inc"]=='1'?'checked':"";?> <?=$_GET['status']=="e"?"disabled":"";?> class="custom-control-input" value="1"  id="incluir" name="statInc">
+                                    <label class="custom-control-label" for="incluir">Incluir</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" <?=$registro["sta_alt"]=='1'?'checked':"";?> <?=$_GET['status']=="e"?"disabled":"";?> class="custom-control-input" value="1"  id="alterar" name="statAlt">
+                                    <label class="custom-control-label" for="alterar">Alterar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" <?=$registro["sta_exc"]=='1'?'checked':"";?> <?=$_GET['status']=="e"?"disabled":"";?> class="custom-control-input" value="1"  id="excluir" name="statExc">
+                                    <label class="custom-control-label" for="excluir">Excluir</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" <?=$registro["sta_con"]=='1'?'checked':"";?> <?=$_GET['status']=="e"?"disabled":"";?> class="custom-control-input" value="1"  id="consultar" name="statCon">
+                                    <label class="custom-control-label" for="consultar">Consultar</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" <?=$registro["sta_rel"]=='1'?'checked':"";?> <?=$_GET['status']=="e"?"disabled":"";?> class="custom-control-input" value="1"  id="relatorio" name="statRel">
+                                    <label class="custom-control-label" for="relatorio">Relatorio</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="form-group">
                         <label hidden >Operacao</label>
                         <input  type="hidden" name="operacao" value="<?=$_GET['status'];?>" class="form-control" placeholder="Nome da Empresa" required  >

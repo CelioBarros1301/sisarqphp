@@ -23,7 +23,6 @@
     # Array para guarda os nome das Colunas doa DataTable
     $dataTableColunas = array(); 
     $registro=Array();
-    $user=$_SESSION['user'];
         
         
     # Preencher Formulario com os dados 
@@ -32,26 +31,29 @@
     {
         $acao=$_GET['status'];
         $codAcesso=isset($_GET['codAce'])?$_GET['codAce']:"";
+        $codUsuario=isset($_GET['codUsu'])?$_GET['codUsu']:"";
         
         if ($acao=="i" ) 
         { 
-            $tabelaUsuario=$usuarioPDO->lista("");
-            $tabelaMenu   =$menusPDO->menu("");
+            $tabelaUsuario =$usuarioPDO->lista("");
+            $tabelaMenu  =$acessoPDO->listaMenu($codUsuario);
         }
         else
         {
-            $registro=$acessoPDO->busca($codAcesso);
+            #$registro=$acessoPDO->busca($codAcesso);
             $codUsuario=$registro['id_usu'];
             $tabelaUsuario=$usuarioPDO->lista($codUsuario);
             $tabelaMenu   =$menuPDO->menu($codAcesso);
        
         }
-       # $registro=$acessoPDO->busca($codAcesso);
+        $registro=$acessoPDO->busca($codAcesso);
         
     }
     else if( !isset($_GET['status']))
     {
         # Preencher o DataTable
+    
+        $user=$_SESSION['user'];
     
         $filtroUsuario=$user['id_usu'];
         $filtroUsuario=isset($_GET['filtroUsu'])?$_GET['filtroUsu']: $filtroUsuario;
@@ -68,23 +70,17 @@
     {
         $operacao=$_POST['operacao'];
         
-        $codEmpresa=$_POST['codEmp'];
-        $codArquivo=$_POST['codArq'];
-        
         
         # Gerando as informacoes do Objeto
-    
-        
-        $acesso->setStatusIncluir($_POST['codAce']);
-        $acesso->setStatusIncluir($_POST['codUsu']);
-        $acesso->setStatusIncluir($_POST['CodMenu']);
             
-        
-        $acesso->setStatusIncluir($_POST['staInc']);
-        $acesso->setStatusAlterar($_POST['staAlt']);
-        $acesso->setStatusExcluir($_POST['staExc']);
-        $acesso->setStatusConsultar($_POST['staCon']);
-        $acesso->setStatusRelatorio($_POST['staInc']);
+        $acesso->setIdMenu($_POST['codMenu']);
+        $acesso->setIdUsuario($_POST['codUsu']);
+        $acesso->setStatusMenu($_POST['statMenu']);
+        $acesso->setStatusIncluir($_POST['statInc']);
+        $acesso->setStatusAlterar($_POST['statAlt']);
+        $acesso->setStatusExcluir($_POST['statExc']);
+        $acesso->setStatusConsultar($_POST['statCon']);
+        $acesso->setStatusRelatorio($_POST['statRel']);
       
         
 
